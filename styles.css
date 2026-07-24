@@ -1113,6 +1113,73 @@ footer {
 .outcome-card h3 { color: var(--navy); font-size: 1.02rem; margin-bottom: 8px; }
 .outcome-card p { font-size: 0.88rem; color: var(--grey); }
 
+/* ---------- Platform roadmap ---------- */
+.roadmap-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.roadmap-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+  box-shadow: var(--shadow);
+}
+.roadmap-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  color: #fff;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.roadmap-arrow { color: var(--teal); font-weight: 700; }
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 32px;
+}
+.roadmap-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.roadmap-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.roadmap-card h3 { color: var(--navy); font-size: 1.02rem; margin-bottom: 8px; }
+.roadmap-card p { font-size: 0.88rem; color: var(--grey); }
+.roadmap-note {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  font-size: 0.88rem;
+  color: var(--grey);
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.roadmap-note strong { color: var(--navy); display: block; margin-top: 6px; }
+.roadmap-note strong:first-child { margin-top: 0; }
+
 /* ---------- Trust badges ---------- */
 .trust-badges {
   margin-top: 40px;
@@ -1234,7 +1301,11 @@ footer {
 [data-theme="dark"] .credibility-card,
 [data-theme="dark"] .calculator-card,
 [data-theme="dark"] .contact-form,
+[data-theme="dark"] .roadmap-card,
+[data-theme="dark"] .roadmap-step,
+[data-theme="dark"] .roadmap-note,
 [data-theme="dark"] .hero-card { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] .roadmap-note { border-left-color: var(--teal); }
 [data-theme="dark"] .contact-form input,
 [data-theme="dark"] .contact-form select,
 [data-theme="dark"] .contact-form textarea,
@@ -1263,6 +1334,9 @@ footer {
 [data-theme="dark"] .portfolio-card h3,
 [data-theme="dark"] .calc-field label,
 [data-theme="dark"] .calc-result-label,
+[data-theme="dark"] .roadmap-card h3,
+[data-theme="dark"] .roadmap-step,
+[data-theme="dark"] .roadmap-note strong,
 [data-theme="dark"] .trust-badge span { color: var(--text-main); }
 [data-theme="dark"] .industry-tag { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
 [data-theme="dark"] .industry-tag:hover { background: var(--accent); color: #fff; }
@@ -1304,6 +1378,8 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
   .trust-badges { grid-template-columns: repeat(2, 1fr); }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
+  .roadmap-flow { justify-content: flex-start; }
   .case-grid-3 { grid-template-columns: 1fr; }
   .confidence-strip { grid-template-columns: repeat(2, 1fr); }
   .promo-banner-services { grid-template-columns: 1fr 1fr; }
@@ -1311,6 +1387,8 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
 }
 @media (max-width: 640px) {
   .promo-banner-services { grid-template-columns: 1fr; }
+  .roadmap-grid { grid-template-columns: 1fr; }
+  .roadmap-step span:last-child { font-size: 0.8rem; }
 }
 @media (max-width: 640px) {
   .nav-links {
