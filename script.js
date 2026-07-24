@@ -40,7 +40,7 @@ if (siteHeader) {
 }
 
 // Scroll-reveal animations (fade/slide in when a section enters the viewport)
-const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger');
+const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .reveal-left, .reveal-right, .reveal-zoom');
 if (revealTargets.length && 'IntersectionObserver' in window) {
   const revealObserver = new IntersectionObserver(
     (entries, obs) => {

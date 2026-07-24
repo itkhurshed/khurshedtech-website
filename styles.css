@@ -54,8 +54,52 @@ html { scroll-behavior: smooth; }
 .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.47s; }
 .reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.54s; }
 
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.visible { opacity: 1; transform: none; }
+.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-zoom.visible { opacity: 1; transform: none; }
+
+/* ---------- Hero entrance animation (plays on load, not scroll) ---------- */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroSlideIn {
+  from { opacity: 0; transform: translateX(44px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.hero-eyebrow, .hero h1, .hero p.lead, .hero-actions, .hero-stats {
+  opacity: 0;
+  animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-eyebrow { animation-delay: 0.08s; }
+.hero h1 { animation-delay: 0.2s; }
+.hero p.lead { animation-delay: 0.32s; }
+.hero-actions { animation-delay: 0.44s; }
+.hero-stats { animation-delay: 0.56s; }
+.hero-card {
+  opacity: 0;
+  animation: heroSlideIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.38s;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .reveal, .reveal-stagger > *, .reveal-left, .reveal-right, .reveal-zoom { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-eyebrow, .hero h1, .hero p.lead, .hero-actions, .hero-stats, .hero-card { animation: none !important; opacity: 1 !important; }
 }
 
 body {
@@ -269,6 +313,29 @@ header.scrolled { box-shadow: 0 6px 24px rgba(20, 38, 71, 0.1); }
 }
 .hero-card ul li:last-child { border-bottom: none; }
 .check { color: #1E9E5A; font-weight: 700; }
+
+/* ---------- Hero promo banner ---------- */
+.hero-banner-wrap {
+  background: var(--white);
+  padding: 44px 0;
+}
+.hero-banner-frame {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+.hero-banner-img:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: 0 26px 55px rgba(20, 38, 71, 0.22);
+}
 
 /* ---------- Sections ---------- */
 section { padding: 80px 0; }
