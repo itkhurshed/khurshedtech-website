@@ -968,13 +968,18 @@ footer {
   padding-top: 22px;
 }
 
-/* ---------- WhatsApp floating button ---------- */
-.whatsapp-float {
+/* ---------- Floating action buttons (WhatsApp + Messenger) ---------- */
+.float-stack {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: #25D366;
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 999;
+}
+.whatsapp-float,
+.messenger-float {
   width: 58px;
   height: 58px;
   border-radius: 50%;
@@ -983,8 +988,222 @@ footer {
   justify-content: center;
   font-size: 1.5rem;
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  z-index: 999;
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.whatsapp-float { background: #25D366; }
+.messenger-float { background: linear-gradient(135deg, #0084FF, #00C6FF); }
+.whatsapp-float:hover,
+.messenger-float:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
+
+/* ---------- Header toggles (theme / language) ---------- */
+.icon-toggle {
+  background: var(--light-grey);
+  border: 1px solid var(--border);
+  color: var(--navy);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.icon-toggle:hover { background: var(--border); transform: translateY(-2px); }
+.lang-toggle { font-weight: 800; font-size: 0.72rem; letter-spacing: 0.02em; }
+
+/* ---------- Hero animated tech-grid background ---------- */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 194, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 194, 255, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  animation: gridDrift 22s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.7), transparent 75%);
+}
+@keyframes gridDrift {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 84px 84px, 84px 84px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-bg-grid { animation: none; } }
+
+/* ---------- Business outcomes ---------- */
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.outcome-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.outcome-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.outcome-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.outcome-icon svg { width: 26px; height: 26px; }
+.outcome-card h3 { color: var(--navy); font-size: 1.02rem; margin-bottom: 8px; }
+.outcome-card p { font-size: 0.88rem; color: var(--grey); }
+
+/* ---------- Trust badges ---------- */
+.trust-badges {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.trust-badge {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.trust-badge:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--teal); }
+.trust-badge svg { width: 26px; height: 26px; color: var(--accent); }
+.trust-badge span { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
+
+/* ---------- Portfolio / work showcase ---------- */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.portfolio-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.portfolio-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.portfolio-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--light-grey);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.portfolio-icon svg { width: 24px; height: 24px; }
+.portfolio-card h3 { color: var(--navy); font-size: 1rem; margin-bottom: 8px; }
+.portfolio-card p { font-size: 0.88rem; color: var(--grey); }
+
+/* ---------- Case studies (3-up) & confidence strip ---------- */
+.case-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.confidence-strip {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.confidence-strip strong { display: block; color: var(--accent); font-size: 1.3rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+.confidence-strip span { font-size: 0.78rem; color: var(--grey); }
+
+/* ---------- Contact: socials + map ---------- */
+.contact-col { display: flex; flex-direction: column; gap: 20px; }
+.social-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-pill {
+  background: var(--light-grey);
+  border: 1px solid var(--border);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.social-pill:hover { background: var(--navy); color: #fff; transform: translateY(-2px); }
+.map-embed {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- Footer: 4-column + legal ---------- */
+.footer-top-4 { grid-template-columns: 1.2fr 0.9fr 0.9fr 1fr; }
+.footer-legal-heading { margin-top: 18px; }
+
+/* ---------- Dark mode ---------- */
+[data-theme="dark"] {
+  --white: #0B1624;
+  --light-grey: #101E30;
+  --text-main: #E7EDF7;
+  --grey: #A9B6CC;
+  --border: #223349;
+}
+[data-theme="dark"] body { background: var(--white); }
+[data-theme="dark"] header { background: var(--white); border-color: var(--border); }
+[data-theme="dark"] .nav-links a { color: var(--grey); }
+[data-theme="dark"] .nav-links a:hover { color: #fff; }
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .price-card,
+[data-theme="dark"] .onetime-card,
+[data-theme="dark"] .case-card,
+[data-theme="dark"] .testimonial-card,
+[data-theme="dark"] .trust-badge,
+[data-theme="dark"] .portfolio-card,
+[data-theme="dark"] .outcome-card,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .credibility-card,
+[data-theme="dark"] .calculator-card,
+[data-theme="dark"] .contact-form,
+[data-theme="dark"] .hero-card { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form select,
+[data-theme="dark"] .contact-form textarea,
+[data-theme="dark"] .calc-field input,
+[data-theme="dark"] .calc-field select,
+[data-theme="dark"] .calc-checks label,
+[data-theme="dark"] .calc-lead-form input { background: var(--white); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] .nav-links { background: var(--white); }
+[data-theme="dark"] .icon-toggle { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] #theme-toggle { }
+
+/* ---------- RTL support (Arabic toggle) ---------- */
+html[dir="rtl"] body { font-family: 'Noto Kufi Arabic', 'Inter', sans-serif; }
+html[dir="rtl"] .nav-links { direction: rtl; }
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .trust-bar,
+html[dir="rtl"] .hero-stats,
+html[dir="rtl"] .social-row { direction: rtl; }
+html[dir="rtl"] .hero-inner { direction: rtl; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
@@ -1002,7 +1221,13 @@ footer {
   .calc-grid { grid-template-columns: 1fr; }
   .calc-lead-form { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; gap: 26px; }
+  .footer-top,
+  .footer-top-4 { grid-template-columns: 1fr; gap: 26px; }
+  .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-badges { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-grid-3 { grid-template-columns: 1fr; }
+  .confidence-strip { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
   .nav-links {

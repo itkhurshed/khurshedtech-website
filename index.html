@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KhurshedTech – Managed IT Services &amp; IT Support in Kuwait</title>
-<meta name="description" content="Professional Managed IT Services for growing businesses. Reliable IT support, Microsoft 365, cloud, networking, cybersecurity and business automation — onsite in Kuwait and remotely worldwide.">
+<meta name="description" content="Managed IT services for modern businesses. Microsoft 365, cloud, networking, cybersecurity and IT support — reduce downtime, protect your data, and support your team, onsite in Kuwait and remotely worldwide.">
 <link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/">
 
 <!-- Open Graph / social preview -->
@@ -32,9 +32,19 @@
 <!-- Premium type system: Plus Jakarta Sans for headings, Inter for body copy -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=3">
+<!-- Inline theme-preload: sets dark/light mode before paint to avoid a flash of the wrong theme -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('kt-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="stylesheet" href="styles.css?v=4">
 
 <!-- AOS.js — lightweight scroll-reveal animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -122,8 +132,28 @@
     },
     {
       "@type": "Question",
-      "name": "How fast do you respond to support requests?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Business-hours plans are answered same business day; Business Support and Managed IT plans receive priority response, with 24/7 remote assistance available on request." }
+      "name": "How quickly do you respond to support requests?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Business-hours plans are answered same business day; Business and Enterprise plans receive priority response, with 24/7 remote assistance available on request." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide remote support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, most issues are resolved remotely the same day. Remote support is included in every plan." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you support Microsoft 365?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Tenant setup, mailbox migration, Teams, SharePoint, OneDrive and Azure administration are all part of our core service." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you visit customer offices?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, on-site visits across Kuwait are included in the Business and Enterprise plans, and available on request for the Starter plan." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you support small businesses?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, the Starter plan is built specifically for small offices and startups, with the same certified support as our larger clients." }
     },
     {
       "@type": "Question",
@@ -148,13 +178,16 @@
       <span>KhurshedTech</span>
     </a>
     <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#case-studies">Case Studies</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA">WhatsApp Us</a>
+      <a href="#about" data-en="About" data-ar="من نحن">About</a>
+      <a href="#services" data-en="Services" data-ar="خدماتنا">Services</a>
+      <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا">Portfolio</a>
+      <a href="#pricing" data-en="Pricing" data-ar="الأسعار">Pricing</a>
+      <a href="#case-studies" data-en="Case Studies" data-ar="دراسات الحالة">Case Studies</a>
+      <a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a>
+      <a href="#contact" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA" data-en="WhatsApp Us" data-ar="واتساب">WhatsApp Us</a>
+      <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
+      <button id="lang-toggle" class="icon-toggle lang-toggle" aria-label="Switch language" title="English / العربية">EN</button>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -163,15 +196,17 @@
 </header>
 
 <section class="hero" id="home">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
   <div class="hero-inner">
     <div>
-      <span class="hero-eyebrow">Managed IT Services · Kuwait &amp; Remote Worldwide</span>
-      <h1>Professional Managed IT Services for Growing Businesses</h1>
-      <p class="lead">Reliable IT support, Microsoft 365, cloud, networking, cybersecurity and business automation — onsite in Kuwait and remotely worldwide.</p>
+      <span class="hero-eyebrow" data-en="Managed IT Services · Kuwait &amp; Remote Worldwide" data-ar="خدمات تقنية معلومات مُدارة · الكويت وعن بُعد حول العالم">Managed IT Services · Kuwait &amp; Remote Worldwide</span>
+      <h1 data-en="Managed IT Services for Modern Businesses" data-ar="خدمات تقنية معلومات مُدارة للشركات العصرية">Managed IT Services for Modern Businesses</h1>
+      <p class="lead-tags" data-en="Microsoft 365 · Cloud · Networking · Cybersecurity · IT Support" data-ar="مايكروسوفت 365 · الحوسبة السحابية · الشبكات · الأمن السيبراني · الدعم الفني">Microsoft 365 · Cloud · Networking · Cybersecurity · IT Support</p>
+      <p class="lead" data-en="Reliable IT support that reduces downtime, protects your data, and keeps your team productive — onsite in Kuwait and remotely worldwide." data-ar="دعم تقني موثوق يقلل التوقف، يحمي بياناتك، ويحافظ على إنتاجية فريقك — في الكويت وعن بُعد حول العالم.">Reliable IT support that reduces downtime, protects your data, and keeps your team productive — onsite in Kuwait and remotely worldwide.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20IT%20assessment%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Get Free IT Assessment">Get Free IT Assessment</a>
-        <a href="#pricing" class="btn btn-outline">View Monthly Plans</a>
-        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-ghost track-cta" data-plan="Hero Chat WhatsApp">Chat on WhatsApp</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20IT%20consultation%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Get Free Consultation" data-en="Get Free Consultation" data-ar="احصل على استشارة مجانية">Get Free Consultation</a>
+        <a href="#quote-calculator" class="btn btn-outline" data-en="Request a Quote" data-ar="اطلب عرض سعر">Request a Quote</a>
+        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-ghost track-cta" data-plan="Hero WhatsApp Now" data-en="WhatsApp Now" data-ar="واتساب الآن">WhatsApp Now</a>
       </div>
       <div class="trust-bar">
         <span>20+ Years' Experience</span><span class="dot">·</span>
@@ -206,13 +241,54 @@
   </div>
 </div>
 
-<section id="about" class="bg-light">
+<!-- ================= BUSINESS OUTCOMES ================= -->
+<section id="outcomes" class="bg-light">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-eyebrow">Why It Matters</span>
+      <h2>We Sell Outcomes, Not Just Technology</h2>
+      <p>Behind every service is a business result. Here's what working with KhurshedTech actually gets you.</p>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v5c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Reduce Downtime</h3>
+        <p>Proactive monitoring and preventive maintenance catch problems before they stop your business.</p>
+      </div>
+      <div class="outcome-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Protect Company Data</h3>
+        <p>Endpoint protection, backup verification and security best practices keep your business data safe.</p>
+      </div>
+      <div class="outcome-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6h7v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Improve Productivity</h3>
+        <p>Well-configured Microsoft 365, devices and networks mean your team spends less time fighting technology.</p>
+      </div>
+      <div class="outcome-card" data-aos="fade-up" data-aos-delay="240">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Fast Remote Support</h3>
+        <p>Most issues are diagnosed and resolved remotely the same day — no waiting days for a technician.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
   <div class="container about-grid">
     <div data-aos="fade-right">
       <span class="section-eyebrow">About KhurshedTech</span>
       <h2>Your Trusted IT Partner for Business Success</h2>
       <p class="about-lead">At KhurshedTech IT Solutions, we provide reliable, secure, and cost-effective IT services that help businesses operate efficiently and grow with confidence. Our mission is to deliver enterprise-level technology solutions with exceptional customer service, proactive support, and rapid response times.</p>
-      <p class="about-lead">Whether you're a small business, medium-sized company, or large enterprise, our experienced IT professionals ensure your technology works seamlessly — so you can focus on running your business.</p>
+      <p class="about-lead">Whether you're a small business, medium-sized company, or large enterprise, our experienced IT professionals ensure your technology works seamlessly — so you can focus on running your business. We've supported financial services, retail, healthcare, education, manufacturing, hospitality, construction and government clients across Kuwait.</p>
     </div>
     <div class="mission-card" data-aos="fade-left">
       <span class="mission-eyebrow">Our Mission</span>
@@ -222,7 +298,7 @@
 </section>
 
 <!-- ================= CREDIBILITY / TRUST ================= -->
-<section id="credibility">
+<section id="credibility" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
       <span class="section-eyebrow">Who's Behind KhurshedTech</span>
@@ -238,15 +314,47 @@
           <li><span class="check">✓</span> 20+ years of hands-on IT experience</li>
           <li><span class="check">✓</span> CCNP &amp; CCNA certified (Cisco)</li>
           <li><span class="check">✓</span> Microsoft Certified Azure Administrator</li>
+          <li><span class="check">✓</span> Microsoft 365 Specialist</li>
           <li><span class="check">✓</span> English &amp; Arabic business support</li>
           <li><span class="check">✓</span> Available remotely worldwide, on-site across Kuwait</li>
         </ul>
       </div>
     </div>
+
+    <div class="trust-badges" data-aos="fade-up">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8L12 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>20+ Years Experience</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Cisco CCNA</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Cisco CCNP Enterprise</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 17l8-13 8 13H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>Microsoft Azure Administrator</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Microsoft 365 Specialist</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Kuwait Based</span>
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Remote Worldwide Support</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="services" class="bg-light">
+<section id="services">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
       <span class="section-eyebrow">What We Do</span>
@@ -255,40 +363,107 @@
     </div>
     <div class="services-grid">
       <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-        <div class="service-icon">🖥️</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
         <h3>Managed IT Support</h3>
-        <p>Desktop, laptop, Windows, software and day-to-day user support for your whole team.</p>
+        <p>Desktop, laptop, Windows, software and day-to-day user support that keeps your whole team productive.</p>
         <span class="card-arrow">→</span>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="80">
-        <div class="service-icon">☁️</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 18h10a4 4 0 000-8 6 6 0 00-11.3-1.8A4.5 4.5 0 007 18z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Microsoft 365 &amp; Cloud</h3>
-        <p>Exchange Online, Outlook, Teams, OneDrive, SharePoint and Azure administration.</p>
+        <p>Exchange Online, Outlook, Teams, OneDrive, SharePoint and Azure administration — configured to reduce friction.</p>
         <span class="card-arrow">→</span>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="160">
-        <div class="service-icon">🌐</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
         <h3>Network &amp; Infrastructure</h3>
-        <p>Wi-Fi, LAN, VPN, switches, firewalls and structured cabling, designed and maintained.</p>
+        <p>Wi-Fi, LAN, VPN, switches, firewalls and structured cabling — designed for coverage and maintained for uptime.</p>
         <span class="card-arrow">→</span>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-        <div class="service-icon">🔒</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Cybersecurity</h3>
-        <p>MFA, endpoint protection, patching, email security and security assessments.</p>
+        <p>MFA, endpoint protection, patching, email security and security assessments that protect your data.</p>
         <span class="card-arrow">→</span>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="80">
-        <div class="service-icon">🖨️</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="8" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M7 8V4h10v4M7 20h10v-4H7v4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Printer &amp; Copier Solutions</h3>
         <p>Network printing, scan-to-folder, scan-to-email and user configuration for office fleets.</p>
         <span class="card-arrow">→</span>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="160">
-        <div class="service-icon">⚙️</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 18h10a4 4 0 000-8 6 6 0 00-11.3-1.8A4.5 4.5 0 007 18z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
         <h3>Websites &amp; Automation</h3>
         <p>Business websites, e-commerce, workflow automation and customer-facing portals.</p>
         <span class="card-arrow">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO / WORK SHOWCASE ================= -->
+<section id="portfolio" class="bg-light">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-eyebrow">Our Work</span>
+      <h2>Types of Projects We Deliver</h2>
+      <p>A look at the kind of work we do day to day. Full project details and screenshots are shared with prospective clients on request, respecting the confidentiality of every business we work with.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Microsoft 365 Projects</h3>
+        <p>Tenant setup, mailbox migrations, Teams &amp; SharePoint rollouts for growing teams.</p>
+      </div>
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 20h6M12 16v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Windows Deployments</h3>
+        <p>Fleet-wide OS upgrades and new PC rollouts with user profiles and apps preserved.</p>
+      </div>
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 17l8-13 8 13H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Azure Administration</h3>
+        <p>Identity, backup, and cloud infrastructure management for businesses moving to the cloud.</p>
+      </div>
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="11" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="0.6" fill="currentColor"/><circle cx="7" cy="13" r="0.6" fill="currentColor"/></svg>
+        </div>
+        <h3>Network Rack Installations</h3>
+        <p>Structured cabling, switch configuration and rack builds for offices and server rooms.</p>
+      </div>
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Websites Built</h3>
+        <p>Business websites and landing pages — this site is a working example of that craft.</p>
+      </div>
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="portfolio-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 8V4h10v4M7 20h10v-4H7v4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Printer &amp; Copier Deployments</h3>
+        <p>Fleet configuration for scan-to-email, scan-to-folder and secure network printing.</p>
       </div>
     </div>
   </div>
@@ -370,10 +545,10 @@
       <div class="price-card tier-essential" data-aos="fade-up" data-aos-delay="0">
         <div class="price-head">
           <div class="tier-icon">🛡️</div>
-          <h3>Essential Support</h3>
+          <h3>Starter</h3>
           <div class="tier-sub">From</div>
           <div class="price">99 KWD <span>/ month</span></div>
-          <div class="users-tag">Up to 10 users</div>
+          <div class="users-tag">Up to 20 users</div>
         </div>
         <div class="price-body">
           <ul>
@@ -383,7 +558,7 @@
             <li><span class="check">✓</span> Basic monthly health check</li>
             <li><span class="check">✓</span> Business-hours response</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Essential%20Support%20Plan%20(from%2099%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Essential Support Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20Plan%20(from%2099%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Starter Plan">Get Started</a>
         </div>
         <div class="price-tag-footer">Ideal for Small Teams</div>
       </div>
@@ -392,21 +567,21 @@
         <div class="price-badge">Most Popular</div>
         <div class="price-head">
           <div class="tier-icon">⭐</div>
-          <h3>Business Support</h3>
+          <h3>Business</h3>
           <div class="tier-sub">From</div>
           <div class="price">149 KWD <span>/ month</span></div>
-          <div class="users-tag">Up to 20 users</div>
+          <div class="users-tag">Up to 40 users</div>
         </div>
         <div class="price-body">
           <ul>
-            <li><span class="check">✓</span> All in Essential Support</li>
+            <li><span class="check">✓</span> All in Starter</li>
             <li><span class="check">✓</span> Two scheduled onsite visits / month</li>
             <li><span class="check">✓</span> Microsoft 365 administration</li>
             <li><span class="check">✓</span> User-account support</li>
             <li><span class="check">✓</span> Network &amp; printer assistance</li>
             <li><span class="check">✓</span> Monthly IT report</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Support%20Plan%20(from%20149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Support Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Plan%20(from%20149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Plan">Get Started</a>
         </div>
         <div class="price-tag-footer">Best for Growing Teams</div>
       </div>
@@ -414,14 +589,14 @@
       <div class="price-card tier-managed" data-aos="fade-up" data-aos-delay="180">
         <div class="price-head">
           <div class="tier-icon">💎</div>
-          <h3>Managed IT</h3>
-          <div class="tier-sub">From</div>
-          <div class="price">249 KWD <span>/ month</span></div>
-          <div class="users-tag">Up to 40 users</div>
+          <h3>Enterprise</h3>
+          <div class="tier-sub">Custom</div>
+          <div class="price">Contact Us</div>
+          <div class="users-tag">40+ users / multi-site</div>
         </div>
         <div class="price-body">
           <ul>
-            <li><span class="check">✓</span> All in Business Support</li>
+            <li><span class="check">✓</span> All in Business</li>
             <li><span class="check">✓</span> Priority support</li>
             <li><span class="check">✓</span> Weekly onsite visit</li>
             <li><span class="check">✓</span> Endpoint monitoring &amp; patch oversight</li>
@@ -429,13 +604,13 @@
             <li><span class="check">✓</span> Security recommendations</li>
             <li><span class="check">✓</span> Monthly management report</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Managed%20IT%20Plan%20(from%20249%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Managed IT Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20quote." target="_blank" rel="noopener" class="btn track-cta" data-plan="Enterprise Plan">Contact Us</a>
         </div>
         <div class="price-tag-footer">Best for Established Businesses</div>
       </div>
     </div>
 
-    <p class="price-note">Plans exclude hardware repair &amp; replacement parts, software licences, and third-party subscription fees. Need more than 40 users or a multi-site rollout? <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20quote." target="_blank" rel="noopener" class="inline-link track-cta" data-plan="Enterprise Custom Quote">Ask for a custom Enterprise quote</a>.</p>
+    <p class="price-note">Plans exclude hardware repair &amp; replacement parts, software licences, and third-party subscription fees. Need a multi-site rollout? <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20quote." target="_blank" rel="noopener" class="inline-link track-cta" data-plan="Enterprise Custom Quote">Ask for a custom Enterprise quote</a>.</p>
 
     <div class="annual-note" data-aos="fade-up">
       <span class="ico">🎁</span>
@@ -571,7 +746,7 @@
 
       <div id="calc-result" class="calc-result" hidden>
         <p class="calc-result-label">Estimated monthly package</p>
-        <p class="calc-result-range" id="calc-range">149–249 KWD</p>
+        <p class="calc-result-range" id="calc-range">99–149 KWD</p>
         <p class="calc-disclaimer">This is an estimate, not a final quotation. Send it to us on WhatsApp for a confirmed price.</p>
         <form id="calc-lead-form" class="calc-lead-form">
           <input type="text" id="calc-name" placeholder="Your name" required>
@@ -592,16 +767,21 @@
       <span class="section-eyebrow">Proof, Not Just Promises</span>
       <h2>Recent Case Studies</h2>
     </div>
-    <div class="case-grid">
+    <div class="case-grid case-grid-3">
       <div class="case-card" data-aos="fade-up" data-aos-delay="0">
         <div class="case-icon">🪟</div>
-        <h3>Windows 11 Business Upgrade</h3>
-        <p>Upgraded office computers while preserving user profiles, printers and business applications — zero data loss, minimal downtime.</p>
+        <h3>Windows 11 Upgrade</h3>
+        <p>150 computers upgraded to Windows 11 with user profiles, printers and business applications preserved — zero data loss, minimal downtime.</p>
       </div>
       <div class="case-card" data-aos="fade-up" data-aos-delay="100">
         <div class="case-icon">📧</div>
-        <h3>Microsoft 365 Support</h3>
-        <p>Resolved recurring Outlook, mailbox, MFA and archive-related problems for business users, restoring reliable day-to-day email access.</p>
+        <h3>Microsoft 365 Migration</h3>
+        <p>Full mailbox migration to Microsoft 365 completed with no data loss, restoring reliable day-to-day email access for the whole team.</p>
+      </div>
+      <div class="case-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="case-icon">📶</div>
+        <h3>Network &amp; Wi-Fi Redesign</h3>
+        <p>Office Wi-Fi redesigned and access points retuned for improved coverage, eliminating dead zones across the workspace.</p>
       </div>
     </div>
     <p class="case-note">Client names, internal IP addresses, screenshots and confidential details are shared only with explicit customer permission. Want your project featured here? Let us know.</p>
@@ -632,6 +812,12 @@
         <div class="role">Gulf Auto Parts · Sample quote</div>
       </div>
     </div>
+    <div class="confidence-strip" data-aos="fade-up">
+      <div><strong>20+</strong><span>Years Experience</span></div>
+      <div><strong>Same-day</strong><span>Typical Response</span></div>
+      <div><strong>4</strong><span>Professional Certifications</span></div>
+      <div><strong>24/7</strong><span>Remote Assistance Available</span></div>
+    </div>
   </div>
 </section>
 
@@ -644,16 +830,32 @@
     </div>
     <div class="faq-list" data-aos="fade-up">
       <details class="faq-item">
+        <summary>How quickly do you respond to support requests?</summary>
+        <p>Business-hours plans are answered same business day; Business and Enterprise plans receive priority response, with 24/7 remote assistance available on request.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you provide remote support?</summary>
+        <p>Yes, most issues are resolved remotely the same day. Remote support is included in every plan.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you support Microsoft 365?</summary>
+        <p>Yes. Tenant setup, mailbox migration, Teams, SharePoint, OneDrive and Azure administration are all part of our core service.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you visit customer offices?</summary>
+        <p>Yes, on-site visits across Kuwait are included in the Business and Enterprise plans, and available on request for the Starter plan.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you support small businesses?</summary>
+        <p>Yes, the Starter plan is built specifically for small offices and startups, with the same certified support as our larger clients.</p>
+      </details>
+      <details class="faq-item">
         <summary>Do you support businesses outside Kuwait?</summary>
         <p>Yes. Remote IT support, Microsoft 365 and cloud services can be delivered anywhere in the world. On-site visits are currently offered in Kuwait.</p>
       </details>
       <details class="faq-item">
         <summary>What is included in the monthly support plans?</summary>
         <p>Each plan includes remote IT support and a defined scope of Microsoft 365, networking and security coverage. Hardware repair, replacement parts, software licences and third-party subscription fees are billed separately.</p>
-      </details>
-      <details class="faq-item">
-        <summary>How fast do you respond to support requests?</summary>
-        <p>Business-hours plans are answered same business day; Business Support and Managed IT plans receive priority response, with 24/7 remote assistance available on request.</p>
       </details>
       <details class="faq-item">
         <summary>Can I cancel or change my plan at any time?</summary>
@@ -675,24 +877,34 @@
       <p>Message us on WhatsApp for the fastest response, or send a detailed note using the form.</p>
     </div>
     <div class="contact-grid" data-aos="fade-up">
-      <ul class="contact-list">
-        <li>
-          <div class="icon">📱</div>
-          <div><strong>WhatsApp / Phone</strong><span><a class="track-cta" data-plan="Phone Click" href="tel:+96566648706">+965 6664 8706</a></span></div>
-        </li>
-        <li>
-          <div class="icon">📧</div>
-          <div><strong>Email</strong><span><a class="track-cta" data-plan="Email Click" href="mailto:info@khurshedtech.com">info@khurshedtech.com</a></span></div>
-        </li>
-        <li>
-          <div class="icon">📍</div>
-          <div><strong>Location</strong><span>Kuwait City, Kuwait</span></div>
-        </li>
-        <li>
-          <div class="icon">🕒</div>
-          <div><strong>Support Hours</strong><span>Sun–Thu, 9:00 AM – 6:00 PM (24/7 remote assistance by arrangement)</span></div>
-        </li>
-      </ul>
+      <div class="contact-col">
+        <ul class="contact-list">
+          <li>
+            <div class="icon">📱</div>
+            <div><strong>WhatsApp / Phone</strong><span><a class="track-cta" data-plan="Phone Click" href="tel:+96566648706">+965 6664 8706</a></span></div>
+          </li>
+          <li>
+            <div class="icon">📧</div>
+            <div><strong>Email</strong><span><a class="track-cta" data-plan="Email Click" href="mailto:info@khurshedtech.com">info@khurshedtech.com</a></span></div>
+          </li>
+          <li>
+            <div class="icon">📍</div>
+            <div><strong>Location</strong><span>Kuwait City, Kuwait</span></div>
+          </li>
+          <li>
+            <div class="icon">🕒</div>
+            <div><strong>Support Hours</strong><span>Sun–Thu, 9:00 AM – 6:00 PM (24/7 remote assistance by arrangement)</span></div>
+          </li>
+        </ul>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/engineer-mohammad-khurshed-alam-b64501186/" target="_blank" rel="noopener" class="social-pill" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://www.facebook.com/profile.php?id=61591711484981" target="_blank" rel="noopener" class="social-pill" aria-label="Facebook">Facebook</a>
+          <a href="https://www.instagram.com/mohammadkhurshed838/" target="_blank" rel="noopener" class="social-pill" aria-label="Instagram">Instagram</a>
+        </div>
+        <div class="map-embed">
+          <iframe title="KhurshedTech location — Kuwait City" src="https://www.google.com/maps?q=Kuwait+City,+Kuwait&output=embed" width="100%" height="220" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
       <div class="contact-form">
         <h3>Request a Free IT Assessment</h3>
         <form id="contact-form">
@@ -726,7 +938,8 @@
           <label for="cf-budget">Estimated budget (optional)</label>
           <input type="text" id="cf-budget" placeholder="e.g. 100-150 KWD/month">
           <button type="submit">Send via WhatsApp</button>
-          <p class="form-note">This opens WhatsApp with your message pre-filled — nothing is stored on this site.</p>
+          <p class="form-note">This opens WhatsApp with your message pre-filled — nothing is stored on this site. You'll also see a confirmation message here once it's sent.</p>
+          <p class="form-note" id="cf-confirmation" hidden>✓ Thanks — your message is ready in WhatsApp. We usually reply the same business day.</p>
         </form>
       </div>
     </div>
@@ -735,7 +948,7 @@
 
 <footer>
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-top footer-top-4">
       <div class="footer-brand">
         <div class="logo"><img src="logo-icon.png" alt="KhurshedTech logo" class="logo-mark-img"><span>KhurshedTech</span></div>
         <p>Managed IT services for startups, small offices, and growing businesses — onsite in Kuwait, remote worldwide.</p>
@@ -744,6 +957,17 @@
           <a href="https://www.linkedin.com/in/engineer-mohammad-khurshed-alam-b64501186/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
           <a href="https://www.instagram.com/mohammadkhurshed838/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
         </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
@@ -756,14 +980,16 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>Business Hours</h4>
         <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#why-us">Why Us</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#case-studies">Case Studies</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>Sun – Thu: 9:00 AM – 6:00 PM</li>
+          <li>Fri – Sat: Closed</li>
+          <li>24/7 remote assistance by arrangement</li>
+        </ul>
+        <h4 class="footer-legal-heading">Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -774,9 +1000,12 @@
   </div>
 </footer>
 
-<a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="whatsapp-float track-cta" data-plan="Floating Button" aria-label="Chat on WhatsApp">💬</a>
+<div class="float-stack">
+  <a href="https://www.facebook.com/profile.php?id=61591711484981" target="_blank" rel="noopener" class="messenger-float track-cta" data-plan="Messenger Floating Button" aria-label="Chat on Facebook Messenger" title="Chat on Messenger">✉️</a>
+  <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="whatsapp-float track-cta" data-plan="Floating Button" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">💬</a>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>

@@ -20,6 +20,64 @@ if (typeof AOS !== 'undefined') {
   });
 }
 
+// ---------- Dark / Light mode toggle ----------
+const themeToggle = document.getElementById('theme-toggle');
+const applyTheme = (theme) => {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (themeToggle) themeToggle.textContent = '☀️';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    if (themeToggle) themeToggle.textContent = '🌙';
+  }
+};
+(function initTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem('kt-theme'); } catch (e) {}
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
+})();
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('kt-theme', next); } catch (e) {}
+  });
+}
+
+// ---------- English / Arabic language toggle ----------
+// Proof-of-concept: translates nav, hero and key CTAs. Full-site translation
+// (all sections, plus other requested languages) is a larger future phase.
+const langToggle = document.getElementById('lang-toggle');
+const applyLang = (lang) => {
+  document.querySelectorAll('[data-en]').forEach((el) => {
+    const text = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    if (text) el.textContent = text;
+  });
+  if (lang === 'ar') {
+    document.documentElement.setAttribute('dir', 'rtl');
+    document.documentElement.setAttribute('lang', 'ar');
+    if (langToggle) langToggle.textContent = 'AR';
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+    document.documentElement.setAttribute('lang', 'en');
+    if (langToggle) langToggle.textContent = 'EN';
+  }
+};
+(function initLang() {
+  let saved = null;
+  try { saved = localStorage.getItem('kt-lang'); } catch (e) {}
+  applyLang(saved === 'ar' ? 'ar' : 'en');
+})();
+if (langToggle) {
+  langToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+    const next = current === 'ar' ? 'en' : 'ar';
+    applyLang(next);
+    try { localStorage.setItem('kt-lang', next); } catch (e) {}
+  });
+}
+
 // Contact form -> opens WhatsApp with prefilled message (no backend required)
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
@@ -63,6 +121,9 @@ if (contactForm) {
     }
 
     window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
+
+    const confirmationEl = document.getElementById('cf-confirmation');
+    if (confirmationEl) confirmationEl.hidden = false;
   });
 }
 
@@ -162,8 +223,25 @@ if (calcSubmit) {
     const network = document.getElementById('calc-network').checked;
     const security = document.getElementById('calc-security').checked;
 
-    // Base per-user cost (remote helpdesk baseline)
-    let low = users <= 5 ? 60 : users <= 10 ? 99 : users <= 20 ? 149 : 249;
+    const resultBox = document.getElementById('calc-result');
+    const rangeEl = document.getElementById('calc-range');
+
+    // Enterprise: 40+ users routes straight to a custom quote, matching the
+    // Starter (up to 20) / Business (up to 40) / Enterprise (custom) plan structure.
+    if (users > 40) {
+      if (rangeEl) rangeEl.textContent = 'Custom Enterprise pricing — contact us for a quote';
+      if (resultBox) {
+        resultBox.hidden = false;
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'quote_calculated', { event_category: 'engagement', event_label: 'Enterprise (custom)' });
+      }
+      return;
+    }
+
+    // Base per-user cost (remote helpdesk baseline), aligned to Starter/Business tiers
+    let low = users <= 5 ? 60 : users <= 20 ? 99 : 149;
     let high = low + 50;
 
     // Adjustments
@@ -177,8 +255,6 @@ if (calcSubmit) {
     if (security) { low += 25; high += 45; }
     if (!remote && onsiteVisits === 0) { low += 10; high += 10; }
 
-    const resultBox = document.getElementById('calc-result');
-    const rangeEl = document.getElementById('calc-range');
     if (rangeEl) rangeEl.textContent = `${low}–${high} KWD / month (estimate)`;
     if (resultBox) {
       resultBox.hidden = false;
