@@ -1194,7 +1194,35 @@ footer {
 [data-theme="dark"] .calc-lead-form input { background: var(--white); border-color: var(--border); color: var(--text-main); }
 [data-theme="dark"] .nav-links { background: var(--white); }
 [data-theme="dark"] .icon-toggle { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
-[data-theme="dark"] #theme-toggle { }
+
+/* Headings/labels that hardcode var(--navy) for text need to stay legible on dark backgrounds */
+[data-theme="dark"] .logo,
+[data-theme="dark"] .section-header h2,
+[data-theme="dark"] .about-grid h2,
+[data-theme="dark"] .why-item h3,
+[data-theme="dark"] .service-card h3,
+[data-theme="dark"] .onetime-card h3,
+[data-theme="dark"] .case-card h3,
+[data-theme="dark"] .testimonial-card .author,
+[data-theme="dark"] .contact-list strong,
+[data-theme="dark"] .contact-form h3,
+[data-theme="dark"] .contact-form label,
+[data-theme="dark"] .faq-item summary,
+[data-theme="dark"] .credibility-info h3,
+[data-theme="dark"] .outcome-card h3,
+[data-theme="dark"] .portfolio-card h3,
+[data-theme="dark"] .calc-field label,
+[data-theme="dark"] .calc-result-label,
+[data-theme="dark"] .trust-badge span { color: var(--text-main); }
+[data-theme="dark"] .industry-tag { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] .industry-tag:hover { background: var(--accent); color: #fff; }
+[data-theme="dark"] .why-item:hover { background: var(--light-grey); }
+[data-theme="dark"] .service-icon,
+[data-theme="dark"] .portfolio-icon { background: rgba(255,255,255,0.08); color: var(--teal); }
+[data-theme="dark"] .service-card:hover .service-icon { background: var(--accent); color: #fff; }
+[data-theme="dark"] .hero-bg-grid { opacity: 0.6; }
+[data-theme="dark"] .hero-card h3 { color: var(--text-main); }
+/* mission-card always keeps its own explicit navy-gradient background + white text, so it stays legible in both themes without extra overrides */
 
 /* ---------- RTL support (Arabic toggle) ---------- */
 html[dir="rtl"] body { font-family: 'Noto Kufi Arabic', 'Inter', sans-serif; }
