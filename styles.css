@@ -384,37 +384,172 @@ header.scrolled { box-shadow: 0 6px 24px rgba(7, 26, 43, 0.1); }
   font-style: italic;
 }
 
-/* ---------- Homepage plan photo banner (EN light / EN dark / AR) ---------- */
-.plan-photo-wrap {
+/* ---------- Smart IT Support Plans (coded 7-tier grid) ---------- */
+.tier-banner-header {
   max-width: 900px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.tier-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.tier-brand-logo { width: 40px; height: 40px; object-fit: contain; }
+.tier-brand-name { text-align: left; line-height: 1.25; }
+.tier-brand-name strong { display: block; font-size: 1.15rem; color: var(--navy); font-weight: 800; }
+.tier-brand-name span { font-size: 0.68rem; letter-spacing: 0.12em; color: var(--grey); font-weight: 700; }
+.tier-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+}
+.tier-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+.tier-trust-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--light-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.tier-trust-item strong { display: block; font-size: 0.78rem; color: var(--navy); font-weight: 700; }
+.tier-trust-item span { font-size: 0.72rem; color: var(--grey); }
+.tier-manage-note { margin-top: 6px; color: var(--grey); font-size: 0.95rem; }
+.tier-manage-note strong { color: var(--accent); }
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.tier-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 18px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  border-top: 4px solid var(--tier-color, var(--accent));
+}
+.tier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.tier-icon { font-size: 1.9rem; display: block; margin-bottom: 6px; }
+.tier-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 2px; }
+.tier-sub { font-size: 0.75rem; color: var(--grey); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 14px; }
+.tier-users { font-size: 0.85rem; color: var(--text-main); margin-bottom: 10px; }
+.tier-users strong { color: var(--tier-color, var(--accent)); font-size: 1rem; }
+.tier-price { margin-bottom: 16px; }
+.tier-amount { font-size: 1.7rem; font-weight: 800; color: var(--tier-color, var(--accent)); }
+.tier-unit { display: block; font-size: 0.7rem; color: var(--grey); margin-top: 2px; }
+.tier-features { text-align: left; margin-bottom: 16px; }
+.tier-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.tier-features li:last-child { border-bottom: none; }
+.tier-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--tier-color, var(--accent));
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+.tier-ribbon {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tier-color, var(--accent));
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  white-space: nowrap;
+}
+.tier-card.most-popular {
+  box-shadow: 0 0 0 2px var(--tier-color, var(--accent)), var(--shadow-lg);
+}
+.tier-bronze    { --tier-color: #a5581f; }
+.tier-silver    { --tier-color: #6b7280; }
+.tier-gold      { --tier-color: #b8860b; }
+.tier-platinum  { --tier-color: #0e8fa3; }
+.tier-diamond   { --tier-color: #2f6fed; }
+.tier-elite     { --tier-color: #7c3aed; }
+.tier-enterprise{ --tier-color: #16a34a; }
+
+.tier-includes {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 24px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
 }
-.plan-photo-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+.tier-includes-label {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
 }
-.plan-photo-img:hover {
-  transform: translateY(-4px) scale(1.008);
-  box-shadow: 0 26px 55px rgba(4, 15, 28, 0.28);
+.tier-includes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px 20px;
+  margin-bottom: 22px;
+  text-align: left;
 }
-.plan-photo-img.lang-hidden {
-  display: none;
+.tier-includes-grid div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-main);
 }
-.plan-photo-img[dir="rtl"] {
-  direction: rtl;
+.tier-consult-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
 }
-@keyframes planPhotoReveal {
-  from { opacity: 0; transform: scale(0.97); }
-  to { opacity: 1; transform: scale(1); }
-}
-.plan-photo-img.plan-photo-reveal {
-  animation: planPhotoReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
+.tier-consult-icon { font-size: 1.6rem; }
+.tier-consult-text { text-align: left; }
+.tier-consult-text strong { display: block; color: var(--navy); font-size: 0.95rem; }
+.tier-consult-text span { font-size: 0.82rem; color: var(--grey); }
 
 /* ---------- Sections ---------- */
 section { padding: 84px 0; }
@@ -1356,8 +1491,11 @@ footer {
 [data-theme="dark"] .roadmap-card,
 [data-theme="dark"] .roadmap-step,
 [data-theme="dark"] .roadmap-note,
+[data-theme="dark"] .tier-card,
+[data-theme="dark"] .tier-includes,
 [data-theme="dark"] .hero-card { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
 [data-theme="dark"] .roadmap-note { border-left-color: var(--teal); }
+[data-theme="dark"] .tier-trust-icon { background: var(--white); }
 [data-theme="dark"] .contact-form input,
 [data-theme="dark"] .contact-form select,
 [data-theme="dark"] .contact-form textarea,
@@ -1389,6 +1527,10 @@ footer {
 [data-theme="dark"] .roadmap-card h3,
 [data-theme="dark"] .roadmap-step,
 [data-theme="dark"] .roadmap-note strong,
+[data-theme="dark"] .tier-card h3,
+[data-theme="dark"] .tier-brand-name strong,
+[data-theme="dark"] .tier-trust-item strong,
+[data-theme="dark"] .tier-consult-text strong,
 [data-theme="dark"] .trust-badge span { color: var(--text-main); }
 [data-theme="dark"] .industry-tag { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
 [data-theme="dark"] .industry-tag:hover { background: var(--accent); color: #fff; }
@@ -1436,11 +1578,20 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   .confidence-strip { grid-template-columns: repeat(2, 1fr); }
   .promo-banner-services { grid-template-columns: 1fr 1fr; }
   .promo-banner-head { flex-direction: column; text-align: center; }
+  .tier-grid { grid-template-columns: repeat(3, 1fr); }
+  .tier-trust-row { gap: 16px; }
 }
 @media (max-width: 640px) {
   .promo-banner-services { grid-template-columns: 1fr; }
   .roadmap-grid { grid-template-columns: 1fr; }
   .roadmap-step span:last-child { font-size: 0.8rem; }
+  .tier-grid { grid-template-columns: repeat(2, 1fr); }
+  .tier-brand { flex-direction: column; }
+  .tier-brand-name { text-align: center; }
+  .tier-trust-row { flex-direction: column; align-items: center; }
+  .tier-includes-grid { grid-template-columns: 1fr; }
+  .tier-consult-cta { flex-direction: column; text-align: center; }
+  .tier-consult-text { text-align: center; }
 }
 @media (max-width: 640px) {
   .nav-links {
