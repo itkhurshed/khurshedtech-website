@@ -5,8 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KhurshedTech – Smart IT Solutions | IT Support &amp; Managed Services in Kuwait</title>
 <meta name="description" content="KhurshedTech provides professional IT support, managed services, Microsoft 365 & Azure cloud, networking, cybersecurity, CCTV, and website development for businesses in Kuwait.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="KhurshedTech – Smart IT Solutions | IT Support in Kuwait">
+<meta property="og:description" content="Managed IT support, cloud, networking, cybersecurity and web development for growing businesses in Kuwait. 13+ years experience, CCNP/CCNA/Azure certified.">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshedtech-website/og-image.png">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshedtech-website/">
+<meta property="og:site_name" content="KhurshedTech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KhurshedTech – Smart IT Solutions | IT Support in Kuwait">
+<meta name="twitter:description" content="Managed IT support, cloud, networking, cybersecurity and web development for growing businesses in Kuwait.">
+<meta name="twitter:image" content="https://itkhurshed.github.io/khurshedtech-website/og-image.png">
+
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231F3864%22/><text x=%2250%22 y=%2266%22 font-size=%2246%22 font-family=%22Arial%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>KT</text></svg>">
 <link rel="stylesheet" href="styles.css">
+
+<!--
+  ANALYTICS / TRACKING SETUP
+  This site ships with a Google Analytics 4 (GA4) hook wired to buttons and
+  form submissions, but it needs YOUR measurement ID to actually send data.
+  1. Create a free GA4 property at https://analytics.google.com (Admin > Create Property)
+  2. Copy your Measurement ID (looks like "G-XXXXXXXXXX")
+  3. Replace G-XXXXXXXXXX below with your real ID (in both places)
+  Until you do this, the site works normally but sends no analytics data anywhere.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 </head>
 <body>
 
@@ -22,7 +53,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#contact">Contact</a>
-      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta">WhatsApp Us</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA">WhatsApp Us</a>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -37,13 +68,13 @@
       <h1>Reliable IT Support for Growing Businesses in Kuwait</h1>
       <p class="lead">Managed IT services, cloud, networking, cybersecurity, and web development — backed by 13+ years of hands-on infrastructure experience and industry certifications (CCNP, CCNA, Azure AZ-104).</p>
       <div class="hero-actions">
-        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Hero CTA">Message on WhatsApp</a>
         <a href="#pricing" class="btn btn-outline">See Support Plans</a>
       </div>
       <div class="hero-stats">
-        <div><strong>13+</strong><span>Years Experience</span></div>
-        <div><strong>3</strong><span>Professional Certifications</span></div>
-        <div><strong>8</strong><span>Core IT Services</span></div>
+        <div><strong class="counter" data-target="13" data-suffix="+">0</strong><span>Years Experience</span></div>
+        <div><strong class="counter" data-target="3">0</strong><span>Professional Certifications</span></div>
+        <div><strong class="counter" data-target="4">0</strong><span>Support Plan Tiers</span></div>
       </div>
     </div>
     <div class="hero-card">
@@ -61,12 +92,12 @@
 
 <section id="services">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">What We Do</span>
       <h2>Complete IT Services &amp; Maintenance</h2>
       <p>From daily help desk support to full network builds, KhurshedTech covers every layer of your business technology.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid reveal-stagger">
       <div class="service-card">
         <div class="service-icon">🖥️</div>
         <h3>IT Support &amp; Managed Services</h3>
@@ -113,26 +144,36 @@
 
 <section id="why-us" class="bg-light">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">Our Approach</span>
       <h2>Why Choose KhurshedTech</h2>
       <p>We treat your business technology the way we'd want ours treated — proactively, honestly, and without surprise bills.</p>
     </div>
-    <div class="why-grid">
+    <div class="why-grid reveal-stagger">
       <div class="why-item">
-        <div class="num">1</div>
-        <h3>Certified &amp; Experienced</h3>
-        <p>13+ years of hands-on IT infrastructure work, backed by CCNP Enterprise, CCNA, and Microsoft Azure AZ-104 certifications.</p>
+        <div class="num">⚡</div>
+        <h3>Rapid Response</h3>
+        <p>We act fast to minimize downtime and keep your business running.</p>
       </div>
       <div class="why-item">
-        <div class="num">2</div>
-        <h3>Fast, Direct Support</h3>
-        <p>One phone number, one point of contact — no call centers, no ticket queues. Remote and on-site support when you need it.</p>
+        <div class="num">🛡️</div>
+        <h3>Secure &amp; Compliant</h3>
+        <p>Your data and systems are protected using industry best practices.</p>
       </div>
       <div class="why-item">
-        <div class="num">3</div>
-        <h3>Prevention Over Repair</h3>
-        <p>Monthly maintenance plans catch problems before they become downtime, backed by transparent, affordable pricing.</p>
+        <div class="num">📈</div>
+        <h3>Boost Productivity</h3>
+        <p>Reliable IT means a more productive team, with fewer interruptions.</p>
+      </div>
+      <div class="why-item">
+        <div class="num">💷</div>
+        <h3>Predictable Costs</h3>
+        <p>One fixed monthly price, no hidden charges or surprise call-out fees.</p>
+      </div>
+      <div class="why-item">
+        <div class="num">🎧</div>
+        <h3>Expert Support</h3>
+        <p>Certified (CCNP, CCNA, Azure AZ-104), experienced, and easy to reach — one point of contact for everything IT.</p>
       </div>
     </div>
   </div>
@@ -140,20 +181,20 @@
 
 <section id="pricing">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">Support Plans</span>
       <h2>Monthly IT Support Plans</h2>
       <p>Choose the plan that fits your business size. Custom AMC packages available for larger teams and multi-site businesses.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="price-card">
+    <div class="pricing-grid reveal-stagger">
+      <div class="price-card tier-small">
         <div class="price-head">
           <h3>Small Company Plan</h3>
+          <div class="users-tag">Up to 20 users</div>
           <div class="price">99 KWD <span>/ month</span></div>
         </div>
         <div class="price-body">
           <ul>
-            <li><span class="check">✓</span> Up to 20 users</li>
             <li><span class="check">✓</span> Unlimited remote IT support</li>
             <li><span class="check">✓</span> Windows &amp; Microsoft 365 support</li>
             <li><span class="check">✓</span> Network &amp; Wi-Fi troubleshooting</li>
@@ -163,17 +204,17 @@
             <li><span class="check">✓</span> Weekly on-site visits</li>
             <li><span class="check">✓</span> Priority technical support</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Small%20Company%20IT%20Support%20Plan." target="_blank" rel="noopener" class="btn">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Small%20Company%20IT%20Support%20Plan." target="_blank" rel="noopener" class="btn track-cta" data-plan="Small Company Plan">Get Started</a>
         </div>
       </div>
-      <div class="price-card featured">
+      <div class="price-card tier-business">
         <div class="price-head">
           <h3>Business Company Plan</h3>
+          <div class="users-tag">Up to 30 users</div>
           <div class="price">149 KWD <span>/ month</span></div>
         </div>
         <div class="price-body">
           <ul>
-            <li><span class="check">✓</span> Up to 30 users</li>
             <li><span class="check">✓</span> Unlimited remote IT support</li>
             <li><span class="check">✓</span> Complete Microsoft 365 administration</li>
             <li><span class="check">✓</span> Windows Server support</li>
@@ -184,7 +225,70 @@
             <li><span class="check">✓</span> Weekly on-site visits</li>
             <li><span class="check">✓</span> Priority IT support</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Company%20IT%20Support%20Plan." target="_blank" rel="noopener" class="btn">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Company%20IT%20Support%20Plan." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Company Plan">Get Started</a>
+        </div>
+      </div>
+      <div class="price-card tier-growth">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-head">
+          <h3>Growth Plan</h3>
+          <div class="users-tag">Up to 40 users</div>
+          <div class="price">249 KWD <span>/ month</span></div>
+        </div>
+        <div class="price-body">
+          <ul>
+            <li><span class="check">✓</span> Remote &amp; on-site support</li>
+            <li><span class="check">✓</span> User &amp; account management</li>
+            <li><span class="check">✓</span> System monitoring &amp; maintenance</li>
+            <li><span class="check">✓</span> Network &amp; Wi-Fi management</li>
+            <li><span class="check">✓</span> Microsoft 365 support</li>
+            <li><span class="check">✓</span> Backup &amp; data protection</li>
+            <li><span class="check">✓</span> Security &amp; antivirus management</li>
+            <li><span class="check">✓</span> Software installation &amp; updates</li>
+            <li><span class="check">✓</span> Printer &amp; device support</li>
+            <li><span class="check">✓</span> Email &amp; Outlook support</li>
+            <li><span class="check">✓</span> Performance optimization</li>
+            <li><span class="check">✓</span> Troubleshooting &amp; issue resolution</li>
+            <li><span class="check">✓</span> Monthly reporting</li>
+            <li><span class="check">✓</span> Help desk support</li>
+            <li><span class="check">✓</span> IT consultation &amp; guidance</li>
+            <li><span class="check">✓</span> File &amp; permission management</li>
+            <li><span class="check">✓</span> Endpoint security</li>
+            <li><span class="check">✓</span> Cloud services support</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Growth%20Plan%20(249%20KWD%2C%20up%20to%2040%20users)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Growth Plan">Get Started</a>
+        </div>
+      </div>
+      <div class="price-card tier-enterprise">
+        <div class="price-badge">Best Value</div>
+        <div class="price-head">
+          <h3>Enterprise Plan</h3>
+          <div class="users-tag">Up to 50 users · Ideal for SMBs</div>
+          <div class="price">299 KWD <span>/ month</span></div>
+        </div>
+        <div class="price-body">
+          <ul>
+            <li><span class="check">✓</span> Remote &amp; on-site support</li>
+            <li><span class="check">✓</span> User &amp; account management</li>
+            <li><span class="check">✓</span> System monitoring &amp; maintenance</li>
+            <li><span class="check">✓</span> Network &amp; Wi-Fi management</li>
+            <li><span class="check">✓</span> Microsoft 365 support</li>
+            <li><span class="check">✓</span> Backup &amp; data protection</li>
+            <li><span class="check">✓</span> Security &amp; antivirus management</li>
+            <li><span class="check">✓</span> Software installation &amp; updates</li>
+            <li><span class="check">✓</span> Printer &amp; device support</li>
+            <li><span class="check">✓</span> Email &amp; Outlook support</li>
+            <li><span class="check">✓</span> Performance optimization</li>
+            <li><span class="check">✓</span> Troubleshooting &amp; issue resolution</li>
+            <li><span class="check">✓</span> Monthly reporting</li>
+            <li><span class="check">✓</span> Help desk support</li>
+            <li><span class="check">✓</span> IT consultation &amp; guidance</li>
+            <li><span class="check">✓</span> Patch management</li>
+            <li><span class="check">✓</span> File &amp; permission management</li>
+            <li><span class="check">✓</span> Endpoint security</li>
+            <li><span class="check">✓</span> Cloud services support</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Enterprise%20Plan%20(299%20KWD%2C%20up%20to%2050%20users)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Enterprise Plan">Get Started</a>
         </div>
       </div>
     </div>
@@ -194,12 +298,12 @@
 
 <section id="testimonials" class="bg-light">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">Client Feedback</span>
       <h2>What Clients Say</h2>
       <p>Real feedback from businesses we support. (Sample quotes below — ask us to add yours.)</p>
     </div>
-    <div class="testimonial-grid">
+    <div class="testimonial-grid reveal-stagger">
       <div class="testimonial-card">
         <p class="quote">"KhurshedTech fixed our recurring network issues in one visit — no more daily slowdowns."</p>
         <div class="author">Ahmad</div>
@@ -221,12 +325,12 @@
 
 <section id="contact">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <span class="section-eyebrow">Get In Touch</span>
       <h2>Let's Talk About Your IT</h2>
       <p>Message us on WhatsApp for the fastest response, or send a quick note using the form.</p>
     </div>
-    <div class="contact-grid">
+    <div class="contact-grid reveal">
       <ul class="contact-list">
         <li>
           <div class="icon">📱</div>
@@ -295,12 +399,13 @@
       </div>
     </div>
     <div class="footer-bottom">
+      Your Trusted IT Partner for a Smarter Tomorrow<br>
       &copy; <span id="year"></span> KhurshedTech – Smart IT Solutions. Kuwait City, Kuwait.
     </div>
   </div>
 </footer>
 
-<a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">💬</a>
+<a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="whatsapp-float track-cta" data-plan="Floating Button" aria-label="Chat on WhatsApp">💬</a>
 
 <script src="script.js"></script>
 </body>
