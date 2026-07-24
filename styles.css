@@ -140,6 +140,17 @@ header.scrolled { box-shadow: 0 6px 24px rgba(20, 38, 71, 0.1); }
   font-size: 1.25rem;
   color: var(--navy);
 }
+.logo-mark-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
+.footer-brand .logo-mark-img {
+  background: #fff;
+  border-radius: 50%;
+  padding: 4px;
+}
 .logo-mark {
   width: 40px;
   height: 40px;
