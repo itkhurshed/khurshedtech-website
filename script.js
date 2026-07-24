@@ -45,34 +45,39 @@ if (themeToggle) {
   });
 }
 
-// ---------- English / Arabic language toggle ----------
-// Proof-of-concept: translates nav, hero and key CTAs. Full-site translation
-// (all sections, plus other requested languages) is a larger future phase.
-const langToggle = document.getElementById('lang-toggle');
+// ---------- Multi-language switcher (English / Arabic / French / Bangla / Hindi) ----------
+// Translates nav, hero, footer and the promo-banner section. Other sections remain
+// English-only for now — full-site translation across every section is a larger future phase.
+const SUPPORTED_LANGS = ['en', 'ar', 'fr', 'bn', 'hi'];
+const langSelect = document.getElementById('lang-select');
 const applyLang = (lang) => {
+  if (!SUPPORTED_LANGS.includes(lang)) lang = 'en';
+
   document.querySelectorAll('[data-en]').forEach((el) => {
-    const text = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    const text = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
     if (text) el.textContent = text;
   });
+
+  document.querySelectorAll('.promo-banner-card').forEach((el) => {
+    el.hidden = el.getAttribute('data-banner-lang') !== lang;
+  });
+
   if (lang === 'ar') {
     document.documentElement.setAttribute('dir', 'rtl');
-    document.documentElement.setAttribute('lang', 'ar');
-    if (langToggle) langToggle.textContent = 'AR';
   } else {
     document.documentElement.setAttribute('dir', 'ltr');
-    document.documentElement.setAttribute('lang', 'en');
-    if (langToggle) langToggle.textContent = 'EN';
   }
+  document.documentElement.setAttribute('lang', lang);
+  if (langSelect) langSelect.value = lang;
 };
 (function initLang() {
   let saved = null;
   try { saved = localStorage.getItem('kt-lang'); } catch (e) {}
-  applyLang(saved === 'ar' ? 'ar' : 'en');
+  applyLang(SUPPORTED_LANGS.includes(saved) ? saved : 'en');
 })();
-if (langToggle) {
-  langToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
-    const next = current === 'ar' ? 'en' : 'ar';
+if (langSelect) {
+  langSelect.addEventListener('change', () => {
+    const next = langSelect.value;
     applyLang(next);
     try { localStorage.setItem('kt-lang', next); } catch (e) {}
   });

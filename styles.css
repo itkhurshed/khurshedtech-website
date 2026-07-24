@@ -1012,7 +1012,57 @@ footer {
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .icon-toggle:hover { background: var(--border); transform: translateY(-2px); }
-.lang-toggle { font-weight: 800; font-size: 0.72rem; letter-spacing: 0.02em; }
+.lang-toggle {
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  width: auto;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  text-align-last: center;
+}
+
+/* ---------- Multilingual promo banner (code-built) ---------- */
+.promo-banner-card {
+  background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+}
+.promo-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+.promo-banner-logo { width: 56px; height: 56px; object-fit: contain; background: #fff; border-radius: 50%; padding: 6px; flex-shrink: 0; }
+.promo-banner-head h3 { font-size: 1.25rem; margin-bottom: 4px; }
+.promo-banner-head p { font-size: 0.85rem; color: #B9C7E6; }
+.promo-banner-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 20px;
+  margin-bottom: 20px;
+}
+.promo-banner-services div { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; }
+.promo-banner-services .check { color: var(--teal); font-weight: 700; }
+.promo-banner-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  font-size: 0.85rem;
+  color: #C9D8F0;
+}
+.promo-banner-card[dir="rtl"] { direction: rtl; }
 
 /* ---------- Hero animated tech-grid background ---------- */
 .hero-bg-grid {
@@ -1256,6 +1306,11 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .case-grid-3 { grid-template-columns: 1fr; }
   .confidence-strip { grid-template-columns: repeat(2, 1fr); }
+  .promo-banner-services { grid-template-columns: 1fr 1fr; }
+  .promo-banner-head { flex-direction: column; text-align: center; }
+}
+@media (max-width: 640px) {
+  .promo-banner-services { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .nav-links {
