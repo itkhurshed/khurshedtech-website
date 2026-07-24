@@ -10,17 +10,58 @@ if (navToggle && navLinks) {
   });
 }
 
+// AOS (Animate On Scroll) init — powers all data-aos="..." attributes across the page
+if (typeof AOS !== 'undefined') {
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60,
+  });
+}
+
 // Contact form -> opens WhatsApp with prefilled message (no backend required)
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('cf-name').value.trim();
-    const service = document.getElementById('cf-service').value.trim();
-    const message = document.getElementById('cf-message').value.trim();
-    const text = encodeURIComponent(
-      `Hello KhurshedTech, my name is ${name}.\nInterested in: ${service}\nMessage: ${message}`
-    );
+    const val = (id) => {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    };
+    const name = val('cf-name');
+    const company = val('cf-company');
+    const email = val('cf-email');
+    const phone = val('cf-phone');
+    const employees = val('cf-employees');
+    const service = val('cf-service');
+    const supportType = val('cf-support-type');
+    const time = val('cf-time');
+    const message = val('cf-message');
+    const budget = val('cf-budget');
+
+    const lines = [
+      `Hello KhurshedTech, my name is ${name}.`,
+      company && `Company: ${company}`,
+      email && `Email: ${email}`,
+      phone && `Phone: ${phone}`,
+      employees && `Employees: ${employees}`,
+      service && `Interested in: ${service}`,
+      supportType && `Support type: ${supportType}`,
+      time && `Preferred contact time: ${time}`,
+      budget && `Estimated budget: ${budget}`,
+      message && `Message: ${message}`,
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(lines.join('\n'));
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'engagement',
+        event_label: 'Contact Form Submit',
+      });
+    }
+
     window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
   });
 }
@@ -39,7 +80,7 @@ if (siteHeader) {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-// Scroll-reveal animations (fade/slide in when a section enters the viewport)
+// Scroll-reveal animations (fallback for sections not using AOS; harmless alongside AOS)
 const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .reveal-left, .reveal-right, .reveal-zoom');
 if (revealTargets.length && 'IntersectionObserver' in window) {
   const revealObserver = new IntersectionObserver(
@@ -58,7 +99,7 @@ if (revealTargets.length && 'IntersectionObserver' in window) {
   revealTargets.forEach((el) => el.classList.add('visible'));
 }
 
-// Animated stat counters (run once, when the hero stats scroll into view)
+// Animated stat counters (run once, when the stats scroll into view)
 const counters = document.querySelectorAll('.counter');
 if (counters.length) {
   const animateCounter = (el) => {
@@ -92,7 +133,7 @@ if (counters.length) {
   }
 }
 
-// Analytics event tracking on WhatsApp / CTA buttons.
+// Analytics event tracking on WhatsApp / CTA / phone / email links.
 // Safe no-op until a real GA4 Measurement ID is added in index.html <head> —
 // gtag() is only called if Google Analytics has actually loaded.
 document.querySelectorAll('.track-cta').forEach((el) => {
@@ -106,3 +147,81 @@ document.querySelectorAll('.track-cta').forEach((el) => {
     }
   });
 });
+
+// ---------- Quote calculator ----------
+// Pure client-side estimate. Clearly labeled as an estimate, not a final quotation.
+const calcSubmit = document.getElementById('calc-submit');
+if (calcSubmit) {
+  calcSubmit.addEventListener('click', () => {
+    const users = parseInt(document.getElementById('calc-users').value, 10) || 1;
+    const locations = parseInt(document.getElementById('calc-locations').value, 10) || 1;
+    const onsiteVisits = parseInt(document.getElementById('calc-onsite').value, 10) || 0;
+    const remote = document.getElementById('calc-remote').checked;
+    const m365 = document.getElementById('calc-m365').checked;
+    const server = document.getElementById('calc-server').checked;
+    const network = document.getElementById('calc-network').checked;
+    const security = document.getElementById('calc-security').checked;
+
+    // Base per-user cost (remote helpdesk baseline)
+    let low = users <= 5 ? 60 : users <= 10 ? 99 : users <= 20 ? 149 : 249;
+    let high = low + 50;
+
+    // Adjustments
+    if (locations >= 2) { low += 20; high += 30; }
+    if (locations >= 3) { low += 20; high += 30; }
+    if (onsiteVisits >= 1) { low += 25; high += 40; }
+    if (onsiteVisits >= 4) { low += 30; high += 50; }
+    if (m365) { low += 15; high += 25; }
+    if (server) { low += 30; high += 50; }
+    if (network) { low += 15; high += 25; }
+    if (security) { low += 25; high += 45; }
+    if (!remote && onsiteVisits === 0) { low += 10; high += 10; }
+
+    const resultBox = document.getElementById('calc-result');
+    const rangeEl = document.getElementById('calc-range');
+    if (rangeEl) rangeEl.textContent = `${low}–${high} KWD / month (estimate)`;
+    if (resultBox) {
+      resultBox.hidden = false;
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'quote_calculated', {
+        event_category: 'engagement',
+        event_label: `${low}-${high} KWD`,
+      });
+    }
+  });
+}
+
+const calcLeadForm = document.getElementById('calc-lead-form');
+if (calcLeadForm) {
+  calcLeadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('calc-name').value.trim();
+    const company = document.getElementById('calc-company').value.trim();
+    const email = document.getElementById('calc-email').value.trim();
+    const whatsapp = document.getElementById('calc-whatsapp').value.trim();
+    const range = document.getElementById('calc-range') ? document.getElementById('calc-range').textContent : '';
+
+    const lines = [
+      `Hello KhurshedTech, my name is ${name}.`,
+      company && `Company: ${company}`,
+      email && `Email: ${email}`,
+      whatsapp && `WhatsApp: ${whatsapp}`,
+      `I used the online calculator and got an estimate of: ${range}.`,
+      `Please send me a confirmed quotation.`,
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(lines.join('\n'));
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'engagement',
+        event_label: 'Quote Calculator Lead',
+      });
+    }
+
+    window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
+  });
+}
