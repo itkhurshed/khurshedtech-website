@@ -62,6 +62,12 @@ const applyLang = (lang) => {
     el.hidden = el.getAttribute('data-banner-lang') !== lang;
   });
 
+  // Plan photo banner only has EN/AR variants; default to EN for fr/bn/hi.
+  const photoLang = lang === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('.plan-photo-img').forEach((el) => {
+    el.classList.toggle('lang-hidden', el.getAttribute('data-banner-lang') !== photoLang);
+  });
+
   if (lang === 'ar') {
     document.documentElement.setAttribute('dir', 'rtl');
   } else {

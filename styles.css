@@ -384,6 +384,31 @@ header.scrolled { box-shadow: 0 6px 24px rgba(7, 26, 43, 0.1); }
   font-style: italic;
 }
 
+/* ---------- Homepage plan photo banner (EN/AR) ---------- */
+.plan-photo-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.plan-photo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+.plan-photo-img:hover {
+  transform: translateY(-4px) scale(1.008);
+  box-shadow: 0 26px 55px rgba(4, 15, 28, 0.28);
+}
+.plan-photo-img.lang-hidden {
+  display: none;
+}
+.plan-photo-img[dir="rtl"] {
+  direction: rtl;
+}
+
 /* ---------- Sections ---------- */
 section { padding: 84px 0; }
 .section-header { text-align: center; max-width: 640px; margin: 0 auto 48px; }
