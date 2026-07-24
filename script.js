@@ -20,6 +20,30 @@ if (typeof AOS !== 'undefined') {
   });
 }
 
+// ---------- Plan photo banner (EN light / EN dark / AR) ----------
+// Picks the right banner image based on current language + site theme, and
+// plays a short reveal animation whenever the visible image changes.
+const updatePlanPhoto = () => {
+  const lang = document.documentElement.getAttribute('lang') || 'en';
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const wantLang = lang === 'ar' ? 'ar' : 'en';
+  const wantTheme = isDark ? 'dark' : 'light';
+
+  document.querySelectorAll('.plan-photo-img').forEach((el) => {
+    const elLang = el.getAttribute('data-banner-lang');
+    const elTheme = el.getAttribute('data-banner-theme') || 'dark';
+    const show = wantLang === 'ar' ? elLang === 'ar' : (elLang === 'en' && elTheme === wantTheme);
+    el.classList.toggle('lang-hidden', !show);
+  });
+
+  const visible = document.querySelector('.plan-photo-img:not(.lang-hidden)');
+  if (visible) {
+    visible.classList.remove('plan-photo-reveal');
+    void visible.offsetWidth; // force reflow so the animation re-triggers
+    visible.classList.add('plan-photo-reveal');
+  }
+};
+
 // ---------- Dark / Light mode toggle ----------
 const themeToggle = document.getElementById('theme-toggle');
 const applyTheme = (theme) => {
@@ -30,6 +54,7 @@ const applyTheme = (theme) => {
     document.documentElement.removeAttribute('data-theme');
     if (themeToggle) themeToggle.textContent = '🌙';
   }
+  updatePlanPhoto();
 };
 (function initTheme() {
   let saved = null;
@@ -62,12 +87,6 @@ const applyLang = (lang) => {
     el.hidden = el.getAttribute('data-banner-lang') !== lang;
   });
 
-  // Plan photo banner only has EN/AR variants; default to EN for fr/bn/hi.
-  const photoLang = lang === 'ar' ? 'ar' : 'en';
-  document.querySelectorAll('.plan-photo-img').forEach((el) => {
-    el.classList.toggle('lang-hidden', el.getAttribute('data-banner-lang') !== photoLang);
-  });
-
   if (lang === 'ar') {
     document.documentElement.setAttribute('dir', 'rtl');
   } else {
@@ -75,6 +94,7 @@ const applyLang = (lang) => {
   }
   document.documentElement.setAttribute('lang', lang);
   if (langSelect) langSelect.value = lang;
+  updatePlanPhoto();
 };
 (function initLang() {
   let saved = null;
