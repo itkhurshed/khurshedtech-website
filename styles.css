@@ -1593,7 +1593,7 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   .tier-consult-cta { flex-direction: column; text-align: center; }
   .tier-consult-text { text-align: center; }
 }
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .nav-links {
     position: absolute;
     top: 100%;
@@ -1608,6 +1608,8 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   }
   .nav-links.open { display: flex; }
   .nav-toggle { display: flex; }
+}
+@media (max-width: 640px) {
   .hero h1 { font-size: 1.9rem; }
   .services-grid { grid-template-columns: 1fr; }
   .onetime-grid { grid-template-columns: 1fr; }
