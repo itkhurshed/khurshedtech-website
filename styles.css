@@ -415,6 +415,37 @@ header.scrolled { box-shadow: 0 6px 24px rgba(7, 26, 43, 0.1); }
   font-style: italic;
 }
 
+/* ---------- Blog article body ---------- */
+.article-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 0;
+}
+.article-body h2 {
+  margin: 36px 0 12px;
+  font-size: 1.4rem;
+}
+.article-body h2:first-child { margin-top: 0; }
+.article-body p { margin-bottom: 16px; line-height: 1.75; color: var(--text-main); }
+.article-body ul, .article-body ol { margin: 0 0 16px 22px; line-height: 1.75; color: var(--text-main); }
+.article-body li { margin-bottom: 6px; }
+.article-meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: var(--grey);
+  font-size: 0.85rem;
+  margin-top: 14px;
+}
+.article-cta-box {
+  margin-top: 40px;
+  padding: 26px;
+  background: var(--light-grey);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.article-cta-box p { margin-bottom: 14px; }
+
 /* ---------- Website Design page: promo banner image ---------- */
 .wds-banner-showcase {
   padding: 0 0 8px;
@@ -1194,6 +1225,10 @@ footer {
 .footer-col h4 { color: #fff; font-size: 0.95rem; margin-bottom: 14px; }
 .footer-col ul li { margin-bottom: 10px; font-size: 0.88rem; }
 .footer-col ul li a:hover { color: #fff; }
+.footer-contact-lines { list-style: none; margin: 14px 0 0; padding: 0; }
+.footer-contact-lines li { font-size: 0.88rem; color: #B9C7E6; margin-bottom: 6px; }
+.footer-contact-lines a { color: #B9C7E6; }
+.footer-contact-lines a:hover { color: #fff; }
 .footer-social { display: flex; gap: 12px; margin-top: 14px; }
 .footer-social a {
   width: 36px;
@@ -1224,7 +1259,8 @@ footer {
   z-index: 999;
 }
 .whatsapp-float,
-.messenger-float {
+.messenger-float,
+.quote-float {
   width: 58px;
   height: 58px;
   border-radius: 50%;
@@ -1238,8 +1274,10 @@ footer {
 }
 .whatsapp-float { background: #25D366; }
 .messenger-float { background: linear-gradient(135deg, #0084FF, #00C6FF); }
+.quote-float { background: linear-gradient(135deg, var(--accent), var(--teal)); }
 .whatsapp-float:hover,
-.messenger-float:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
+.messenger-float:hover,
+.quote-float:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
 
 /* ---------- Header toggles (theme / language) ---------- */
 .icon-toggle {

@@ -306,3 +306,100 @@ if (calcLeadForm) {
     window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
   });
 }
+
+// ---------- Website cost calculator (website-design-services.html) ----------
+// Pure client-side estimate, anchored to the real package prices shown on the page.
+const wcalcSubmit = document.getElementById('wcalc-submit');
+if (wcalcSubmit) {
+  wcalcSubmit.addEventListener('click', () => {
+    const type = document.getElementById('wcalc-type').value;
+    const pages = parseInt(document.getElementById('wcalc-pages').value, 10) || 1;
+    const multilang = document.getElementById('wcalc-multilang').checked;
+    const booking = document.getElementById('wcalc-booking').checked;
+    const seo = document.getElementById('wcalc-seo').checked;
+    const content = document.getElementById('wcalc-content').checked;
+    const logo = document.getElementById('wcalc-logo').checked;
+
+    const resultBox = document.getElementById('wcalc-result');
+    const rangeEl = document.getElementById('wcalc-range');
+
+    if (type === 'enterprise') {
+      if (rangeEl) rangeEl.textContent = 'Custom Enterprise pricing — contact us for a quote';
+      if (resultBox) {
+        resultBox.hidden = false;
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      if (typeof gtag === 'function') {
+        gtag('event', 'quote_calculated', { event_category: 'engagement', event_label: 'Website Enterprise (custom)' });
+      }
+      return;
+    }
+
+    // Base price + baseline page count, aligned to the real Starter/Basic/Standard/E-Commerce/Business Pro packages
+    const plans = {
+      landing:  { base: 79,  basePages: 1,  high: 129 },
+      business: { base: 129, basePages: 5,  high: 199 },
+      standard: { base: 199, basePages: 10, high: 349 },
+      ecommerce:{ base: 349, basePages: 20, high: 499 },
+      bookingpro:{ base: 499, basePages: 20, high: 599 },
+    };
+    const plan = plans[type] || plans.business;
+    let low = plan.base;
+    let high = plan.high;
+
+    const extraPages = Math.max(0, pages - plan.basePages);
+    low += extraPages * 8;
+    high += extraPages * 12;
+
+    if (multilang) { low += 40; high += 70; }
+    if (booking) { low += 60; high += 100; }
+    if (seo) { low += 30; high += 50; }
+    if (content) { low += 15 * Math.min(pages, 20); high += 20 * Math.min(pages, 20); }
+    if (logo) { low += 25; high += 40; }
+
+    if (rangeEl) rangeEl.textContent = `${low}–${high} KWD (estimate)`;
+    if (resultBox) {
+      resultBox.hidden = false;
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'quote_calculated', {
+        event_category: 'engagement',
+        event_label: `Website ${low}-${high} KWD`,
+      });
+    }
+  });
+}
+
+const wcalcLeadForm = document.getElementById('wcalc-lead-form');
+if (wcalcLeadForm) {
+  wcalcLeadForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('wcalc-name').value.trim();
+    const company = document.getElementById('wcalc-company').value.trim();
+    const email = document.getElementById('wcalc-email').value.trim();
+    const whatsapp = document.getElementById('wcalc-whatsapp').value.trim();
+    const range = document.getElementById('wcalc-range') ? document.getElementById('wcalc-range').textContent : '';
+
+    const lines = [
+      `Hello KhurshedTech, my name is ${name}.`,
+      company && `Company: ${company}`,
+      email && `Email: ${email}`,
+      whatsapp && `WhatsApp: ${whatsapp}`,
+      `I used the website cost calculator and got an estimate of: ${range}.`,
+      `Please send me a confirmed quotation.`,
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(lines.join('\n'));
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'engagement',
+        event_label: 'Website Calculator Lead',
+      });
+    }
+
+    window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
+  });
+}

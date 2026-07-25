@@ -35,7 +35,7 @@
   })();
 </script>
 
-<link rel="stylesheet" href="styles.css?v=17">
+<link rel="stylesheet" href="styles.css?v=18">
 
 <!-- AOS.js — lightweight scroll-reveal animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -347,6 +347,57 @@
       </div>
     </div>
     <p class="wds-disclaimer" data-aos="fade-up">Prices shown are standard package prices — no discounts or promotional pricing. Items marked with * are explained in "Scope, Payments &amp; Ownership" below. A short discovery call confirms final scope before any work begins.</p>
+  </div>
+</section>
+
+<!-- ================= WEBSITE COST CALCULATOR ================= -->
+<section id="wds-calculator" class="bg-light">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-eyebrow">Not Sure What You Need?</span>
+      <h2>Get an Instant Website Cost Estimate</h2>
+      <p>Answer a few quick questions and get an estimated price range in seconds. This is an estimate, not a final quotation.</p>
+    </div>
+    <div class="calculator-card" data-aos="fade-up">
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label for="wcalc-type">Website type</label>
+          <select id="wcalc-type">
+            <option value="landing">Landing Page</option>
+            <option value="business" selected>Business Website</option>
+            <option value="standard">Standard / Professional Website</option>
+            <option value="ecommerce">E-Commerce Store</option>
+            <option value="bookingpro">Booking / Business Pro Website</option>
+            <option value="enterprise">Custom / Enterprise Platform</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="wcalc-pages">Approximate number of pages</label>
+          <input type="number" id="wcalc-pages" min="1" max="100" value="5">
+        </div>
+        <div class="calc-checks">
+          <label><input type="checkbox" id="wcalc-multilang"> Multi-language pages</label>
+          <label><input type="checkbox" id="wcalc-booking"> Booking / appointment system</label>
+          <label><input type="checkbox" id="wcalc-seo"> Advanced SEO setup</label>
+          <label><input type="checkbox" id="wcalc-content"> Content writing needed</label>
+          <label><input type="checkbox" id="wcalc-logo"> Logo design needed</label>
+        </div>
+      </div>
+      <button type="button" id="wcalc-submit" class="btn btn-primary-dark">Calculate My Website Cost</button>
+
+      <div id="wcalc-result" class="calc-result" hidden>
+        <p class="calc-result-label">Estimated project cost</p>
+        <p class="calc-result-range" id="wcalc-range">79–129 KWD</p>
+        <p class="calc-disclaimer">This is an estimate, not a final quotation. Send it to us on WhatsApp for a confirmed price.</p>
+        <form id="wcalc-lead-form" class="calc-lead-form">
+          <input type="text" id="wcalc-name" placeholder="Your name" required>
+          <input type="text" id="wcalc-company" placeholder="Company name">
+          <input type="email" id="wcalc-email" placeholder="Email">
+          <input type="text" id="wcalc-whatsapp" placeholder="WhatsApp number">
+          <button type="submit" class="btn btn-primary-dark">Send My Estimate via WhatsApp</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -666,6 +717,10 @@
           <a href="https://www.instagram.com/mohammadkhurshed838/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
           <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="track-cta" data-plan="Footer WhatsApp" aria-label="WhatsApp">WA</a>
         </div>
+        <ul class="footer-contact-lines">
+          <li>📞 <a href="tel:+96566648706">+965 6664 8706</a></li>
+          <li>✉️ <a href="mailto:info@khurshedtech.com">info@khurshedtech.com</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
@@ -674,7 +729,7 @@
           <li><a href="index.html#services">IT Services</a></li>
           <li><a href="index.html#portfolio">IT Portfolio</a></li>
           <li><a href="index.html#pricing">IT Pricing</a></li>
-          <li><a href="index.html#faq">IT FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
       </div>
@@ -699,6 +754,7 @@
         <ul>
           <li><a href="privacy-policy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="sitemap.xml">Sitemap</a></li>
         </ul>
       </div>
     </div>
@@ -710,12 +766,13 @@
 </footer>
 
 <div class="float-stack">
+  <a href="#wds-calculator" class="quote-float track-cta" data-plan="Sticky Get Quote Button" aria-label="Get an instant website cost estimate" title="Get a Quote">💰</a>
   <a href="https://www.facebook.com/profile.php?id=61591711484981" target="_blank" rel="noopener" class="messenger-float track-cta" data-plan="Messenger Floating Button" aria-label="Chat on Facebook Messenger" title="Chat on Messenger">✉️</a>
   <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="whatsapp-float track-cta" data-plan="Floating Button" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">💬</a>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 <!-- This page has no translated content yet, so always force LTR/English regardless of a saved language preference from the homepage -->
 <script>document.documentElement.setAttribute('dir', 'ltr'); document.documentElement.setAttribute('lang', 'en');</script>
 </body>

@@ -51,6 +51,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-windows11-tips.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-m365-migration-checklist.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-cybersecurity-basics-smb.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://itkhurshed.github.io/khurshedtech-website/privacy-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
