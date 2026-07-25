@@ -1856,19 +1856,14 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
 .wds-card h3 { color: var(--navy); font-size: 1.15rem; font-weight: 800; margin-bottom: 2px; }
 .wds-sub { color: var(--wds-color, var(--accent)); font-weight: 700; font-size: 0.85rem; margin-bottom: 4px; }
 .wds-tagline { color: var(--grey); font-size: 0.8rem; margin-bottom: 14px; }
-.wds-price-row { min-height: 20px; }
-.wds-old-price { color: var(--grey); text-decoration: line-through; font-size: 0.88rem; }
-.wds-price { color: var(--navy); font-size: 2.1rem; font-weight: 800; line-height: 1; margin: 4px 0 8px; }
+.wds-price { color: var(--navy); font-size: 2.1rem; font-weight: 800; line-height: 1; margin: 12px 0 4px; }
 .wds-price span { font-size: 0.95rem; font-weight: 700; color: var(--grey); }
-.wds-save {
+.wds-delivery {
   display: inline-block;
-  background: var(--wds-color, var(--accent));
-  color: #fff;
-  font-size: 0.75rem;
+  color: var(--wds-color, var(--accent));
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 4px 14px;
-  border-radius: 999px;
-  margin: 0 auto 16px;
+  margin-bottom: 16px;
 }
 .wds-feature-list { text-align: left; margin-bottom: 20px; flex-grow: 1; }
 .wds-feature-list li {
@@ -1962,6 +1957,23 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
 [data-theme="dark"] .wds-card h3,
 [data-theme="dark"] .wds-price { color: var(--text-main); }
 [data-theme="dark"] .wds-addons { background: var(--white); }
+
+/* ---- Portfolio: service chips + view-project link ---- */
+.wds-portfolio-icon { font-size: 1.5rem; }
+.wds-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 14px; }
+.wds-chip {
+  background: var(--light-grey);
+  color: var(--navy);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+.wds-view-link { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+.wds-view-link:hover { text-decoration: underline; }
+[data-theme="dark"] .wds-chip { background: var(--white); border-color: var(--border); color: var(--text-main); }
+[data-theme="dark"] .wds-view-link { color: var(--teal); }
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
