@@ -1989,3 +1989,45 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
   .wds-cta-inner { flex-direction: column; text-align: center; }
   .wds-cta-contact { justify-content: center; }
 }
+
+/* ================= Portfolio demo-gallery cards (starting price + dual CTA) ================= */
+.wds-demo-price { color: var(--accent); font-weight: 800; font-size: 0.95rem; margin: 4px 0 12px; }
+.wds-demo-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.wds-demo-actions .btn { padding: 10px 16px; font-size: 0.82rem; text-align: center; }
+
+/* ================= Delivery timeline table ================= */
+.wds-timeline-table { max-width: 720px; margin: 0 auto; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--white); }
+.wds-timeline-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; border-bottom: 1px solid var(--border); }
+.wds-timeline-row:last-child { border-bottom: none; }
+.wds-timeline-row strong { color: var(--navy); font-size: 0.92rem; }
+.wds-timeline-row span { color: var(--accent); font-weight: 700; font-size: 0.88rem; }
+.wds-timeline-note { text-align: center; color: var(--grey); font-size: 0.82rem; margin-top: 16px; }
+[data-theme="dark"] .wds-timeline-table { background: var(--light-grey); border-color: var(--border); }
+[data-theme="dark"] .wds-timeline-row { border-color: var(--border); }
+[data-theme="dark"] .wds-timeline-row strong { color: var(--text-main); }
+
+/* ================= Demo template pages ================= */
+.demo-banner {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--navy-dark);
+  color: #fff;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 10px 16px;
+}
+.demo-banner a { color: var(--teal); font-weight: 700; margin-left: 10px; }
+.demo-price-tag { color: var(--accent); font-weight: 800; font-size: 1rem; margin: 6px 0; }
+.demo-mini-footer {
+  text-align: center;
+  padding: 28px 20px;
+  color: var(--grey);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--border);
+}
+.demo-mini-footer a { color: var(--accent); font-weight: 700; }
+@media (max-width: 640px) {
+  .wds-timeline-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
