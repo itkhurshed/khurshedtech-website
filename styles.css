@@ -2064,3 +2064,81 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
 @media (max-width: 640px) {
   .wds-timeline-row { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
+
+/* ================= Homepage: Website Design promo banner ================= */
+.web-promo {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  padding: 64px 0;
+}
+.web-promo-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 32px;
+}
+.web-promo-eyebrow {
+  display: inline-block;
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.web-promo-header h2 { color: #fff; font-size: 2rem; margin-bottom: 12px; }
+.web-promo-header p { color: rgba(255,255,255,0.75); font-size: 1rem; margin-bottom: 20px; }
+.web-promo-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.web-promo-badges span {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.web-promo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 940px;
+  margin: 0 auto 32px;
+}
+.web-promo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.web-promo-item:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
+.web-promo-item strong { display: block; color: #fff; font-size: 0.88rem; }
+.web-promo-item span:not(.web-promo-icon) { color: rgba(255,255,255,0.65); font-size: 0.78rem; }
+.web-promo-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #fff;
+}
+.wp-c1 { background: #7c3aed; }
+.wp-c2 { background: #ea580c; }
+.wp-c3 { background: #16a34a; }
+.wp-c4 { background: var(--accent); }
+.wp-c5 { background: #4f46e5; }
+.wp-c6 { background: #db2777; }
+.web-promo-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .web-promo-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .web-promo-header h2 { font-size: 1.6rem; }
+  .web-promo-grid { grid-template-columns: 1fr; }
+  .web-promo-actions { flex-direction: column; align-items: center; }
+}
