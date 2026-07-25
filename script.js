@@ -335,13 +335,13 @@ if (wcalcSubmit) {
       return;
     }
 
-    // Base price + baseline page count, aligned to the real Starter/Basic/Standard/E-Commerce/Business Pro packages
+    // Base price + baseline page count, aligned to the real Starter/Basic Business/Professional Business/E-Commerce/Premium Business packages
     const plans = {
-      landing:  { base: 79,  basePages: 1,  high: 129 },
-      business: { base: 129, basePages: 5,  high: 199 },
-      standard: { base: 199, basePages: 10, high: 349 },
-      ecommerce:{ base: 349, basePages: 20, high: 499 },
-      bookingpro:{ base: 499, basePages: 20, high: 599 },
+      landing:  { base: 49,  basePages: 1,  high: 79 },
+      business: { base: 99,  basePages: 5,  high: 149 },
+      standard: { base: 199, basePages: 10, high: 279 },
+      ecommerce:{ base: 349, basePages: 20, high: 449 },
+      bookingpro:{ base: 599, basePages: 20, high: 699 },
     };
     const plan = plans[type] || plans.business;
     let low = plan.base;
