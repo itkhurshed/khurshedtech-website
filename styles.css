@@ -122,6 +122,37 @@ ul { list-style: none; }
 img { max-width: 100%; display: block; }
 .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 
+/* ---------- Service switcher (IT Services / Website Design) ---------- */
+.service-switcher {
+  background: var(--navy-dark);
+  padding: 7px 24px;
+}
+.service-switcher-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.service-switcher-label {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.switcher-tab {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+.switcher-tab:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
+.switcher-tab.active { color: #fff; background: var(--accent); }
+
 /* ---------- Header ---------- */
 header {
   position: sticky;
