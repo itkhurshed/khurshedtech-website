@@ -2111,6 +2111,7 @@ html[dir="rtl"] .hero-inner { direction: rtl; }
 
 /* ================= Portfolio demo-gallery cards (starting price + dual CTA) ================= */
 .wds-demo-price { color: var(--accent); font-weight: 800; font-size: 0.95rem; margin: 4px 0 12px; }
+.wds-demo-fit { font-size: 0.85rem; color: var(--text-muted, #6b7280); margin: -4px 0 10px; }
 .wds-demo-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
 .wds-demo-actions .btn { padding: 10px 16px; font-size: 0.82rem; text-align: center; }
 
