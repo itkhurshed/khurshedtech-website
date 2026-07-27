@@ -10,6 +10,40 @@ if (navToggle && navLinks) {
   });
 }
 
+// Hero mouse parallax - subtle background drift following the cursor, disabled for reduced-motion users
+const heroSection = document.querySelector('.hero');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroSection && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+  heroSection.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width - 0.5;
+    const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    heroSection.style.setProperty('--parallax-x', (relX * 20) + 'px');
+    heroSection.style.setProperty('--parallax-y', (relY * 20) + 'px');
+  });
+  heroSection.addEventListener('mouseleave', () => {
+    heroSection.style.setProperty('--parallax-x', '0px');
+    heroSection.style.setProperty('--parallax-y', '0px');
+  });
+}
+
+// Portfolio filter buttons
+const portfolioFilterBtns = document.querySelectorAll('.portfolio-filter-btn');
+const portfolioCards = document.querySelectorAll('#portfolio-grid .portfolio-card');
+if (portfolioFilterBtns.length && portfolioCards.length) {
+  portfolioFilterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      portfolioFilterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      portfolioCards.forEach((card) => {
+        const show = filter === 'all' || card.getAttribute('data-category') === filter;
+        card.classList.toggle('is-hidden', !show);
+      });
+    });
+  });
+}
+
 // AOS (Animate On Scroll) init — powers all data-aos="..." attributes across the page
 if (typeof AOS !== 'undefined') {
   AOS.init({

@@ -33,7 +33,7 @@
 <!-- Premium type system: Plus Jakarta Sans for headings, Inter for body copy -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
 
 <!-- Inline theme-preload: sets dark/light mode before paint to avoid a flash of the wrong theme -->
 <script>
@@ -203,7 +203,9 @@
       <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا" data-fr="Portfolio" data-bn="পোর্টফোলিও" data-hi="पोर्टफोलियो">Portfolio</a>
       <a href="#pricing" data-en="Pricing" data-ar="الأسعار" data-fr="Tarifs" data-bn="মূল্য তালিকা" data-hi="मूल्य निर्धारण">Pricing</a>
       <a href="#case-studies" data-en="Case Studies" data-ar="دراسات الحالة" data-fr="Études de cas" data-bn="কেস স্টাডি" data-hi="केस स्टडीज़">Case Studies</a>
+      <a href="#testimonials" data-en="Testimonials" data-ar="آراء العملاء" data-fr="Témoignages" data-bn="প্রশংসাপত্র" data-hi="प्रशंसापत्र">Testimonials</a>
       <a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة" data-fr="FAQ" data-bn="সাধারণ জিজ্ঞাসা" data-hi="अक्सर पूछे जाने वाले प्रश्न">FAQ</a>
+      <a href="blog.html" data-en="Blog" data-ar="المدونة" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
       <a href="#contact" data-en="Contact" data-ar="تواصل معنا" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
       <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA" data-en="WhatsApp Us" data-ar="واتساب" data-fr="WhatsApp" data-bn="হোয়াটসঅ্যাপ করুন" data-hi="व्हाट्सएप करें">WhatsApp Us</a>
       <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
@@ -223,16 +225,25 @@
 
 <section class="hero" id="home">
   <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-particles" aria-hidden="true">
+    <span class="hero-particle" style="left:8%; animation-delay:0s;"></span>
+    <span class="hero-particle" style="left:18%; animation-delay:2.2s;"></span>
+    <span class="hero-particle" style="left:30%; animation-delay:0.8s;"></span>
+    <span class="hero-particle" style="left:44%; animation-delay:3.5s;"></span>
+    <span class="hero-particle" style="left:58%; animation-delay:1.4s;"></span>
+    <span class="hero-particle" style="left:70%; animation-delay:4.2s;"></span>
+    <span class="hero-particle" style="left:82%; animation-delay:2.8s;"></span>
+    <span class="hero-particle" style="left:92%; animation-delay:0.4s;"></span>
+  </div>
   <div class="hero-inner">
     <div>
       <span class="hero-eyebrow" data-en="Managed IT Services · Kuwait &amp; Remote Worldwide" data-ar="خدمات تقنية معلومات مُدارة · الكويت وعن بُعد حول العالم" data-fr="Services informatiques gérés · Koweït et à distance dans le monde entier" data-bn="ব্যবস্থাপিত আইটি সেবা · কুয়েত এবং বিশ্বব্যাপী দূরবর্তী সহায়তা" data-hi="प्रबंधित आईटी सेवाएं · कुवैत और दुनिया भर में रिमोट सहायता">Managed IT Services · Kuwait &amp; Remote Worldwide</span>
-      <h1 data-en="Managed IT Services for Small &amp; Medium Businesses" data-ar="خدمات تقنية معلومات مُدارة للشركات الصغيرة والمتوسطة" data-fr="Services informatiques gérés pour les petites et moyennes entreprises" data-bn="ছোট ও মাঝারি ব্যবসার জন্য ব্যবস্থাপিত আইটি সেবা" data-hi="छोटे और मध्यम व्यवसायों के लिए प्रबंधित आईटी सेवाएं">Managed IT Services for Small &amp; Medium Businesses</h1>
-      <p class="lead-tags" data-en="Secure · Reliable · Proactive IT Support in Kuwait &amp; Remote Worldwide" data-ar="آمن · موثوق · دعم تقني استباقي في الكويت وعن بُعد حول العالم" data-fr="Sécurisé · Fiable · Support informatique proactif au Koweït et à distance dans le monde entier" data-bn="নিরাপদ · নির্ভরযোগ্য · সক্রিয় আইটি সহায়তা কুয়েতে এবং বিশ্বব্যাপী দূরবর্তীভাবে" data-hi="सुरक्षित · विश्वसनीय · सक्रिय आईटी सहायता कुवैत में और दुनिया भर में रिमोट">Secure · Reliable · Proactive IT Support in Kuwait &amp; Remote Worldwide</p>
-      <p class="lead" data-en="Reliable IT support that reduces downtime, protects your data, and keeps your team productive — onsite in Kuwait and remotely worldwide." data-ar="دعم تقني موثوق يقلل التوقف، يحمي بياناتك، ويحافظ على إنتاجية فريقك — في الكويت وعن بُعد حول العالم." data-fr="Un support informatique fiable qui réduit les temps d'arrêt, protège vos données et maintient la productivité de votre équipe — sur site au Koweït et à distance dans le monde entier." data-bn="নির্ভরযোগ্য আইটি সহায়তা যা ডাউনটাইম কমায়, আপনার তথ্য সুরক্ষিত রাখে এবং আপনার দলকে উৎপাদনশীল রাখে — কুয়েতে সরাসরি এবং বিশ্বব্যাপী দূরবর্তীভাবে।" data-hi="विश्वसनीय आईटी सहायता जो डाउनटाइम कम करती है, आपके डेटा की सुरक्षा करती है, और आपकी टीम को उत्पादक बनाए रखती है — कुवैत में ऑनसाइट और दुनिया भर में रिमोट।">Reliable IT support that reduces downtime, protects your data, and keeps your team productive — onsite in Kuwait and remotely worldwide.</p>
+      <h1 data-en="Professional IT Support &amp; Website Development" data-ar="دعم تقني احترافي وتطوير المواقع الإلكترونية" data-fr="Support informatique professionnel et développement de sites web" data-bn="পেশাদার আইটি সহায়তা ও ওয়েবসাইট ডেভেলপমেন্ট" data-hi="पेशेवर आईटी सहायता और वेबसाइट डेवलपमेंट">Professional IT Support &amp; Website Development</h1>
+      <p class="lead" data-en="Helping businesses grow with reliable IT solutions, websites, Microsoft 365, cloud services, networking and cybersecurity." data-ar="نساعد الشركات على النمو من خلال حلول تقنية معلومات موثوقة، ومواقع إلكترونية، ومايكروسوفت 365، وخدمات سحابية، وشبكات، وأمن سيبراني." data-fr="Nous aidons les entreprises à se développer grâce à des solutions informatiques fiables, des sites web, Microsoft 365, des services cloud, la mise en réseau et la cybersécurité." data-bn="নির্ভরযোগ্য আইটি সমাধান, ওয়েবসাইট, মাইক্রোসফট ৩৬৫, ক্লাউড সেবা, নেটওয়ার্কিং ও সাইবার নিরাপত্তার মাধ্যমে ব্যবসা প্রবৃদ্ধিতে সহায়তা।" data-hi="विश्वसनीय आईटी समाधान, वेबसाइट, माइक्रोसॉफ्ट 365, क्लाउड सेवाएं, नेटवर्किंग और साइबर सुरक्षा के साथ व्यवसायों को बढ़ने में मदद करना।">Helping businesses grow with reliable IT solutions, websites, Microsoft 365, cloud services, networking and cybersecurity.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20IT%20assessment%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Get Free IT Assessment" data-en="Get Free IT Assessment" data-ar="احصل على تقييم تقني مجاني" data-fr="Évaluation informatique gratuite" data-bn="বিনামূল্যে আইটি মূল্যায়ন নিন" data-hi="मुफ़्त आईटी मूल्यांकन लें">Get Free IT Assessment</a>
-        <a href="#quote-calculator" class="btn btn-outline" data-en="Request a Quote" data-ar="اطلب عرض سعر" data-fr="Demander un devis" data-bn="কোটেশন চান" data-hi="कोटेशन के लिए अनुरोध करें">Request a Quote</a>
-        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-ghost track-cta" data-plan="Hero WhatsApp Us" data-en="WhatsApp Us" data-ar="راسلنا على واتساب" data-fr="WhatsApp" data-bn="হোয়াটসঅ্যাপ করুন" data-hi="व्हाट्सएप करें">WhatsApp Us</a>
+        <a href="#quote-calculator" class="btn btn-primary" data-en="Get Free Quote" data-ar="احصل على عرض سعر مجاني" data-fr="Devis gratuit" data-bn="বিনামূল্যে কোটেশন নিন" data-hi="मुफ़्त कोटेशन लें">Get Free Quote</a>
+        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Hero WhatsApp Now" data-en="WhatsApp Now" data-ar="واتساب الآن" data-fr="WhatsApp maintenant" data-bn="এখনই হোয়াটসঅ্যাপ করুন" data-hi="अभी व्हाट्सएप करें">WhatsApp Now</a>
+        <a href="#portfolio" class="btn btn-ghost" data-en="View Portfolio" data-ar="عرض أعمالنا" data-fr="Voir le portfolio" data-bn="পোর্টফোলিও দেখুন" data-hi="पोर्टफोलियो देखें">View Portfolio</a>
       </div>
       <div class="hero-badge-row" data-aos="fade-up">
         <div class="hero-badge-item"><span class="hero-badge-icon">⚡</span>Fast Response</div>
@@ -775,6 +786,33 @@
   </div>
 </section>
 
+<!-- ================= SPECIALIZED IT SOLUTIONS ================= -->
+<section id="specialized-it" class="bg-light">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-eyebrow">Also Available</span>
+      <h2>Specialized IT Solutions</h2>
+      <p>Beyond day-to-day support, we handle the specialized projects that keep your infrastructure secure, compliant, and running.</p>
+    </div>
+    <div class="wds-addons-grid" data-aos="fade-up">
+      <div class="wds-addon-item"><span class="wds-addon-icon">📝</span><div><strong>IT AMC (Annual Maintenance Contracts)</strong><span>Predictable yearly coverage, discounted vs. monthly</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">☁️</span><div><strong>Microsoft 365 Migration</strong><span>Mailbox, Teams &amp; SharePoint moves with zero data loss</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🔷</span><div><strong>Azure Cloud Solutions</strong><span>Virtual machines, storage, identity &amp; cost optimization</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🗂️</span><div><strong>Active Directory Management</strong><span>User accounts, group policy &amp; domain administration</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🔐</span><div><strong>VPN Setup</strong><span>Secure remote access for hybrid &amp; remote teams</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">💾</span><div><strong>Backup &amp; Disaster Recovery</strong><span>Automated backups &amp; tested recovery plans</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🧱</span><div><strong>Firewall Configuration</strong><span>Perimeter security tuned to your business</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🛡️</span><div><strong>Network Security</strong><span>Segmentation, monitoring &amp; intrusion protection</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">🖨️</span><div><strong>Printer &amp; Copier Support</strong><span>Fleet setup, scan-to-email/folder configuration</span></div></div>
+      <div class="wds-addon-item"><span class="wds-addon-icon">📹</span><div><strong>CCTV &amp; Access Control</strong><span>Camera systems, NVRs &amp; door-access setup</span></div></div>
+    </div>
+    <div class="pricing-cta-row" data-aos="fade-up" style="margin-top:24px;">
+      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20a%20specialized%20IT%20project." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Specialized IT Quote">Get a Quote</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Specialized IT WhatsApp">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
 <!-- ================= WEBSITE DESIGN PROMO BANNER ================= -->
 <section class="web-promo">
   <div class="container">
@@ -812,57 +850,65 @@
       <h2>Types of Projects We Deliver</h2>
       <p>A look at the kind of work we do day to day. Full project details and screenshots are shared with prospective clients on request, respecting the confidentiality of every business we work with.</p>
     </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0">
+    <div class="portfolio-filters" data-aos="fade-up" role="tablist" aria-label="Filter portfolio by category">
+      <button type="button" class="portfolio-filter-btn active" data-filter="all">All</button>
+      <button type="button" class="portfolio-filter-btn" data-filter="it-support">IT Support</button>
+      <button type="button" class="portfolio-filter-btn" data-filter="cloud">Cloud &amp; Microsoft 365</button>
+      <button type="button" class="portfolio-filter-btn" data-filter="networking">Networking</button>
+      <button type="button" class="portfolio-filter-btn" data-filter="web">Websites</button>
+      <button type="button" class="portfolio-filter-btn" data-filter="security">Security</button>
+    </div>
+    <div class="portfolio-grid" id="portfolio-grid">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0" data-category="cloud">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" stroke="currentColor" stroke-width="1.5"/></svg>
         </div>
         <h3>Microsoft 365 Projects</h3>
         <p>Tenant setup, mailbox migrations, Teams &amp; SharePoint rollouts for growing teams.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60" data-category="it-support">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M9 20h6M12 16v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
         <h3>Windows Deployments</h3>
         <p>Fleet-wide OS upgrades and new PC rollouts with user profiles and apps preserved.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="120" data-category="cloud">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 17l8-13 8 13H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
         <h3>Azure Administration</h3>
         <p>Identity, backup, and cloud infrastructure management for businesses moving to the cloud.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180" data-category="networking">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="11" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="0.6" fill="currentColor"/><circle cx="7" cy="13" r="0.6" fill="currentColor"/></svg>
         </div>
         <h3>Network Rack Installations</h3>
         <p>Structured cabling, switch configuration and rack builds for offices and server rooms.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="0" data-category="web">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z" stroke="currentColor" stroke-width="1.5"/></svg>
         </div>
         <h3>Websites Built</h3>
         <p>Business websites and landing pages — this site is a working example of that craft.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="60" data-category="it-support">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 8V4h10v4M7 20h10v-4H7v4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
         <h3>Printer &amp; Copier Deployments</h3>
         <p>Fleet configuration for scan-to-email, scan-to-folder and secure network printing.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="120">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="120" data-category="security">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M4 9l6 3-6 3M20 9v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="19" r="1.2" fill="currentColor"/></svg>
         </div>
         <h3>CCTV &amp; Security Camera Setup</h3>
         <p>Camera installation, NVR configuration and remote viewing for offices and retail locations.</p>
       </div>
-      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180">
+      <div class="portfolio-card" data-aos="fade-up" data-aos-delay="180" data-category="networking">
         <div class="portfolio-icon">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 9a12 12 0 0116 0M7 12.5a7.5 7.5 0 0110 0M10 16a3 3 0 014 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="19" r="1.1" fill="currentColor"/></svg>
         </div>
@@ -982,7 +1028,7 @@
       <p class="plan-banner-caption">Promotional overview — see the full, current plan details and pricing below.</p>
     </div>
 
-    <div class="pricing-grid pricing-grid-3">
+    <div class="pricing-grid pricing-grid-4">
       <div class="price-card tier-essential" data-aos="fade-up" data-aos-delay="0">
         <div class="price-head">
           <div class="tier-icon">🛡️</div>
@@ -1025,6 +1071,28 @@
           <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Plan%20(from%20149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Plan">Get Started</a>
         </div>
         <div class="price-tag-footer">Best for Growing Teams</div>
+      </div>
+
+      <div class="price-card tier-professional" data-aos="fade-up" data-aos-delay="135">
+        <div class="price-head">
+          <div class="tier-icon">🚀</div>
+          <h3>Professional</h3>
+          <div class="tier-sub">From</div>
+          <div class="price">229 KWD <span>/ month</span></div>
+          <div class="users-tag">Up to 60 users / multi-department</div>
+        </div>
+        <div class="price-body">
+          <ul>
+            <li><span class="check">✓</span> All in Business</li>
+            <li><span class="check">✓</span> Weekly onsite visit</li>
+            <li><span class="check">✓</span> Advanced cybersecurity monitoring</li>
+            <li><span class="check">✓</span> Firewall &amp; VPN management</li>
+            <li><span class="check">✓</span> Backup &amp; disaster-recovery checks</li>
+            <li><span class="check">✓</span> Quarterly IT strategy review</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Professional%20Plan%20(from%20229%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Professional Plan">Get Started</a>
+        </div>
+        <div class="price-tag-footer">Best for Multi-Department Teams</div>
       </div>
 
       <div class="price-card tier-managed" data-aos="fade-up" data-aos-delay="180">
@@ -1556,7 +1624,7 @@
   <div class="container">
     <div class="footer-top footer-top-4">
       <div class="footer-brand">
-        <div class="logo"><img src="logo-icon.png" alt="KhurshedTech logo" class="logo-mark-img"><span>KhurshedTech</span></div>
+        <div class="logo"><img src="logo-icon.png" alt="KhurshedTech logo" class="logo-mark-img" loading="lazy" decoding="async"><span>KhurshedTech</span></div>
         <p>Managed IT services and professional website development for startups, small businesses, and growing organizations — onsite in Kuwait, remote worldwide.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/profile.php?id=61591711484981" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
@@ -1576,7 +1644,9 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="khurshedtech-company-profile.pdf" target="_blank" rel="noopener">Company Profile (PDF)</a></li>
         </ul>
