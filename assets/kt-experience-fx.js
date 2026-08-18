@@ -23,6 +23,11 @@
       honestly-labeled FAQ set — this is scripted pattern matching, not a
       live language model (this is a static GitHub Pages site with no
       backend), and is presented as "Quick Answers" for that reason.
+    - Subtle floating tech tags around the About section (decorative only,
+      hidden on touch/narrow viewports).
+    - A soft blue/purple ambient glow behind the Contact section for a
+      calmer closing feel, kept low-opacity so it stays true to the site's
+      light color scheme instead of forcing a dark reskin.
   Respects prefers-reduced-motion and pointer:coarse throughout, and does
   nothing until DOM is ready.
 */
@@ -110,12 +115,23 @@
     .kt-ai-quick button:hover{border-color:#00C2FF;color:#fff;}\
     @media (max-width:480px){.kt-ai-toggle{left:16px;bottom:16px;width:50px;height:50px;font-size:1.2rem;}.kt-ai-panel{left:16px;bottom:78px;}}\
     \
+    .kt-about-floater{position:absolute;display:flex;align-items:center;gap:6px;padding:6px 12px 6px 8px;border-radius:999px;background:rgba(0,194,255,0.07);border:1px solid rgba(0,194,255,0.18);color:#3E5C7A;font-size:.72rem;font-weight:600;pointer-events:none;opacity:0;animation:kt-about-float 7s ease-in-out infinite;white-space:nowrap;z-index:0;}\
+    .kt-about-floater span.kt-about-floater-ic{font-size:.9rem;}\
+    @keyframes kt-about-float{0%{opacity:0;transform:translateY(6px);}10%,80%{opacity:.9;}50%{transform:translateY(-10px);}100%{opacity:0;transform:translateY(6px);}}\
+    @media (max-width:900px){.kt-about-floater{display:none;}}\
+    \
+    .kt-contact-glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.14;pointer-events:none;z-index:0;animation:kt-aurora-drift 22s ease-in-out infinite alternate;}\
+    #contact{position:relative;overflow:hidden;}\
+    #contact .container{position:relative;z-index:1;}\
+    \
     @media (prefers-reduced-motion:reduce){\
       .kt-shield-ring{animation:none;}\
       .kt-shield-emblem svg{animation:none;}\
       .kt-fly-in{opacity:1;transform:none;transition:none;}\
       .kt-flip-inner{transition:none;}\
       .kt-skill-fill{transition:none;}\
+      .kt-about-floater{animation:none;opacity:.9;transform:none;}\
+      .kt-contact-glow{animation:none;}\
     }\
   ";
   var styleEl = document.createElement('style');
@@ -432,6 +448,51 @@
     });
   }
 
+  /* ------------------------------------------- About: floating tech tags */
+  function initAboutFloaters(){
+    if (coarsePointer) return;
+    var grid = document.querySelector('#about .about-grid');
+    if (!grid) return;
+    if (getComputedStyle(grid).position === 'static') grid.style.position = 'relative';
+    var tags = [
+      { icon: '🔒', label: 'Secure', top: '-8%', left: '78%', delay: '0s' },
+      { icon: '☁️', label: 'Cloud-Ready', top: '96%', left: '2%', delay: '2.3s' },
+      { icon: '🖧', label: 'Networked', top: '48%', left: '-4%', delay: '4.6s' }
+    ];
+    tags.forEach(function(t){
+      var el = document.createElement('div');
+      el.className = 'kt-about-floater';
+      el.setAttribute('aria-hidden', 'true');
+      el.style.top = t.top;
+      el.style.left = t.left;
+      el.style.animationDelay = t.delay;
+      el.innerHTML = '<span class="kt-about-floater-ic">' + t.icon + '</span>' + t.label;
+      grid.appendChild(el);
+    });
+  }
+
+  /* --------------------------------------------- Contact closing ambience */
+  function initContactAtmosphere(){
+    var section = document.querySelector('#contact');
+    if (!section) return;
+    var specs = [
+      { w: 360, h: 360, top: '-6%', left: '-6%', bg: 'radial-gradient(circle,#00C2FF,transparent 70%)' },
+      { w: 320, h: 320, top: '55%', left: '86%', bg: 'radial-gradient(circle,#7C3AED,transparent 70%)' }
+    ];
+    specs.forEach(function(s, i){
+      var blob = document.createElement('div');
+      blob.className = 'kt-contact-glow';
+      blob.setAttribute('aria-hidden', 'true');
+      blob.style.width = s.w + 'px';
+      blob.style.height = s.h + 'px';
+      blob.style.top = s.top;
+      blob.style.left = s.left;
+      blob.style.background = s.bg;
+      blob.style.animationDelay = (i * 3) + 's';
+      section.insertBefore(blob, section.firstChild);
+    });
+  }
+
   /* --------------------------------------------------------------- Init */
   function init(){
     initShieldEmblem();
@@ -441,6 +502,8 @@
     initFlipBadges();
     initDashboardPanel();
     initAssistant();
+    initAboutFloaters();
+    initContactAtmosphere();
   }
 
   if (document.readyState === 'loading'){
