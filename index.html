@@ -347,20 +347,25 @@
   </div>
 </div>
 
-<!-- ================= COMPANY PROMO VIDEO ================= -->
+<!-- ================= COMPANY PROMO MOTION (live animated, not a static flyer video) ================= -->
 <section id="innovation-intro" class="innovation-intro-section" data-aos="fade-up">
   <div class="container innovation-intro-inner">
-    <p class="promo-video-eyebrow">Watch: KhurshedTech in 30 Seconds</p>
-    <video class="innovation-intro-video" controls playsinline preload="metadata" poster="khurshedtech-promo30-poster.jpg" aria-label="KhurshedTech promotional video — Professional IT Support, Website Design and Development, Microsoft 365, Cybersecurity, and Cloud Solutions">
-      <source src="khurshedtech-promo30.mp4" type="video/mp4">
-    </video>
+    <p class="promo-video-eyebrow">Watch: KhurshedTech in Motion</p>
+    <div class="innovation-intro-frame">
+      <iframe class="innovation-intro-video" src="assets/brand/khurshedtech-promo-motion.html" loading="lazy" title="KhurshedTech animated promo — IT Solutions, Website Design, Certifications" aria-label="KhurshedTech animated promotional experience — Professional IT Support, Website Design and Development, Microsoft 365, Cybersecurity, and Cloud Solutions"></iframe>
+    </div>
+    <p class="promo-video-download"><a href="assets/brand/khurshedtech-promo-motion.mp4" download>⬇ Download as MP4</a></p>
   </div>
 </section>
 <style>
   .innovation-intro-section{padding:40px 20px;text-align:center;background:#0B0C10;}
   .innovation-intro-inner{max-width:900px;margin:0 auto;}
   .promo-video-eyebrow{color:#B9C2D0;font-weight:600;letter-spacing:.03em;margin:0 0 14px;}
-  .innovation-intro-video{width:100%;height:auto;border-radius:16px;display:block;box-shadow:0 20px 50px rgba(0,0,0,.35);}
+  .innovation-intro-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);background:#040F1C;}
+  .innovation-intro-video{width:100%;height:100%;border:0;display:block;}
+  .promo-video-download{margin:14px 0 0;}
+  .promo-video-download a{color:#00C2FF;font-weight:600;font-size:.9rem;text-decoration:none;}
+  .promo-video-download a:hover{text-decoration:underline;}
 </style>
 
 <!-- ================= MULTILINGUAL PROMO BANNER (code-built, not AI-illustrated) ================= -->
