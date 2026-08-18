@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/securing-microsoft-365-against-modern-threats.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/azure-ad-security-hardening-guide.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/enterprise-network-security-firewall-vpn-segmentation.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/soc-analyst-workflow-incident-response-lifecycle.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/active-directory-hardening-windows-server-checklist.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/sitemap.xml
