@@ -4,9 +4,17 @@
   Self-injecting widget: include this one script tag near the end of <body> on
   any page and it builds its own markup + styles + generative soundtrack.
   No external audio files — the "music" is synthesized live via the Web Audio
-  API (layered detuned oscillators + a slow-modulated lowpass filter + a
-  filtered-noise texture layer), so there is nothing to download and zero
-  impact on page weight or load time.
+  API. Sound design: "Futuristic Cyber Ambient + Soft Piano + Cinematic
+  Orchestra" —
+    - Cinematic Orchestra: four detuned pad voices (sine/triangle/sawtooth
+      blend) forming a slow evolving chord, like a distant string section.
+    - Soft Piano: a generative note scheduler plucks soft, piano-like notes
+      from a per-section scale through a short delay/echo tail, at a lazy,
+      unpredictable pace — never a repeating loop.
+    - Futuristic Cyber Ambient: filtered noise + a slow high shimmer, both
+      riding a slowly LFO-modulated lowpass filter for that "system online"
+      movement.
+  Nothing to download, zero impact on page weight or load time.
 
   Autoplay-policy safe: the AudioContext is only created/resumed inside a
   real user gesture, and the UI only reports "playing" once the browser has
@@ -59,7 +67,7 @@
     <div class="kt-audio-panel">\
       <label for="kt-audio-volume" class="kt-audio-label">Ambient Soundtrack</label>\
       <input type="range" id="kt-audio-volume" class="kt-audio-slider" min="0" max="100" value="35" aria-label="Volume">\
-      <span class="kt-audio-hint">Cinematic AI &amp; cybersecurity atmosphere</span>\
+      <span class="kt-audio-hint">Futuristic cyber ambient, soft piano &amp; cinematic orchestra</span>\
       <span class="kt-audio-status" id="kt-audio-status"></span>\
     </div>\
   ';
@@ -93,18 +101,53 @@
   volumeInput.value = savedVolume;
   var userDisabled = localStorage.getItem(LS_ENABLED) === 'false';
 
-  var ctx, master, filter, filterLFO, filterLFOGain, analyser, noiseSrc, noiseGain, noiseFilter;
-  var voices = [];
-  var built = false, playing = false, rafId = null;
+  var ctx, master, filter, filterLFO, filterLFOGain, analyser;
+  var noiseSrc, noiseGain, noiseFilter;
+  var shimmerGain, shimmerLFOGain;
+  var pianoBus, pianoDelay, pianoDelayFilter, pianoFeedback, pianoWet;
+  var padVoices = [];
+  var built = false, playing = false, rafId = null, noteTimer = null;
 
   // Section moods: Hero / About / Services("Skills") / Portfolio("Projects") / Contact.
+  // Each preset blends the three layers differently — deep cinematic pad,
+  // a mellow or urgent piano scale, and more/less cyber texture.
   // Pages that don't have a given id simply won't switch into that mood — harmless.
   var PRESETS = {
-    home:     { freqs:[55, 82.5, 110],     cutoff:600,  lfoRate:0.05, lfoDepth:220, noise:0.0 },
-    about:    { freqs:[65.4, 98, 130.8],   cutoff:850,  lfoRate:0.06, lfoDepth:200, noise:0.0 },
-    services: { freqs:[73.4, 110, 146.8],  cutoff:1400, lfoRate:0.12, lfoDepth:420, noise:0.05 },
-    portfolio:{ freqs:[61.7, 92.5, 123.4], cutoff:1800, lfoRate:0.09, lfoDepth:520, noise:0.08 },
-    contact:  { freqs:[87.3, 110, 130.8],  cutoff:1200, lfoRate:0.04, lfoDepth:180, noise:0.02 }
+    home: {
+      pad: [55.00, 82.41, 110.00, 164.81],                          // A1 E2 A2 E3 — deep cinematic open fifths
+      cutoff: 700, lfoRate: 0.05, lfoDepth: 240,
+      noise: 0.03, shimmer: 0.016,
+      scale: [220.00, 246.94, 277.18, 329.63, 392.00, 440.00],       // A minor pentatonic, mid register
+      noteMin: 3.2, noteMax: 6.4, density: 0.55
+    },
+    about: {
+      pad: [65.41, 98.00, 130.81, 196.00],                          // C2 G2 C3 G3 — calm, spacious
+      cutoff: 950, lfoRate: 0.045, lfoDepth: 150,
+      noise: 0.012, shimmer: 0.01,
+      scale: [261.63, 293.66, 329.63, 392.00, 440.00, 523.25],       // C major pentatonic, soft
+      noteMin: 2.6, noteMax: 5.0, density: 0.72
+    },
+    services: {
+      pad: [73.42, 110.00, 146.83, 220.00],                         // D2 A2 D3 A3 — brighter, more motion
+      cutoff: 1500, lfoRate: 0.14, lfoDepth: 480,
+      noise: 0.07, shimmer: 0.03,
+      scale: [293.66, 329.63, 349.23, 415.30, 466.16, 587.33],       // energetic AI/security atmosphere
+      noteMin: 1.8, noteMax: 3.6, density: 0.8
+    },
+    portfolio: {
+      pad: [61.74, 92.50, 123.47, 185.00],                          // B1 F#2 B2 F#3 — tense, advanced-cyber
+      cutoff: 1900, lfoRate: 0.1, lfoDepth: 560,
+      noise: 0.09, shimmer: 0.035,
+      scale: [246.94, 277.18, 311.13, 369.99, 415.30, 493.88],       // moodier minor, sparse notes
+      noteMin: 2.4, noteMax: 5.0, density: 0.45
+    },
+    contact: {
+      pad: [87.31, 130.81, 174.61, 261.63],                         // F2 C3 F3 C4 — warm, resolving
+      cutoff: 1250, lfoRate: 0.035, lfoDepth: 190,
+      noise: 0.015, shimmer: 0.015,
+      scale: [349.23, 392.00, 440.00, 523.25, 587.33, 659.25],       // uplifting major pentatonic
+      noteMin: 2.2, noteMax: 4.2, density: 0.75
+    }
   };
   var DEFAULT_PRESET = 'home';
   var currentPreset = DEFAULT_PRESET;
@@ -139,32 +182,36 @@
     filterLFO.connect(filterLFOGain).connect(filter.frequency);
     filterLFO.start();
 
-    PRESETS[currentPreset].freqs.forEach(function(f, i){
+    // --- Cinematic Orchestra: 4-voice detuned pad (sine/triangle/sawtooth blend) ---
+    var padTypes = ['sine', 'triangle', 'sawtooth', 'triangle'];
+    var padLevels = [0.5, 0.3, 0.16, 0.24];
+    PRESETS[currentPreset].pad.forEach(function(f, i){
       var osc = ctx.createOscillator();
-      osc.type = i === 0 ? 'sine' : 'triangle';
+      osc.type = padTypes[i] || 'triangle';
       osc.frequency.value = f;
-      osc.detune.value = (i - 1) * 6;
+      osc.detune.value = (i - 1.5) * 5;
       var g = ctx.createGain();
-      g.gain.value = i === 0 ? 0.5 : 0.28;
+      g.gain.value = padLevels[i] || 0.2;
       osc.connect(g).connect(filter);
       osc.start();
-      voices.push({ osc: osc, gain: g });
+      padVoices.push({ osc: osc, gain: g });
     });
 
+    // --- Futuristic cyber shimmer (slow-breathing high sine) ---
     var shimmer = ctx.createOscillator();
     shimmer.type = 'sine';
     shimmer.frequency.value = 1760;
-    var shimmerGain = ctx.createGain();
-    shimmerGain.gain.value = 0.015;
+    shimmerGain = ctx.createGain();
+    shimmerGain.gain.value = PRESETS[currentPreset].shimmer;
     var shimmerLFO = ctx.createOscillator();
     shimmerLFO.frequency.value = 0.07;
-    var shimmerLFOGain = ctx.createGain();
-    shimmerLFOGain.gain.value = 0.012;
+    shimmerLFOGain = ctx.createGain();
+    shimmerLFOGain.gain.value = PRESETS[currentPreset].shimmer * 0.8;
     shimmerLFO.connect(shimmerLFOGain).connect(shimmerGain.gain);
     shimmer.connect(shimmerGain).connect(filter);
     shimmer.start(); shimmerLFO.start();
-    voices.push({ osc: shimmer, gain: shimmerGain, isShimmer:true });
 
+    // --- Futuristic cyber ambient texture (filtered noise) ---
     noiseSrc = ctx.createBufferSource();
     noiseSrc.buffer = makeNoiseBuffer(ctx);
     noiseSrc.loop = true;
@@ -178,9 +225,86 @@
     noiseSrc.start();
 
     filter.connect(master);
+
+    // --- Soft Piano: generative notes through a short echo/delay tail ---
+    pianoBus = ctx.createGain();
+    pianoBus.gain.value = 1;
+    pianoDelay = ctx.createDelay(2.0);
+    pianoDelay.delayTime.value = 0.34;
+    pianoDelayFilter = ctx.createBiquadFilter();
+    pianoDelayFilter.type = 'lowpass';
+    pianoDelayFilter.frequency.value = 2400;
+    pianoFeedback = ctx.createGain();
+    pianoFeedback.gain.value = 0.3;
+    pianoWet = ctx.createGain();
+    pianoWet.gain.value = 0.55;
+
+    pianoBus.connect(master); // dry piano signal
+    pianoBus.connect(pianoDelay);
+    pianoDelay.connect(pianoDelayFilter);
+    pianoDelayFilter.connect(pianoFeedback).connect(pianoDelay); // feedback loop = echo tail
+    pianoDelayFilter.connect(pianoWet).connect(master);          // wet (echoed) signal to output
+
     master.connect(analyser);
     analyser.connect(ctx.destination);
     built = true;
+  }
+
+  // A single soft, piano-like note: fast hammer-strike attack, long natural
+  // decay, a quiet octave overtone for warmth, and gentle stereo placement.
+  function playPianoNote(freq, velocity){
+    if (!ctx || !pianoBus) return;
+    var t = ctx.currentTime;
+    var fundamental = ctx.createOscillator();
+    fundamental.type = 'sine';
+    fundamental.frequency.value = freq;
+    var overtone = ctx.createOscillator();
+    overtone.type = 'triangle';
+    overtone.frequency.value = freq * 2;
+
+    var voiceGain = ctx.createGain();
+    voiceGain.gain.value = 0;
+    var overtoneGain = ctx.createGain();
+    overtoneGain.gain.value = 0.16;
+
+    fundamental.connect(voiceGain);
+    overtone.connect(overtoneGain).connect(voiceGain);
+
+    var outNode = voiceGain;
+    if (ctx.createStereoPanner){
+      var panner = ctx.createStereoPanner();
+      panner.pan.value = (Math.random() * 1.1) - 0.55;
+      voiceGain.connect(panner);
+      outNode = panner;
+    }
+    outNode.connect(pianoBus);
+
+    var peak = 0.42 * (velocity || 0.8);
+    voiceGain.gain.setValueAtTime(0, t);
+    voiceGain.gain.linearRampToValueAtTime(peak, t + 0.012);
+    voiceGain.gain.exponentialRampToValueAtTime(0.0008, t + 3.4);
+
+    fundamental.start(t);
+    overtone.start(t);
+    fundamental.stop(t + 3.6);
+    overtone.stop(t + 3.6);
+  }
+
+  function scheduleNextNote(){
+    if (!playing){ noteTimer = null; return; }
+    var p = PRESETS[currentPreset];
+    var delay = (p.noteMin + Math.random() * (p.noteMax - p.noteMin)) * 1000;
+    noteTimer = setTimeout(function(){
+      if (playing){
+        var p2 = PRESETS[currentPreset];
+        if (Math.random() < p2.density){
+          var scale = p2.scale;
+          var freq = scale[Math.floor(Math.random() * scale.length)];
+          playPianoNote(freq, 0.55 + Math.random() * 0.4);
+        }
+      }
+      scheduleNextNote();
+    }, delay);
   }
 
   function applyPreset(key, smooth){
@@ -194,9 +318,10 @@
     filterLFO.frequency.setTargetAtTime(p.lfoRate, t, ramp / 3 || 0.01);
     filterLFOGain.gain.setTargetAtTime(p.lfoDepth, t, ramp / 3 || 0.01);
     noiseGain.gain.setTargetAtTime(p.noise * (volumeInput.value / 100), t, ramp / 2 || 0.01);
-    voices.forEach(function(v, i){
-      if (v.isShimmer) return;
-      var f = p.freqs[i];
+    if (shimmerGain) shimmerGain.gain.setTargetAtTime(p.shimmer, t, ramp / 2 || 0.01);
+    if (shimmerLFOGain) shimmerLFOGain.gain.setTargetAtTime(p.shimmer * 0.8, t, ramp / 2 || 0.01);
+    padVoices.forEach(function(v, i){
+      var f = p.pad[i];
       if (f) v.osc.frequency.setTargetAtTime(f, t, ramp / 2 || 0.01);
     });
   }
@@ -235,10 +360,11 @@
     if (msg && ms) setTimeout(function(){ if (statusEl.textContent === msg) statusEl.textContent = ''; }, ms);
   }
 
-  // The core fix: only report "playing" once the AudioContext has actually
-  // resumed. A scroll gesture may not satisfy the browser's autoplay policy —
-  // in that case we stay armed for the next click/keydown/touch instead of
-  // silently pretending playback started.
+  // The core fix (kept from the previous release): only report "playing"
+  // once the AudioContext has actually resumed. A scroll gesture may not
+  // satisfy the browser's autoplay policy — in that case we stay armed for
+  // the next click/keydown/touch instead of silently pretending playback
+  // started.
   function start(){
     buildGraph();
     applyPreset(currentPreset, false);
@@ -249,6 +375,7 @@
         setPlayingUI(true);
         localStorage.setItem(LS_ENABLED, 'true');
         runVisualizer();
+        if (!noteTimer) scheduleNextNote();
         detachArmedListeners();
       } else {
         showStatus('Tap again to enable sound', 2500);
@@ -265,6 +392,7 @@
     setPlayingUI(false);
     localStorage.setItem(LS_ENABLED, 'false');
     if (rafId) cancelAnimationFrame(rafId);
+    if (noteTimer) { clearTimeout(noteTimer); noteTimer = null; }
   }
 
   function runVisualizer(){
