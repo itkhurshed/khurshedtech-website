@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Securing Microsoft 365 Against Modern Threats | MD Khurshed Alam</title>
+<meta name="description" content="A practical guide to defending Microsoft 365 tenants — Conditional Access, MFA, Defender for Office 365, and Zero Trust identity controls — by Senior IT Infrastructure Engineer MD Khurshed Alam.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/securing-microsoft-365-against-modern-threats.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Securing Microsoft 365 Against Modern Threats">
+<meta property="og:description" content="Conditional Access, MFA, Defender for Office 365, and Zero Trust identity controls for enterprise Microsoft 365 tenants.">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/securing-microsoft-365-against-modern-threats.html">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"Securing Microsoft 365 Against Modern Threats",
+  "description":"Conditional Access, MFA, Defender for Office 365, and Zero Trust identity controls for enterprise Microsoft 365 tenants.",
+  "author":{"@type":"Person","name":"MD Khurshed Alam","url":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/"},
+  "datePublished":"2026-08-01","dateModified":"2026-08-17",
+  "image":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png",
+  "publisher":{"@type":"Person","name":"MD Khurshed Alam"},
+  "mainEntityOfPage":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/securing-microsoft-365-against-modern-threats.html"
+}
+</script>
+</head>
+<body>
+
+<nav class="art-nav"><div class="art-nav-inner">
+  <a class="art-logo" href="../index.html">MD KHURSHED ALAM <span>| Cyber Defense Lab</span></a>
+  <a class="art-back" href="../index.html#blog">← Back to Portfolio</a>
+</div></nav>
+
+<header class="art-header"><div class="wrap">
+  <span class="art-category"><i>🛡</i> Cyber Defense</span>
+  <h1 class="art-title">Securing Microsoft 365 Against Modern Threats</h1>
+  <div class="art-meta">
+    <span>Mohammad Khurshed Alam</span><span class="dot">·</span>
+    <span>Published August 2026</span><span class="dot">·</span>
+    <span>8 min read</span><span class="dot">·</span>
+    <span>Advanced</span>
+  </div>
+  <div class="art-tags"><span>Microsoft 365</span><span>Azure AD</span><span>Conditional Access</span><span>Microsoft Defender</span></div>
+</div></header>
+
+<main class="wrap art-body">
+
+  <p>Microsoft 365 is the single most attacked SaaS platform in the enterprise world — because it's also the most valuable. A compromised M365 identity gives an attacker email, files, Teams chat, and often a foothold into Azure AD-joined devices, all through one set of credentials. This guide walks through the layered defenses I implement on every tenant I manage: identity hardening, Conditional Access, and Defender-based detection.</p>
+
+  <div class="art-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#intro">Why M365 Is a Primary Target</a></li>
+      <li><a href="#risks">Common Attack Scenarios</a></li>
+      <li><a href="#protection">Protection Methods</a></li>
+      <li><a href="#recommendations">Enterprise Recommendations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro"><span class="num">01</span>Why M365 Is a Primary Target</h2>
+  <p>Every M365 tenant is internet-facing by default. Sign-in endpoints, Exchange Online, and SharePoint are reachable from anywhere, which means identity — not the network perimeter — is the real security boundary. Attackers know this, which is why phishing-for-credentials and OAuth consent-phishing are now more common than malware delivery in the enterprise inbox.</p>
+
+  <div class="flow">
+    <div class="flow-step">USER</div><div class="flow-arrow">→</div>
+    <div class="flow-step">AZURE AD</div><div class="flow-arrow">→</div>
+    <div class="flow-step">CONDITIONAL ACCESS</div><div class="flow-arrow">→</div>
+    <div class="flow-step">MFA</div><div class="flow-arrow">→</div>
+    <div class="flow-step">MICROSOFT DEFENDER</div><div class="flow-arrow">→</div>
+    <div class="flow-step">SOC MONITORING</div>
+  </div>
+
+  <h2 id="risks"><span class="num">02</span>Common Attack Scenarios</h2>
+  <ul>
+    <li><strong>Credential phishing + no MFA:</strong> a single reused password grants full mailbox and file access.</li>
+    <li><strong>MFA fatigue / push-bombing:</strong> repeated push prompts until a tired user approves one.</li>
+    <li><strong>Legacy authentication:</strong> POP/IMAP/SMTP AUTH endpoints that bypass Conditional Access and MFA entirely.</li>
+    <li><strong>Malicious OAuth app consent:</strong> a user grants a rogue third-party app read access to mail and files — no password needed.</li>
+    <li><strong>Business Email Compromise (BEC):</strong> inbox rules silently forward or hide finance-related email after a successful takeover.</li>
+  </ul>
+
+  <h2 id="protection"><span class="num">03</span>Protection Methods</h2>
+  <p>These are the controls I roll out first on any new tenant, in priority order:</p>
+  <ul>
+    <li><strong>Enforce Conditional Access:</strong> require MFA for all users, block legacy authentication, and require compliant/hybrid-joined devices for admin roles.</li>
+    <li><strong>Number-matching MFA:</strong> switch from simple push-approval to number-matching to defeat MFA fatigue attacks.</li>
+    <li><strong>Privileged Identity Management (PIM):</strong> make admin roles just-in-time and time-boxed instead of standing access.</li>
+    <li><strong>Microsoft Defender for Office 365:</strong> Safe Links, Safe Attachments, and anti-phishing policies tuned for impersonation of internal executives.</li>
+    <li><strong>Audit OAuth app consent:</strong> restrict user consent to verified publishers only; review the enterprise app list quarterly.</li>
+    <li><strong>Alert on inbox rule creation:</strong> auto-forwarding and hide-folder rules are one of the most reliable BEC indicators.</li>
+  </ul>
+
+  <div class="art-callout"><strong>Field note:</strong> in every tenant hardening I've run, enforcing Conditional Access + number-matching MFA alone eliminated the majority of credential-based sign-in incidents — before any advanced tooling was even switched on. Identity controls come first; everything else is defense in depth.</div>
+
+  <h2 id="recommendations"><span class="num">04</span>Enterprise Recommendations</h2>
+  <ul>
+    <li>Baseline every tenant against the Microsoft 365 Secure Score and track it monthly, not just at onboarding.</li>
+    <li>Separate admin accounts from daily-use accounts — no admin should read email from a Global Administrator identity.</li>
+    <li>Route Defender and Azure AD sign-in logs into a SIEM (or Sentinel) for correlation with on-prem AD and firewall logs.</li>
+    <li>Run a phishing-simulation program tied to targeted awareness training, not a one-time company memo.</li>
+  </ul>
+
+  <h2 id="conclusion"><span class="num">05</span>Conclusion</h2>
+  <p>Microsoft 365 security is fundamentally an identity problem wearing a productivity-suite costume. Get Conditional Access, MFA, and privileged access management right, layer Defender for Office 365 on top for detection, and feed everything into a SOC workflow — and the platform goes from your biggest attack surface to one of your best-monitored ones.</p>
+
+  <div class="art-author">
+    <img src="../assets/khurshed-photo.jpg" alt="MD Khurshed Alam">
+    <div>
+      <h4>Mohammad Khurshed Alam</h4>
+      <p>Senior IT Infrastructure Engineer · Cloud &amp; Cybersecurity · Microsoft Certified: Azure Administrator Associate</p>
+    </div>
+  </div>
+
+  <div class="art-cta">
+    <p>Have a question about your M365 tenant's security posture?</p>
+    <div class="art-cta-row">
+      <a href="https://wa.me/96566648706?text=Hi%20Khurshed%2C%20I%20read%20your%20M365%20security%20article%20and%20wanted%20to%20ask..." target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+      <a href="mailto:itkhurshed@gmail.com" class="btn btn-outline">Email Me</a>
+      <a href="../index.html#blog" class="btn btn-outline">More Articles</a>
+    </div>
+  </div>
+</main>
+
+<footer class="art-foot">&copy; 2026 MD Khurshed Alam — Cyber Defense Lab. Technical write-up for educational purposes.</footer>
+
+</body>
+</html>

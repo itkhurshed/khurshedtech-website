@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Analyst Workflow &amp; Incident Response Lifecycle | MD Khurshed Alam</title>
+<meta name="description" content="How a SOC analyst triages alerts, investigates with SIEM data, and works through the NIST-aligned incident response lifecycle — from detection to lessons learned.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/soc-analyst-workflow-incident-response-lifecycle.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SOC Analyst Workflow & Incident Response Lifecycle">
+<meta property="og:description" content="Alert triage, SIEM investigation, and the NIST-aligned incident response lifecycle.">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/soc-analyst-workflow-incident-response-lifecycle.html">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"SOC Analyst Workflow & Incident Response Lifecycle",
+  "description":"Alert triage, SIEM investigation, and the NIST-aligned incident response lifecycle.",
+  "author":{"@type":"Person","name":"MD Khurshed Alam","url":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/"},
+  "datePublished":"2026-06-05","dateModified":"2026-08-17",
+  "image":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png",
+  "publisher":{"@type":"Person","name":"MD Khurshed Alam"},
+  "mainEntityOfPage":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/soc-analyst-workflow-incident-response-lifecycle.html"
+}
+</script>
+</head>
+<body>
+
+<nav class="art-nav"><div class="art-nav-inner">
+  <a class="art-logo" href="../index.html">MD KHURSHED ALAM <span>| Cyber Defense Lab</span></a>
+  <a class="art-back" href="../index.html#blog">← Back to Portfolio</a>
+</div></nav>
+
+<header class="art-header"><div class="wrap">
+  <span class="art-category"><i>🔍</i> Security Operations</span>
+  <h1 class="art-title">SOC Analyst Workflow &amp; Incident Response Lifecycle</h1>
+  <div class="art-meta">
+    <span>Mohammad Khurshed Alam</span><span class="dot">·</span>
+    <span>Published June 2026</span><span class="dot">·</span>
+    <span>6 min read</span><span class="dot">·</span>
+    <span>Intermediate</span>
+  </div>
+  <div class="art-tags"><span>SIEM</span><span>Wazuh</span><span>Incident Response</span><span>Threat Detection</span></div>
+</div></header>
+
+<main class="wrap art-body">
+
+  <p>Every alert that lands in a SIEM dashboard needs to go through the same disciplined process, whether it turns out to be a false positive or a genuine breach. Here's the workflow I run in my home SOC lab (Wazuh-based) and the same lifecycle enterprise teams use in production.</p>
+
+  <div class="art-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#risks">What Triggers an Investigation</a></li>
+      <li><a href="#protection">The Incident Response Lifecycle</a></li>
+      <li><a href="#recommendations">Enterprise Recommendations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro"><span class="num">01</span>Introduction</h2>
+  <p>SIEM tools like Wazuh, Splunk, or Sentinel generate a constant stream of alerts — the job of a SOC analyst is triage: deciding fast which ones matter, and investigating those thoroughly without drowning in noise from the rest.</p>
+
+  <h2 id="risks"><span class="num">02</span>What Triggers an Investigation</h2>
+  <ul>
+    <li><strong>Authentication anomalies:</strong> impossible travel, repeated failed logins, sign-ins from unfamiliar countries or ASNs.</li>
+    <li><strong>Endpoint indicators:</strong> unexpected process execution, disabled AV/EDR, suspicious PowerShell activity.</li>
+    <li><strong>Network anomalies:</strong> large outbound data transfers, connections to known-bad IPs, unusual DNS query patterns.</li>
+    <li><strong>Privilege escalation events:</strong> a standard user account suddenly added to an admin group.</li>
+  </ul>
+
+  <h2 id="protection"><span class="num">03</span>The Incident Response Lifecycle</h2>
+  <p>I follow the NIST-aligned phases on every incident, lab or production:</p>
+  <ul>
+    <li><strong>1. Preparation:</strong> log sources onboarded, detection rules tuned, escalation contacts and runbooks documented before anything happens.</li>
+    <li><strong>2. Detection &amp; Analysis:</strong> the alert fires — confirm it's not a false positive, scope what's affected, and assign a severity.</li>
+    <li><strong>3. Containment:</strong> isolate the affected host or account (network isolation, disable the account, revoke tokens) to stop the spread without destroying evidence.</li>
+    <li><strong>4. Eradication:</strong> remove the malicious artifact — malware, persistence mechanism, rogue account or forwarding rule.</li>
+    <li><strong>5. Recovery:</strong> restore the system to normal operation, re-enable access, and monitor closely for recurrence.</li>
+    <li><strong>6. Lessons Learned:</strong> a post-incident review — what detection gap let this happen, and what changes prevent it next time.</li>
+  </ul>
+
+  <div class="flow">
+    <div class="flow-step">PREPARATION</div><div class="flow-arrow">→</div>
+    <div class="flow-step">DETECTION</div><div class="flow-arrow">→</div>
+    <div class="flow-step">CONTAINMENT</div><div class="flow-arrow">→</div>
+    <div class="flow-step">ERADICATION</div><div class="flow-arrow">→</div>
+    <div class="flow-step">RECOVERY</div><div class="flow-arrow">→</div>
+    <div class="flow-step">LESSONS LEARNED</div>
+  </div>
+
+  <div class="art-callout"><strong>Field note:</strong> the phase most teams underinvest in is Lessons Learned. Skipping it means the same detection gap gets exploited again — a 30-minute review after every incident is one of the highest-return habits a SOC can build.</div>
+
+  <h2 id="recommendations"><span class="num">04</span>Enterprise Recommendations</h2>
+  <ul>
+    <li>Maintain written runbooks per alert type so triage doesn't depend on one analyst's memory.</li>
+    <li>Track mean-time-to-detect (MTTD) and mean-time-to-respond (MTTR) as real operational metrics.</li>
+    <li>Correlate identity, endpoint, and network logs in one place — siloed log sources slow every investigation down.</li>
+    <li>Rehearse incident response with tabletop exercises, not just documentation nobody has read.</li>
+  </ul>
+
+  <h2 id="conclusion"><span class="num">05</span>Conclusion</h2>
+  <p>Good SOC work isn't about having the most alerts — it's about a disciplined, repeatable process that turns noisy telemetry into fast, confident decisions when it actually matters.</p>
+
+  <div class="art-author">
+    <img src="../assets/khurshed-photo.jpg" alt="MD Khurshed Alam">
+    <div>
+      <h4>Mohammad Khurshed Alam</h4>
+      <p>Senior IT Infrastructure Engineer · CompTIA CySA+ (ce) Certified · SOC-style home lab (Wazuh)</p>
+    </div>
+  </div>
+
+  <div class="art-cta">
+    <p>Interested in SOC processes or Wazuh lab setup?</p>
+    <div class="art-cta-row">
+      <a href="https://wa.me/96566648706?text=Hi%20Khurshed%2C%20I%20read%20your%20SOC%20workflow%20article%20and%20wanted%20to%20ask..." target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+      <a href="mailto:itkhurshed@gmail.com" class="btn btn-outline">Email Me</a>
+      <a href="../index.html#blog" class="btn btn-outline">More Articles</a>
+    </div>
+  </div>
+</main>
+
+<footer class="art-foot">&copy; 2026 MD Khurshed Alam — Cyber Defense Lab. Technical write-up for educational purposes.</footer>
+
+</body>
+</html>

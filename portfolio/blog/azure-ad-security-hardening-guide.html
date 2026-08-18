@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azure Active Directory Security Hardening Guide | MD Khurshed Alam</title>
+<meta name="description" content="A practical Azure AD / Microsoft Entra ID hardening guide covering identity protection, Conditional Access, PIM, and Zero Trust configuration for enterprise tenants.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/azure-ad-security-hardening-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Active Directory Security Hardening Guide">
+<meta property="og:description" content="Identity protection, Conditional Access, PIM, and Zero Trust configuration for enterprise Azure AD / Entra ID tenants.">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/azure-ad-security-hardening-guide.html">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"Azure Active Directory Security Hardening Guide",
+  "description":"Identity protection, Conditional Access, PIM, and Zero Trust configuration for enterprise Azure AD / Entra ID tenants.",
+  "author":{"@type":"Person","name":"MD Khurshed Alam","url":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/"},
+  "datePublished":"2026-07-18","dateModified":"2026-08-17",
+  "image":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png",
+  "publisher":{"@type":"Person","name":"MD Khurshed Alam"},
+  "mainEntityOfPage":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/azure-ad-security-hardening-guide.html"
+}
+</script>
+</head>
+<body>
+
+<nav class="art-nav"><div class="art-nav-inner">
+  <a class="art-logo" href="../index.html">MD KHURSHED ALAM <span>| Cyber Defense Lab</span></a>
+  <a class="art-back" href="../index.html#blog">← Back to Portfolio</a>
+</div></nav>
+
+<header class="art-header"><div class="wrap">
+  <span class="art-category"><i>☁</i> Cloud Security</span>
+  <h1 class="art-title">Azure Active Directory Security Hardening Guide</h1>
+  <div class="art-meta">
+    <span>Mohammad Khurshed Alam</span><span class="dot">·</span>
+    <span>Published August 2026</span><span class="dot">·</span>
+    <span>7 min read</span><span class="dot">·</span>
+    <span>Intermediate</span>
+  </div>
+  <div class="art-tags"><span>Azure AD</span><span>Microsoft Entra ID</span><span>Identity Security</span><span>PIM</span></div>
+</div></header>
+
+<main class="wrap art-body">
+
+  <p>Azure AD (now Microsoft Entra ID) is the identity backbone for every Microsoft 365 and Azure workload a company runs. Hardening it properly is the highest-leverage security work an infrastructure engineer can do — a small number of configuration changes closes off the majority of identity-based attack paths.</p>
+
+  <div class="art-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#risks">Security Risks in Default Configurations</a></li>
+      <li><a href="#protection">Hardening Checklist</a></li>
+      <li><a href="#recommendations">Enterprise Recommendations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro"><span class="num">01</span>Introduction</h2>
+  <p>Out of the box, Azure AD is usable but not secure by default — global admin roles are standing (always active), legacy authentication protocols are enabled, and there's no Conditional Access policy enforcing MFA. Every tenant I take on gets the same first-week hardening pass described below.</p>
+
+  <h2 id="risks"><span class="num">02</span>Security Risks in Default Configurations</h2>
+  <ul>
+    <li><strong>Standing privileged roles:</strong> Global Admin, User Admin, and other privileged roles active 24/7 instead of just-in-time.</li>
+    <li><strong>Self-service app registration:</strong> any user can register an app and request permissions by default.</li>
+    <li><strong>No sign-in risk policy:</strong> impossible-travel and anonymous-IP sign-ins go unflagged.</li>
+    <li><strong>Weak default password policy</strong> and no smart lockout tuning for brute-force protection.</li>
+    <li><strong>Guest access left wide open,</strong> giving external accounts more tenant visibility than intended.</li>
+  </ul>
+
+  <h2 id="protection"><span class="num">03</span>Hardening Checklist</h2>
+  <ul>
+    <li><strong>Enable Security Defaults or custom Conditional Access</strong> — require MFA for all users and all admin roles at minimum.</li>
+    <li><strong>Turn on Privileged Identity Management (PIM)</strong> for all directory roles; require approval and time-bound activation.</li>
+    <li><strong>Enable Identity Protection risk policies</strong> — block or force MFA on risky sign-ins and risky users automatically.</li>
+    <li><strong>Disable legacy authentication</strong> tenant-wide via Conditional Access (blocks POP/IMAP/older Office clients that can't do MFA).</li>
+    <li><strong>Restrict user consent for applications</strong> to admin-verified publishers only.</li>
+    <li><strong>Review and restrict guest invitation settings</strong> — limit who can invite guests and what they can see.</li>
+    <li><strong>Enable Azure AD Password Protection</strong> with a custom banned-password list relevant to the organization.</li>
+  </ul>
+
+  <div class="art-callout"><strong>Field note:</strong> moving privileged roles from standing access to PIM-managed, time-boxed activation is consistently the single change that most reduces the real-world blast radius of a compromised admin credential.</div>
+
+  <h2 id="recommendations"><span class="num">04</span>Enterprise Recommendations</h2>
+  <ul>
+    <li>Run an Access Review campaign quarterly for privileged roles and guest accounts — remove what's no longer needed.</li>
+    <li>Feed Azure AD sign-in and audit logs into a SIEM for correlation with on-prem Active Directory events.</li>
+    <li>Document an emergency "break-glass" admin account excluded from Conditional Access, stored securely, and monitored for any use.</li>
+    <li>Track Identity Secure Score alongside Microsoft 365 Secure Score as a monthly KPI, not a one-time audit.</li>
+  </ul>
+
+  <h2 id="conclusion"><span class="num">05</span>Conclusion</h2>
+  <p>Azure AD hardening isn't a single project — it's an ongoing discipline of least-privilege access, continuous risk detection, and killing legacy protocols that quietly bypass modern controls. Get the checklist above in place and you've closed the paths attackers use most often against cloud identity.</p>
+
+  <div class="art-author">
+    <img src="../assets/khurshed-photo.jpg" alt="MD Khurshed Alam">
+    <div>
+      <h4>Mohammad Khurshed Alam</h4>
+      <p>Senior IT Infrastructure Engineer · Cloud &amp; Cybersecurity · Microsoft Certified: Azure Administrator Associate</p>
+    </div>
+  </div>
+
+  <div class="art-cta">
+    <p>Working on an Azure AD / Entra ID hardening project?</p>
+    <div class="art-cta-row">
+      <a href="https://wa.me/96566648706?text=Hi%20Khurshed%2C%20I%20read%20your%20Azure%20AD%20hardening%20article%20and%20wanted%20to%20ask..." target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+      <a href="mailto:itkhurshed@gmail.com" class="btn btn-outline">Email Me</a>
+      <a href="../index.html#blog" class="btn btn-outline">More Articles</a>
+    </div>
+  </div>
+</main>
+
+<footer class="art-foot">&copy; 2026 MD Khurshed Alam — Cyber Defense Lab. Technical write-up for educational purposes.</footer>
+
+</body>
+</html>

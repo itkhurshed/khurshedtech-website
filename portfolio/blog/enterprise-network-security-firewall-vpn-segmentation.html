@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Network Security: Firewalls, VPNs &amp; Segmentation | MD Khurshed Alam</title>
+<meta name="description" content="Enterprise firewall design, VPN security best practices, and VLAN-based network segmentation — practical guidance from a Cisco CCNP-certified infrastructure engineer.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/enterprise-network-security-firewall-vpn-segmentation.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Enterprise Network Security: Firewalls, VPNs & Segmentation">
+<meta property="og:description" content="Enterprise firewall design, VPN security best practices, and VLAN-based network segmentation.">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/enterprise-network-security-firewall-vpn-segmentation.html">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"Enterprise Network Security: Firewalls, VPNs & Segmentation",
+  "description":"Enterprise firewall design, VPN security best practices, and VLAN-based network segmentation.",
+  "author":{"@type":"Person","name":"MD Khurshed Alam","url":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/"},
+  "datePublished":"2026-06-30","dateModified":"2026-08-17",
+  "image":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png",
+  "publisher":{"@type":"Person","name":"MD Khurshed Alam"},
+  "mainEntityOfPage":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/enterprise-network-security-firewall-vpn-segmentation.html"
+}
+</script>
+</head>
+<body>
+
+<nav class="art-nav"><div class="art-nav-inner">
+  <a class="art-logo" href="../index.html">MD KHURSHED ALAM <span>| Cyber Defense Lab</span></a>
+  <a class="art-back" href="../index.html#blog">← Back to Portfolio</a>
+</div></nav>
+
+<header class="art-header"><div class="wrap">
+  <span class="art-category"><i>🌐</i> Network Security</span>
+  <h1 class="art-title">Enterprise Network Security: Firewalls, VPNs &amp; Segmentation</h1>
+  <div class="art-meta">
+    <span>Mohammad Khurshed Alam</span><span class="dot">·</span>
+    <span>Published July 2026</span><span class="dot">·</span>
+    <span>7 min read</span><span class="dot">·</span>
+    <span>Intermediate</span>
+  </div>
+  <div class="art-tags"><span>Firewall Design</span><span>VPN</span><span>VLAN Segmentation</span><span>CCNP</span></div>
+</div></header>
+
+<main class="wrap art-body">
+
+  <p>A flat network is a gift to an attacker: one compromised workstation can reach the file server, the domain controller, and the finance VLAN in the same hop. Good enterprise network security design starts with the assumption that something inside the perimeter will eventually be compromised — and limits what it can reach when it is.</p>
+
+  <div class="art-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#risks">Common Design Weaknesses</a></li>
+      <li><a href="#protection">Best Practices</a></li>
+      <li><a href="#recommendations">Enterprise Recommendations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro"><span class="num">01</span>Introduction</h2>
+  <p>Firewalls, VPNs, and VLANs are the three pillars of the traditional network security stack, and they're still relevant even in a cloud-first world — most enterprises still run hybrid environments with on-prem servers, site-to-site links, and remote access VPNs that need the same rigor as any cloud control plane.</p>
+
+  <h2 id="risks"><span class="num">02</span>Common Design Weaknesses</h2>
+  <ul>
+    <li><strong>Flat networks:</strong> user, server, and management traffic sharing the same broadcast domain.</li>
+    <li><strong>Overly permissive firewall rules:</strong> "any-any" rules left over from a troubleshooting session and never removed.</li>
+    <li><strong>Split-tunnel VPN misconfiguration:</strong> remote users routing both corporate and internet traffic without inspection.</li>
+    <li><strong>No east-west inspection:</strong> firewalls guarding the perimeter but nothing filtering traffic between internal VLANs.</li>
+    <li><strong>Shared local admin credentials</strong> across endpoints, turning one compromised machine into lateral movement everywhere.</li>
+  </ul>
+
+  <h2 id="protection"><span class="num">03</span>Best Practices</h2>
+  <ul>
+    <li><strong>Segment by function and trust level:</strong> separate VLANs for users, servers, management/OOB, guest Wi-Fi, and IoT/printers — with routing between them controlled by firewall policy, not just a router ACL.</li>
+    <li><strong>Apply least-privilege firewall rules:</strong> explicit source/destination/port rules, default-deny, and a documented change-review process — no standing "any-any."</li>
+    <li><strong>Harden VPN access:</strong> require MFA on the VPN gateway, use split-tunnel only for trusted destinations, and prefer modern protocols (IKEv2/WireGuard) over legacy PPTP/L2TP.</li>
+    <li><strong>Deploy an internal firewall or ACLs between VLANs</strong> so a compromised endpoint in one segment can't freely scan or pivot into another.</li>
+    <li><strong>Use 802.1X port-based authentication</strong> on switch ports so unknown devices can't just plug in and reach the network.</li>
+  </ul>
+
+  <div class="art-callout"><strong>Field note:</strong> the single highest-impact change on most networks I've assessed is separating the management VLAN (switches, firewalls, hypervisors) from the user VLAN — it's a low-effort change that removes an entire class of lateral-movement paths.</div>
+
+  <h2 id="recommendations"><span class="num">04</span>Enterprise Recommendations</h2>
+  <ul>
+    <li>Review firewall rule bases at least semi-annually and remove unused or overly broad rules.</li>
+    <li>Log and monitor VPN authentication events alongside on-prem AD sign-ins for correlated anomaly detection.</li>
+    <li>Maintain an up-to-date network diagram — you can't segment or defend what isn't documented.</li>
+    <li>Run periodic internal vulnerability scans (not just external) to catch misconfigurations between segments.</li>
+  </ul>
+
+  <h2 id="conclusion"><span class="num">05</span>Conclusion</h2>
+  <p>Perimeter security alone hasn't been sufficient for years. Segmentation, least-privilege firewall policy, and hardened remote access work together to make sure a single compromised device is a contained incident — not a company-wide breach.</p>
+
+  <div class="art-author">
+    <img src="../assets/khurshed-photo.jpg" alt="MD Khurshed Alam">
+    <div>
+      <h4>Mohammad Khurshed Alam</h4>
+      <p>Senior IT Infrastructure Engineer · Cisco CCNP Enterprise &amp; CCNA Certified</p>
+    </div>
+  </div>
+
+  <div class="art-cta">
+    <p>Planning a network segmentation or firewall redesign project?</p>
+    <div class="art-cta-row">
+      <a href="https://wa.me/96566648706?text=Hi%20Khurshed%2C%20I%20read%20your%20network%20security%20article%20and%20wanted%20to%20ask..." target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+      <a href="mailto:itkhurshed@gmail.com" class="btn btn-outline">Email Me</a>
+      <a href="../index.html#blog" class="btn btn-outline">More Articles</a>
+    </div>
+  </div>
+</main>
+
+<footer class="art-foot">&copy; 2026 MD Khurshed Alam — Cyber Defense Lab. Technical write-up for educational purposes.</footer>
+
+</body>
+</html>

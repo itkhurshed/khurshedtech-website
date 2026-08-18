@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Directory Hardening &amp; Windows Server Security Checklist | MD Khurshed Alam</title>
+<meta name="description" content="A practical Active Directory hardening guide and Windows Server security checklist — GPO baselines, tiered admin model, and patch management strategy.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/active-directory-hardening-windows-server-checklist.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Active Directory Hardening & Windows Server Security Checklist">
+<meta property="og:description" content="GPO baselines, tiered admin model, and patch management strategy for enterprise Active Directory.">
+<meta property="og:url" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/active-directory-hardening-windows-server-checklist.html">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"BlogPosting",
+  "headline":"Active Directory Hardening & Windows Server Security Checklist",
+  "description":"GPO baselines, tiered admin model, and patch management strategy for enterprise Active Directory.",
+  "author":{"@type":"Person","name":"MD Khurshed Alam","url":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/"},
+  "datePublished":"2026-05-14","dateModified":"2026-08-17",
+  "image":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/og-image.png",
+  "publisher":{"@type":"Person","name":"MD Khurshed Alam"},
+  "mainEntityOfPage":"https://itkhurshed.github.io/khurshed-cybersecurity-portfolio/blog/active-directory-hardening-windows-server-checklist.html"
+}
+</script>
+</head>
+<body>
+
+<nav class="art-nav"><div class="art-nav-inner">
+  <a class="art-logo" href="../index.html">MD KHURSHED ALAM <span>| Cyber Defense Lab</span></a>
+  <a class="art-back" href="../index.html#blog">← Back to Portfolio</a>
+</div></nav>
+
+<header class="art-header"><div class="wrap">
+  <span class="art-category"><i>🖥</i> Infrastructure</span>
+  <h1 class="art-title">Active Directory Hardening &amp; Windows Server Security Checklist</h1>
+  <div class="art-meta">
+    <span>Mohammad Khurshed Alam</span><span class="dot">·</span>
+    <span>Published May 2026</span><span class="dot">·</span>
+    <span>7 min read</span><span class="dot">·</span>
+    <span>Intermediate</span>
+  </div>
+  <div class="art-tags"><span>Active Directory</span><span>Windows Server</span><span>Group Policy</span><span>Patch Management</span></div>
+</div></header>
+
+<main class="wrap art-body">
+
+  <p>Active Directory is still the identity core of most enterprise networks, and it's the number one target in nearly every internal penetration test and real-world ransomware incident. A disciplined hardening baseline closes off the paths attackers rely on most — Kerberoasting, unconstrained delegation abuse, and flat admin access.</p>
+
+  <div class="art-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#risks">Common AD Weaknesses</a></li>
+      <li><a href="#protection">Hardening Checklist</a></li>
+      <li><a href="#recommendations">Enterprise Recommendations</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ol>
+  </div>
+
+  <h2 id="intro"><span class="num">01</span>Introduction</h2>
+  <p>Most AD environments accumulate risk slowly — a service account added to Domain Admins "just for now," a GPO that was never re-tightened, a patch cycle that slipped. This checklist is the baseline I bring every environment back to before layering on anything more advanced.</p>
+
+  <h2 id="risks"><span class="num">02</span>Common AD Weaknesses</h2>
+  <ul>
+    <li><strong>Flat admin model:</strong> the same account used to manage workstations, servers, and domain controllers.</li>
+    <li><strong>Service accounts in Domain Admins</strong> with old, never-rotated passwords — prime Kerberoasting targets.</li>
+    <li><strong>Excessive delegation rights</strong> left over from legacy application setups.</li>
+    <li><strong>Inconsistent patching</strong> between domain controllers, member servers, and workstations.</li>
+    <li><strong>Weak or default GPO baselines</strong> — no password policy tightening, no audit policy for privileged actions.</li>
+  </ul>
+
+  <h2 id="protection"><span class="num">03</span>Hardening Checklist</h2>
+  <ul>
+    <li><strong>Implement a tiered admin model</strong> (Tier 0 / 1 / 2) — domain controller admins never log into workstations, and workstation admins never touch domain controllers.</li>
+    <li><strong>Use dedicated admin accounts</strong> (no admin rights on the daily-use account), with unique, rotated, vaulted credentials for service accounts.</li>
+    <li><strong>Enable Advanced Audit Policy</strong> for logon events, privilege use, and directory service changes — feed it to a SIEM.</li>
+    <li><strong>Apply GPO password &amp; lockout baselines</strong> aligned to CIS or Microsoft's security baselines.</li>
+    <li><strong>Remove unnecessary delegation</strong> and disable unconstrained Kerberos delegation wherever it isn't explicitly required.</li>
+    <li><strong>Patch domain controllers first, on a defined cycle</strong> — not "whenever there's a maintenance window."</li>
+    <li><strong>Run regular AD security assessments</strong> (e.g. with PingCastle or similar tooling) to catch configuration drift.</li>
+  </ul>
+
+  <div class="art-callout"><strong>Field note:</strong> the tiered admin model is the single biggest structural change I recommend — it directly breaks the most common ransomware lateral-movement chain (workstation → cached admin credential → domain controller) without needing new tooling budget.</div>
+
+  <h2 id="recommendations"><span class="num">04</span>Enterprise Recommendations</h2>
+  <ul>
+    <li>Maintain a documented, versioned patch management strategy with defined SLAs by criticality.</li>
+    <li>Review Domain Admins, Enterprise Admins, and Schema Admins group membership monthly.</li>
+    <li>Back up AD (system state) on a tested schedule, with a documented forest-recovery runbook.</li>
+    <li>Decommission legacy protocols (NTLMv1, SMBv1) tenant-wide — they're still enabled far more often than they should be.</li>
+  </ul>
+
+  <h2 id="conclusion"><span class="num">05</span>Conclusion</h2>
+  <p>None of this requires exotic tooling — it's disciplined identity tiering, consistent patching, and audit visibility. Get the fundamentals right and Active Directory goes from the easiest target in the network to one of the best-defended.</p>
+
+  <div class="art-author">
+    <img src="../assets/khurshed-photo.jpg" alt="MD Khurshed Alam">
+    <div>
+      <h4>Mohammad Khurshed Alam</h4>
+      <p>Senior IT Infrastructure Engineer · 15+ Years Active Directory &amp; Windows Server Administration</p>
+    </div>
+  </div>
+
+  <div class="art-cta">
+    <p>Need help with an AD hardening or patch management review?</p>
+    <div class="art-cta-row">
+      <a href="https://wa.me/96566648706?text=Hi%20Khurshed%2C%20I%20read%20your%20AD%20hardening%20article%20and%20wanted%20to%20ask..." target="_blank" rel="noopener" class="btn btn-primary">Message on WhatsApp</a>
+      <a href="mailto:itkhurshed@gmail.com" class="btn btn-outline">Email Me</a>
+      <a href="../index.html#blog" class="btn btn-outline">More Articles</a>
+    </div>
+  </div>
+</main>
+
+<footer class="art-foot">&copy; 2026 MD Khurshed Alam — Cyber Defense Lab. Technical write-up for educational purposes.</footer>
+
+</body>
+</html>

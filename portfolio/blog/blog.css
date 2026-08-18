@@ -1,0 +1,107 @@
+/* ===== Shared Blog Article Styles — Khurshed Cyber Defense Lab ===== */
+:root{
+  --bg:#050b16; --bg-alt:#0a1424; --panel:#0d1a2e; --panel-2:#0f2036;
+  --line:rgba(255,255,255,.08); --cyan:#22d3ee; --blue:#3b82f6; --purple:#a855f7; --green:#34d399;
+  --text:#e7edf7; --muted:#8ea0bd; --muted-2:#5c6d87;
+}
+*{margin:0; padding:0; box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter', Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+.wrap{max-width:820px; margin:0 auto; padding:0 24px;}
+
+/* nav */
+.art-nav{position:sticky; top:0; z-index:20; background:rgba(5,11,22,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+.art-nav-inner{max-width:820px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between;}
+.art-back{display:inline-flex; align-items:center; gap:8px; font-size:.85rem; font-weight:600; color:var(--muted); text-decoration:none;}
+.art-back:hover{color:var(--cyan);}
+.art-logo{font-size:.85rem; font-weight:700; color:var(--text); text-decoration:none;}
+.art-logo span{color:var(--cyan);}
+
+/* header */
+.art-header{padding:56px 0 32px; border-bottom:1px solid var(--line);}
+.art-category{
+  display:inline-flex; align-items:center; gap:7px; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--cyan); background:rgba(34,211,238,.1); border:1px solid rgba(34,211,238,.3); padding:6px 14px; border-radius:999px; margin-bottom:18px;
+}
+.art-title{font-size:clamp(1.7rem,4vw,2.5rem); font-weight:800; line-height:1.22; margin-bottom:18px; letter-spacing:-.5px;}
+.art-meta{display:flex; flex-wrap:wrap; gap:18px; font-size:.82rem; color:var(--muted); margin-bottom:20px;}
+.art-meta span{display:inline-flex; align-items:center; gap:6px;}
+.art-meta .dot{color:var(--muted-2);}
+.art-tags{display:flex; flex-wrap:wrap; gap:8px;}
+.art-tags span{font-size:.7rem; font-family:'JetBrains Mono',monospace; color:var(--muted); background:rgba(255,255,255,.05); border:1px solid var(--line); padding:4px 10px; border-radius:6px;}
+
+/* toc */
+.art-toc{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 24px; margin:32px 0;}
+.art-toc h3{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--cyan); margin-bottom:12px;}
+.art-toc ol{list-style:none; display:grid; gap:8px;}
+.art-toc a{font-size:.86rem; color:var(--muted); text-decoration:none; display:flex; gap:8px;}
+.art-toc a:hover{color:var(--cyan);}
+.art-toc a::before{content:counter(t); counter-increment:t;}
+.art-toc ol{counter-reset:t;}
+
+/* body */
+.art-body{padding:8px 0 40px;}
+.art-body h2{font-size:1.32rem; font-weight:800; margin:36px 0 14px; color:var(--text); scroll-margin-top:80px;}
+.art-body h2 .num{color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:1rem; margin-right:10px;}
+.art-body p{font-size:.98rem; color:#c3cee0; margin-bottom:14px;}
+.art-body ul, .art-body ol.plain{margin:14px 0 18px 0; padding-left:0; list-style:none;}
+.art-body ul li{font-size:.94rem; color:#c3cee0; padding-left:22px; position:relative; margin-bottom:9px; line-height:1.55;}
+.art-body ul li::before{content:'▸'; position:absolute; left:0; color:var(--cyan);}
+.art-body strong{color:var(--text);}
+.art-callout{
+  background:rgba(168,85,247,.08); border:1px solid rgba(168,85,247,.28); border-left:3px solid var(--purple);
+  border-radius:10px; padding:16px 20px; margin:20px 0; font-size:.9rem; color:#d7d0f0;
+}
+.art-callout strong{color:#e9e3ff;}
+
+/* flow diagram */
+.flow{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px;
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:24px; margin:24px 0;
+}
+.flow-step{
+  font-size:.78rem; font-weight:700; color:var(--text); background:var(--panel-2); border:1px solid rgba(34,211,238,.35);
+  padding:10px 16px; border-radius:9px; text-align:center; font-family:'JetBrains Mono',monospace;
+}
+.flow-arrow{color:var(--cyan); font-size:1rem;}
+
+/* code block */
+.art-code{
+  background:#03080f; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:16px 0;
+  font-family:'JetBrains Mono',monospace; font-size:.8rem; color:#8ef0c9; overflow-x:auto; white-space:pre;
+}
+
+/* author box */
+.art-author{
+  display:flex; gap:16px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:22px; margin:40px 0 24px;
+}
+.art-author img{width:56px; height:56px; border-radius:50%; object-fit:cover; border:1px solid rgba(34,211,238,.4); flex-shrink:0;}
+.art-author h4{font-size:.95rem; font-weight:700;}
+.art-author p{font-size:.82rem; color:var(--muted); margin-top:3px;}
+
+/* cta footer */
+.art-cta{
+  text-align:center; padding:36px 24px; border-top:1px solid var(--line); margin-top:20px;
+}
+.art-cta p{color:var(--muted); font-size:.88rem; margin-bottom:16px;}
+.art-cta-row{display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:9px; font-size:.84rem; font-weight:700;
+  text-decoration:none; transition:all .2s ease;
+}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--blue)); color:#03101c;}
+.btn-primary:hover{filter:brightness(1.1);}
+.btn-outline{border:1px solid var(--line); color:var(--text);}
+.btn-outline:hover{border-color:var(--cyan); color:var(--cyan);}
+
+footer.art-foot{border-top:1px solid var(--line); padding:24px; text-align:center; font-size:.78rem; color:var(--muted-2);}
+
+@media(max-width:640px){
+  .art-header{padding:40px 0 24px;}
+  .art-body h2{font-size:1.14rem;}
+}
