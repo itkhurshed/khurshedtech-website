@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills &amp; Certification Dashboard | Engineer Mohammad Khurshed Alam</title>
+<meta name="description" content="An interactive, 3D-styled dashboard of Mohammad Khurshed Alam's cybersecurity, systems and AI skills, certifications, and projects — CompTIA CySA+, Microsoft Azure, Cisco CCNP.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/dashboard.html">
+<link rel="icon" type="image/png" href="logo-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('kt-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="stylesheet" href="styles.css?v=19">
+
+<style>
+  :root{
+    --neon: #00E5FF;
+    --neon-soft: rgba(0,229,255,0.35);
+    --hologram: #7C3AED;
+  }
+
+  .dash-hero{
+    position:relative; padding:150px 0 90px; text-align:center; overflow:hidden;
+    background:radial-gradient(circle at 50% 0%, #0C2540 0%, var(--navy-dark) 65%);
+    color:#fff;
+  }
+  .dash-hero canvas{position:absolute; inset:0; width:100%; height:100%; opacity:0.55;}
+  .dash-hero .container{position:relative; z-index:2;}
+  .dash-hero .section-eyebrow{color:var(--neon); letter-spacing:2px;}
+  .dash-hero h1{font-family:'Poppins',sans-serif; font-size:clamp(28px,4.5vw,48px); font-weight:800; margin:14px 0 16px; text-shadow:0 0 24px var(--neon-soft);}
+  .dash-hero p{color:#C9D1D9; max-width:640px; margin:0 auto; font-size:1.05rem;}
+
+  .dash-section{padding:80px 0;}
+  .dash-section.alt{background:var(--light-grey);}
+  [data-theme="dark"] .dash-section.alt{background:var(--light-grey);}
+
+  /* ---------- Skills: 3D tilt + neon progress ---------- */
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; margin-top:44px;}
+  .skill-group{
+    perspective:1000px;
+  }
+  .skill-group .card-face{
+    background:var(--navy-dark); border-radius:16px; padding:28px 26px; height:100%;
+    border:1px solid rgba(0,229,255,0.18); box-shadow:0 14px 34px rgba(4,15,28,0.35);
+    transition:transform .35s ease, box-shadow .35s ease;
+    transform-style:preserve-3d;
+  }
+  .skill-group:hover .card-face{
+    transform:rotateX(4deg) rotateY(-4deg) translateY(-4px);
+    box-shadow:0 26px 50px rgba(0,229,255,0.22);
+  }
+  .skill-group h3{font-family:'Poppins',sans-serif; color:#fff; font-size:1.15rem; margin-bottom:6px; display:flex; align-items:center; gap:10px;}
+  .skill-group h3 .dot{width:10px; height:10px; border-radius:50%; background:var(--neon); box-shadow:0 0 12px var(--neon);}
+  .skill-group .group-label{color:#7C8CA6; font-size:0.82rem; margin-bottom:20px; text-transform:uppercase; letter-spacing:1.5px;}
+
+  .skill-row{margin-bottom:16px;}
+  .skill-row:last-child{margin-bottom:0;}
+  .skill-row .skill-name{display:flex; justify-content:space-between; color:#E7EDF7; font-size:0.9rem; font-weight:600; margin-bottom:6px;}
+  .skill-row .skill-name span.pct{color:var(--neon); font-family:'JetBrains Mono',monospace; font-weight:700;}
+  .skill-bar{height:8px; border-radius:99px; background:rgba(255,255,255,0.08); overflow:hidden; position:relative;}
+  .skill-bar .fill{
+    height:100%; width:0%; border-radius:99px;
+    background:linear-gradient(90deg, var(--teal), var(--neon));
+    box-shadow:0 0 10px var(--neon-soft);
+    transition:width 1.4s cubic-bezier(.16,.84,.44,1);
+  }
+  .skill-group.is-visible .skill-bar .fill{width:var(--target);}
+
+  /* ---------- Certifications: flip cards ---------- */
+  .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:32px; margin-top:44px;}
+  .cert-flip{perspective:1200px; height:230px;}
+  .cert-flip-inner{
+    position:relative; width:100%; height:100%; text-align:center;
+    transition:transform .7s cubic-bezier(.2,.9,.25,1); transform-style:preserve-3d;
+  }
+  .cert-flip:hover .cert-flip-inner, .cert-flip:focus-within .cert-flip-inner{transform:rotateY(180deg) scale(1.03);}
+  .cert-face{
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:16px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px;
+  }
+  .cert-front{
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+    border:1px solid rgba(0,194,255,0.25); color:#fff;
+  }
+  .cert-front .badge{
+    width:64px; height:64px; border-radius:50%; margin-bottom:14px;
+    background:radial-gradient(circle, var(--teal) 0%, var(--navy) 72%);
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    box-shadow:0 0 22px var(--neon-soft); animation:badge-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes badge-pulse{0%,100%{box-shadow:0 0 14px var(--neon-soft);} 50%{box-shadow:0 0 30px var(--neon-soft);}}
+  .cert-front h4{font-family:'Poppins',sans-serif; font-size:1.05rem;}
+  .cert-front span{color:#9FB0C9; font-size:0.82rem; margin-top:4px;}
+  .cert-back{
+    background:linear-gradient(160deg, var(--teal-dark) 0%, var(--navy) 100%);
+    color:#fff; transform:rotateY(180deg); font-size:0.9rem; line-height:1.6;
+  }
+  .cert-back strong{display:block; font-family:'Poppins',sans-serif; margin-bottom:8px;}
+
+  /* ---------- Projects: tilt cards ---------- */
+  .project-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; margin-top:44px;}
+  .project-card{
+    background:#fff; border-radius:16px; border:1px solid var(--border); overflow:hidden;
+    box-shadow:var(--shadow); transition:transform .3s ease, box-shadow .3s ease;
+  }
+  [data-theme="dark"] .project-card{background:var(--navy-light);}
+  .project-card:hover{transform:translateY(-6px) rotateX(2deg); box-shadow:var(--shadow-lg);}
+  .project-media{
+    height:150px; position:relative; overflow:hidden;
+    background:linear-gradient(120deg, var(--navy) 0%, var(--teal-dark) 100%);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .project-media .scan{
+    position:absolute; inset:0; background:repeating-linear-gradient(180deg, transparent 0 3px, rgba(255,255,255,0.06) 3px 4px);
+    animation:scan-move 6s linear infinite;
+  }
+  @keyframes scan-move{0%{transform:translateY(0);} 100%{transform:translateY(20px);}}
+  .project-media .glyph{font-size:2.2rem; position:relative; z-index:1;}
+  .project-body{padding:22px 24px;}
+  .project-body h4{font-family:'Poppins',sans-serif; margin-bottom:8px;}
+  .project-body p{color:var(--grey); font-size:0.9rem; margin-bottom:14px; line-height:1.55;}
+  .tech-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .tech-tags span{
+    font-size:0.74rem; font-weight:700; padding:4px 10px; border-radius:999px;
+    background:rgba(0,194,255,0.12); color:var(--teal-dark);
+  }
+  [data-theme="dark"] .tech-tags span{color:var(--neon); background:rgba(0,229,255,0.12);}
+  .project-body .btn-outline{font-size:0.82rem; padding:8px 16px;}
+
+  /* ---------- Contact: map + social motion ---------- */
+  .contact-dash{display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; margin-top:44px; align-items:center;}
+  @media (max-width:800px){.contact-dash{grid-template-columns:1fr;}}
+  .map-wrap{
+    position:relative; background:var(--navy-dark); border-radius:18px; padding:16px;
+    border:1px solid rgba(0,229,255,0.18); box-shadow:var(--shadow-lg);
+  }
+  .map-wrap svg{width:100%; height:auto; display:block;}
+  .map-dot{fill:#2C4260;}
+  .map-pin{transform-origin:center;}
+  .map-pin .pulse{
+    fill:none; stroke:var(--neon); stroke-width:2; opacity:0.8;
+    animation:pin-pulse 2.2s ease-out infinite;
+  }
+  @keyframes pin-pulse{0%{r:4; opacity:0.9;} 100%{r:26; opacity:0;}}
+  .map-caption{text-align:center; color:#9FB0C9; font-size:0.82rem; margin-top:10px;}
+
+  .social-motion{display:flex; flex-wrap:wrap; gap:16px; margin-top:26px;}
+  .social-motion a{
+    display:flex; align-items:center; gap:10px; padding:12px 18px; border-radius:12px;
+    background:var(--navy-dark); color:#fff; text-decoration:none; font-weight:700; font-size:0.9rem;
+    border:1px solid rgba(255,255,255,0.08); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .social-motion a:hover{transform:translateY(-4px) scale(1.03); box-shadow:0 12px 26px var(--neon-soft); border-color:var(--neon);}
+  .social-motion .ic{width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;}
+  .contact-line{color:var(--grey); margin-bottom:8px; font-size:0.95rem;}
+  .contact-line a{color:var(--teal-dark); font-weight:700;}
+
+  /* ---------- Footer ---------- */
+  .dash-footer{
+    position:relative; overflow:hidden; padding:60px 0 40px; text-align:center; color:#fff;
+    background:linear-gradient(-45deg, var(--navy-dark), var(--navy), #0C2540, var(--navy-dark));
+    background-size:400% 400%; animation:gradient-shift 14s ease infinite;
+  }
+  @keyframes gradient-shift{0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;}}
+  .dash-footer canvas{position:absolute; inset:0; width:100%; height:100%; opacity:0.5;}
+  .dash-footer .container{position:relative; z-index:2;}
+  .dash-footer .tagline{font-family:'Poppins',sans-serif; font-weight:700; font-size:1.15rem; margin-bottom:10px; text-shadow:0 0 18px var(--neon-soft);}
+  .dash-footer .fine{color:#8FA0BC; font-size:0.82rem;}
+
+  @media (prefers-reduced-motion: reduce){
+    .skill-group:hover .card-face, .cert-flip:hover .cert-flip-inner, .project-card:hover, .social-motion a:hover{transform:none;}
+    .cert-front .badge, .project-media .scan, .map-pin .pulse, .dash-footer{animation:none;}
+    .skill-bar .fill{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="index.html" class="logo">
+      <img src="logo-icon.png" alt="KhurshedTech logo" class="logo-mark-img">
+      <span>KhurshedTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="portfolio/index.html#top">Security Portfolio</a>
+      <a href="dashboard.html" style="opacity:0.6;">Skills Dashboard</a>
+      <a href="brand.html">Brand Kit</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta">WhatsApp Us</a>
+      <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="dash-hero">
+  <canvas id="hero-particles" aria-hidden="true"></canvas>
+  <div class="container">
+    <span class="section-eyebrow">Interactive Dashboard</span>
+    <h1>Skills, Certifications &amp; Projects</h1>
+    <p>Cybersecurity, systems administration and AI — the same skill set behind every KhurshedTech engagement, shown here in one live view.</p>
+  </div>
+</section>
+
+<section class="dash-section" aria-labelledby="skills-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Skills</span>
+      <h2 id="skills-heading">Core Skill Set</h2>
+      <p>Hover a card for a closer look — bars fill in as they scroll into view.</p>
+    </div>
+
+    <div class="skill-groups">
+      <div class="skill-group" data-group="cyber">
+        <div class="card-face">
+          <h3><span class="dot"></span>Cybersecurity</h3>
+          <div class="group-label">SOC &amp; Defense</div>
+          <div class="skill-row"><div class="skill-name"><span>CompTIA CySA+</span><span class="pct">92%</span></div><div class="skill-bar"><div class="fill" style="--target:92%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Ethical Hacking</span><span class="pct">78%</span></div><div class="skill-bar"><div class="fill" style="--target:78%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>SIEM</span><span class="pct">85%</span></div><div class="skill-bar"><div class="fill" style="--target:85%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>SOC Operations</span><span class="pct">88%</span></div><div class="skill-bar"><div class="fill" style="--target:88%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Vulnerability Assessment</span><span class="pct">83%</span></div><div class="skill-bar"><div class="fill" style="--target:83%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group" data-group="system">
+        <div class="card-face">
+          <h3><span class="dot"></span>Systems &amp; Infrastructure</h3>
+          <div class="group-label">13+ Years Hands-On</div>
+          <div class="skill-row"><div class="skill-name"><span>Windows Server</span><span class="pct">95%</span></div><div class="skill-bar"><div class="fill" style="--target:95%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Linux</span><span class="pct">80%</span></div><div class="skill-bar"><div class="fill" style="--target:80%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Active Directory</span><span class="pct">93%</span></div><div class="skill-bar"><div class="fill" style="--target:93%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Networking</span><span class="pct">90%</span></div><div class="skill-bar"><div class="fill" style="--target:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Cloud (Azure)</span><span class="pct">86%</span></div><div class="skill-bar"><div class="fill" style="--target:86%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group" data-group="ai">
+        <div class="card-face">
+          <h3><span class="dot"></span>AI &amp; Automation</h3>
+          <div class="group-label">Applied, Not Just Theory</div>
+          <div class="skill-row"><div class="skill-name"><span>Artificial Intelligence</span><span class="pct">70%</span></div><div class="skill-bar"><div class="fill" style="--target:70%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Machine Learning</span><span class="pct">55%</span></div><div class="skill-bar"><div class="fill" style="--target:55%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>Automation</span><span class="pct">82%</span></div><div class="skill-bar"><div class="fill" style="--target:82%"></div></div></div>
+          <div class="skill-row"><div class="skill-name"><span>AI Security</span><span class="pct">68%</span></div><div class="skill-bar"><div class="fill" style="--target:68%"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:22px; font-size:0.8rem; color:var(--grey);">Percentages are self-assessed proficiency levels, not a formal test score.</p>
+  </div>
+</section>
+
+<section class="dash-section alt" aria-labelledby="cert-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Certifications</span>
+      <h2 id="cert-heading">Certificate Showcase</h2>
+      <p>Hover or focus a card to flip it.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-flip" tabindex="0">
+        <div class="cert-flip-inner">
+          <div class="cert-face cert-front">
+            <div class="badge">🛡️</div>
+            <h4>CompTIA CySA+</h4>
+            <span>Cybersecurity Analyst</span>
+          </div>
+          <div class="cert-face cert-back">
+            <strong>CySA+</strong>
+            Behavioral analytics to detect and combat cybersecurity threats — threat detection, vulnerability management, and incident response.
+          </div>
+        </div>
+      </div>
+      <div class="cert-flip" tabindex="0">
+        <div class="cert-flip-inner">
+          <div class="cert-face cert-front">
+            <div class="badge">☁️</div>
+            <h4>Microsoft Azure</h4>
+            <span>AZ-104 Administrator</span>
+          </div>
+          <div class="cert-face cert-back">
+            <strong>AZ-104</strong>
+            Managing Azure identities, governance, storage, compute and virtual networks in production environments.
+          </div>
+        </div>
+      </div>
+      <div class="cert-flip" tabindex="0">
+        <div class="cert-flip-inner">
+          <div class="cert-face cert-front">
+            <div class="badge">🌐</div>
+            <h4>Cisco CCNP</h4>
+            <span>Network Professional</span>
+          </div>
+          <div class="cert-face cert-back">
+            <strong>CCNP</strong>
+            Enterprise routing, switching and network infrastructure design at a professional level.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dash-section" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Projects</span>
+      <h2 id="projects-heading">Selected Work</h2>
+      <p>Real, live work — not mockups.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-media"><div class="scan"></div><span class="glyph">🖥️</span></div>
+        <div class="project-body">
+          <h4>KhurshedTech.com</h4>
+          <p>Business website and client-facing IT services platform — pricing, booking, and support content in five languages.</p>
+          <div class="tech-tags"><span>HTML/CSS/JS</span><span>SEO</span><span>GitHub Pages</span></div>
+          <a href="https://github.com/itkhurshed/khurshedtech-website" target="_blank" rel="noopener" class="btn btn-outline">GitHub Repo</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-media"><div class="scan"></div><span class="glyph">🛡️</span></div>
+        <div class="project-body">
+          <h4>Cybersecurity Portfolio</h4>
+          <p>Dedicated portfolio covering SOC labs, certifications, security write-ups and research articles.</p>
+          <div class="tech-tags"><span>SOC</span><span>SIEM</span><span>Threat Analysis</span></div>
+          <a href="https://github.com/itkhurshed/khurshed-cybersecurity-portfolio" target="_blank" rel="noopener" class="btn btn-outline">GitHub Repo</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-media"><div class="scan"></div><span class="glyph">🏢</span></div>
+        <div class="project-body">
+          <h4>Enterprise IT Support — KMEFIC</h4>
+          <p>Day-to-day infrastructure administration: Windows Server, Active Directory, networking and end-user support for a financial services firm.</p>
+          <div class="tech-tags"><span>Windows Server</span><span>Active Directory</span><span>Networking</span></div>
+          <a href="portfolio/index.html#experience" class="btn btn-outline">View Experience</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dash-section alt" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Contact</span>
+      <h2 id="contact-heading">Let's Connect</h2>
+      <p>Based in Kuwait City — open to opportunities and IT support engagements.</p>
+    </div>
+    <div class="contact-dash">
+      <div class="map-wrap">
+        <svg viewBox="0 0 400 200" role="img" aria-label="World map with Kuwait marked">
+          <g class="map-dot">
+            <circle cx="30" cy="70" r="2"></circle><circle cx="45" cy="60" r="2"></circle><circle cx="60" cy="65" r="2"></circle><circle cx="75" cy="55" r="2"></circle><circle cx="90" cy="70" r="2"></circle>
+            <circle cx="120" cy="50" r="2"></circle><circle cx="135" cy="45" r="2"></circle><circle cx="150" cy="55" r="2"></circle><circle cx="165" cy="60" r="2"></circle>
+            <circle cx="180" cy="75" r="2"></circle><circle cx="195" cy="80" r="2"></circle><circle cx="210" cy="70" r="2"></circle><circle cx="225" cy="65" r="2"></circle>
+            <circle cx="240" cy="90" r="2"></circle><circle cx="255" cy="100" r="2"></circle><circle cx="270" cy="85" r="2"></circle><circle cx="285" cy="95" r="2"></circle>
+            <circle cx="300" cy="80" r="2"></circle><circle cx="315" cy="70" r="2"></circle><circle cx="330" cy="90" r="2"></circle><circle cx="345" cy="100" r="2"></circle>
+            <circle cx="60" cy="120" r="2"></circle><circle cx="80" cy="130" r="2"></circle><circle cx="100" cy="140" r="2"></circle><circle cx="120" cy="150" r="2"></circle>
+            <circle cx="200" cy="130" r="2"></circle><circle cx="220" cy="140" r="2"></circle><circle cx="240" cy="150" r="2"></circle><circle cx="260" cy="145" r="2"></circle>
+            <circle cx="310" cy="130" r="2"></circle><circle cx="330" cy="140" r="2"></circle><circle cx="350" cy="150" r="2"></circle>
+          </g>
+          <g class="map-pin" transform="translate(238,88)">
+            <circle class="pulse" r="4"></circle>
+            <circle r="5" fill="#00E5FF"></circle>
+          </g>
+          <text x="238" y="78" fill="#C9D1D9" font-size="9" text-anchor="middle" font-family="Inter, sans-serif">Kuwait</text>
+        </svg>
+        <p class="map-caption">Kuwait City, Kuwait — available for remote &amp; on-site engagements</p>
+      </div>
+      <div>
+        <p class="contact-line">📧 <a href="mailto:info@khurshedtech.com">info@khurshedtech.com</a></p>
+        <p class="contact-line">💬 <a href="https://wa.me/96566648706" target="_blank" rel="noopener">WhatsApp: +965 6664 8706</a></p>
+        <div class="social-motion">
+          <a href="https://www.facebook.com/profile.php?id=61591711484981" target="_blank" rel="noopener" aria-label="Facebook"><span class="ic">📘</span>Facebook</a>
+          <a href="https://www.linkedin.com/in/engineer-mohammad-khurshed-alam-b64501186/" target="_blank" rel="noopener" aria-label="LinkedIn"><span class="ic">💼</span>LinkedIn</a>
+          <a href="https://www.instagram.com/mohammadkhurshed838/" target="_blank" rel="noopener" aria-label="Instagram"><span class="ic">📸</span>Instagram</a>
+          <a href="https://github.com/itkhurshed" target="_blank" rel="noopener" aria-label="GitHub"><span class="ic">💻</span>GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="dash-footer">
+  <canvas id="footer-particles" aria-hidden="true"></canvas>
+  <div class="container">
+    <p class="tagline">Building Secure Digital Futures with Cybersecurity &amp; AI</p>
+    <p class="fine">&copy; <span id="year"></span> KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait.</p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Progress bars: trigger fill when each skill-group scrolls into view
+  var groups = document.querySelectorAll('.skill-group');
+  if('IntersectionObserver' in window && groups.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.3});
+    groups.forEach(function(g){ io.observe(g); });
+  } else {
+    groups.forEach(function(g){ g.classList.add('is-visible'); });
+  }
+
+  // Lightweight particle canvas, shared by hero + footer
+  function initParticles(canvas){
+    if(!canvas || reduce) return;
+    var ctx = canvas.getContext('2d');
+    var w, h, points;
+    function resize(){
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+    }
+    function makePoints(){
+      var count = Math.max(24, Math.floor((w*h)/26000));
+      points = [];
+      for(var i=0;i<count;i++){
+        points.push({
+          x: Math.random()*w, y: Math.random()*h,
+          vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(0,229,255,0.7)';
+      for(var i=0;i<points.length;i++){
+        var p = points[i];
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1;
+        if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,1.4,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.strokeStyle = 'rgba(0,229,255,0.12)';
+      for(var a=0;a<points.length;a++){
+        for(var b=a+1;b<points.length;b++){
+          var dx = points[a].x-points[b].x, dy = points[a].y-points[b].y;
+          var dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist<90){
+            ctx.beginPath();
+            ctx.moveTo(points[a].x, points[a].y);
+            ctx.lineTo(points[b].x, points[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+    resize(); makePoints(); tick();
+    window.addEventListener('resize', function(){ resize(); makePoints(); });
+  }
+  initParticles(document.getElementById('hero-particles'));
+  initParticles(document.getElementById('footer-particles'));
+})();
+</script>
+<script>
+(function(){
+  var t = document.getElementById('theme-toggle');
+  if(!t) return;
+  var root = document.documentElement;
+  function apply(){ try{ if(localStorage.getItem('kt-theme')==='dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); }catch(e){} }
+  apply();
+  t.addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    if(isDark){ root.removeAttribute('data-theme'); try{localStorage.setItem('kt-theme','light');}catch(e){} }
+    else{ root.setAttribute('data-theme','dark'); try{localStorage.setItem('kt-theme','dark');}catch(e){} }
+  });
+})();
+</script>
+</body>
+</html>

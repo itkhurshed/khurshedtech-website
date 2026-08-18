@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Identity &amp; Brand Kit | Engineer Mohammad Khurshed Alam</title>
+<meta name="description" content="The brand system behind KhurshedTech and Engineer Mohammad Khurshed Alam — motion logo, animated brand intro, 3D-style hero, color palette, and typography.">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/brand.html">
+<link rel="icon" type="image/png" href="logo-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('kt-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="stylesheet" href="styles.css?v=19">
+
+<style>
+  .brand-hero{
+    padding:150px 0 70px; text-align:center;
+    background:linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+    color:#fff;
+  }
+  .brand-hero .section-eyebrow{color:var(--teal);}
+  .brand-hero h1{font-family:'Poppins',sans-serif; font-size:clamp(28px,4.5vw,46px); font-weight:800; margin:14px 0 16px;}
+  .brand-hero p{color:#C9D1D9; max-width:640px; margin:0 auto; font-size:1.05rem;}
+
+  .media-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:28px; margin-top:44px;}
+  .media-card{
+    background:#0A1D33; border:1px solid rgba(0,194,255,0.18); border-radius:16px; overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  }
+  .media-card .frame{position:relative; width:100%; aspect-ratio:16/9; background:#03101f;}
+  .media-card.square .frame{aspect-ratio:1/1;}
+  .media-card iframe{width:100%; height:100%; border:0; display:block;}
+  .media-card .meta{padding:18px 20px 22px;}
+  .media-card h3{font-family:'Poppins',sans-serif; color:#fff; font-size:1.05rem; margin-bottom:6px;}
+  .media-card p{color:#9FB0C9; font-size:0.9rem; margin-bottom:14px; line-height:1.5;}
+  .media-card .actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .media-card .actions a{
+    font-size:0.82rem; font-weight:700; padding:8px 14px; border-radius:999px;
+    text-decoration:none; border:1px solid rgba(255,255,255,0.25); color:#fff;
+  }
+  .media-card .actions a.primary{background:var(--teal); color:#03101f; border-color:var(--teal);}
+
+  .palette-row{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin-top:36px;}
+  .swatch{width:150px; text-align:center;}
+  .swatch .chip{height:74px; border-radius:12px; box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);}
+  .swatch .label{margin-top:8px; font-size:0.82rem; color:var(--grey); font-weight:600;}
+  .swatch .hex{font-size:0.78rem; color:#9aa4b5; font-family:monospace;}
+
+  .type-row{display:flex; gap:40px; flex-wrap:wrap; justify-content:center; margin-top:30px;}
+  .type-sample{text-align:center;}
+  .type-sample .name{font-size:0.85rem; color:var(--grey); margin-top:8px;}
+
+  .tagline-list{max-width:560px; margin:36px auto 0; text-align:left;}
+  .tagline-list li{padding:12px 18px; background:var(--light-grey); border-radius:10px; margin-bottom:10px; font-weight:600; color:var(--navy);}
+
+  [data-theme="dark"] .swatch .label{color:#C9D1D9;}
+  [data-theme="dark"] .tagline-list li{background:var(--navy-light); color:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="index.html" class="logo">
+      <img src="logo-icon.png" alt="KhurshedTech logo" class="logo-mark-img">
+      <span>KhurshedTech</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="portfolio/index.html#top">Security Portfolio</a>
+      <a href="dashboard.html">Skills Dashboard</a>
+      <a href="brand.html" style="opacity:0.6;">Brand Kit</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta">WhatsApp Us</a>
+      <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="brand-hero">
+  <div class="container">
+    <span class="section-eyebrow">Digital Identity System</span>
+    <h1>The Brand Behind KhurshedTech &amp; Engineer Mohammad Khurshed Alam</h1>
+    <p>Three rendered motion assets, a shared color system, and a consistent voice — used across LinkedIn, Facebook, Instagram, and this website.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:70px 0;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Motion</span>
+      <h2>Rendered Brand Animations</h2>
+      <p>These play live, right here — not mockups. Each is also downloadable as an MP4.</p>
+    </div>
+
+    <div class="media-grid">
+      <div class="media-card square">
+        <div class="frame"><iframe src="assets/brand/motion-logo.html" loading="lazy" title="MKA motion logo"></iframe></div>
+        <div class="meta">
+          <h3>MKA Motion Logo</h3>
+          <p>A glowing data point resolves into circuit lines, a shield outline, then the MKA monogram and full name.</p>
+          <div class="actions">
+            <a href="assets/brand/motion-logo.mp4" download class="primary">Download MP4</a>
+            <a href="assets/brand/motion-logo.html" target="_blank">Open full-screen</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <div class="frame"><iframe src="assets/brand/brand-intro.html" loading="lazy" title="Cinematic brand intro"></iframe></div>
+        <div class="meta">
+          <h3>Cinematic Brand Intro</h3>
+          <p>Staged reveal of name, role, certifications, and social links over an animated particle network.</p>
+          <div class="actions">
+            <a href="assets/brand/brand-intro.mp4" download class="primary">Download MP4</a>
+            <a href="assets/brand/brand-intro.html" target="_blank">Open full-screen</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="media-card">
+        <div class="frame"><iframe src="assets/brand/website-hero.html" loading="lazy" title="3D website hero"></iframe></div>
+        <div class="meta">
+          <h3>3D Website Hero</h3>
+          <p>A real-time Three.js particle field with a holographic-style profile card — the visual language for a future site relaunch.</p>
+          <div class="actions">
+            <a href="assets/brand/website-hero.html" target="_blank" class="primary">Open full-screen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding:20px 0 70px; background:var(--light-grey);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Foundation</span>
+      <h2>Color &amp; Typography</h2>
+      <p>The same palette across LinkedIn, Facebook, Instagram, and every asset on this page.</p>
+    </div>
+
+    <div class="palette-row">
+      <div class="swatch"><div class="chip" style="background:#071A33;"></div><div class="label">Navy</div><div class="hex">#071A33</div></div>
+      <div class="swatch"><div class="chip" style="background:#00A8FF;"></div><div class="label">Cyber Blue</div><div class="hex">#00A8FF</div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFFFF; box-shadow:inset 0 0 0 1px #E2E8F0;"></div><div class="label">White</div><div class="hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="chip" style="background:#C9D1D9;"></div><div class="label">Silver</div><div class="hex">#C9D1D9</div></div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-sample"><div style="font-family:'Poppins',sans-serif; font-weight:800; font-size:2rem;">Poppins</div><div class="name">Headings</div></div>
+      <div class="type-sample"><div style="font-family:'Inter',sans-serif; font-weight:600; font-size:2rem;">Inter</div><div class="name">Body copy</div></div>
+      <div class="type-sample"><div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:2rem;">Montserrat</div><div class="name">Alternate display</div></div>
+    </div>
+
+    <ul class="tagline-list">
+      <li>Building Secure Digital Futures</li>
+      <li>Smart Technology. Reliable Support. Business Growth.</li>
+      <li>The Engineer Behind Digital Security</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none; padding-top:0;">
+      <span>Smart Technology. Reliable Support. Business Growth.</span><br>
+      &copy; <span id="year"></span> KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait.
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+(function(){
+  var t = document.getElementById('theme-toggle');
+  if(!t) return;
+  var root = document.documentElement;
+  function apply(){ try{ if(localStorage.getItem('kt-theme')==='dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); }catch(e){} }
+  apply();
+  t.addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    if(isDark){ root.removeAttribute('data-theme'); try{localStorage.setItem('kt-theme','light');}catch(e){} }
+    else{ root.setAttribute('data-theme','dark'); try{localStorage.setItem('kt-theme','dark');}catch(e){} }
+  });
+})();
+</script>
+</body>
+</html>

@@ -20,13 +20,7 @@
 <meta name="twitter:description" content="Managed IT support, Microsoft 365, cloud, networking, cybersecurity and business automation for growing businesses in Kuwait and remotely worldwide.">
 <meta name="twitter:image" content="https://itkhurshed.github.io/khurshedtech-website/og-image.png">
 
-<!--
-  SEARCH CONSOLE VERIFICATION
-  1. Go to https://search.google.com/search-console, add this URL as a property.
-  2. Choose the "HTML tag" verification method — it gives you a meta tag like the one below.
-  3. Replace REPLACE_WITH_YOUR_VERIFICATION_CODE with the code Google gives you.
--->
-<meta name="google-site-verification" content="REPLACE_WITH_YOUR_VERIFICATION_CODE">
+<!-- Add your Google Search Console verification meta tag here once you register the property at https://search.google.com/search-console -->
 
 <link rel="icon" type="image/png" href="logo-icon.png">
 
@@ -182,12 +176,46 @@
 </head>
 <body>
 
+<!-- One-time animated brand intro (MKA motion logo). Shows once per browser session,
+     skips automatically if the visitor prefers reduced motion, and is fully skippable. -->
+<div id="kt-intro-overlay" style="position:fixed;inset:0;z-index:9999;background:#03101f;display:none;">
+  <iframe src="assets/brand/motion-logo.html" title="Brand intro"
+          style="width:100%;height:100%;border:0;display:block;"></iframe>
+  <button id="kt-intro-skip" aria-label="Skip intro"
+          style="position:absolute;bottom:24px;right:28px;z-index:2;padding:9px 18px;border-radius:999px;
+                 background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);color:#fff;
+                 font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+                 cursor:pointer;backdrop-filter:blur(6px);">Skip</button>
+</div>
+<script>
+(function(){
+  try{
+    var seen = sessionStorage.getItem('kt-intro-seen');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!seen && !reduce){
+      var overlay = document.getElementById('kt-intro-overlay');
+      overlay.style.display = 'block';
+      sessionStorage.setItem('kt-intro-seen', '1');
+      var close = function(){ overlay.style.transition = 'opacity .5s ease'; overlay.style.opacity = '0'; setTimeout(function(){ overlay.remove(); }, 520); };
+      document.getElementById('kt-intro-skip').addEventListener('click', close);
+      setTimeout(close, 7200);
+    } else {
+      document.getElementById('kt-intro-overlay').remove();
+    }
+  }catch(e){
+    var el = document.getElementById('kt-intro-overlay');
+    if(el) el.remove();
+  }
+})();
+</script>
+
 <div class="service-switcher">
   <div class="container service-switcher-inner">
     <span class="service-switcher-label">KhurshedTech offers:</span>
     <a href="index.html" class="switcher-tab active">🖥️ IT Services</a>
     <a href="website-design-services.html" class="switcher-tab">🎨 Website Design</a>
     <a href="video-editing-services.html" class="switcher-tab">🎬 Video Editing</a>
+    <a href="portfolio/index.html#top" class="switcher-tab">🛡️ Security Portfolio</a>
   </div>
 </div>
 
@@ -205,6 +233,9 @@
       <a href="#case-studies" data-en="Case Studies" data-ar="دراسات الحالة" data-fr="Études de cas" data-bn="কেস স্টাডি" data-hi="केस स्टडीज़">Case Studies</a>
       <a href="#testimonials" data-en="Testimonials" data-ar="آراء العملاء" data-fr="Témoignages" data-bn="প্রশংসাপত্র" data-hi="प्रशंसापत्र">Testimonials</a>
       <a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة" data-fr="FAQ" data-bn="সাধারণ জিজ্ঞাসা" data-hi="अक्सर पूछे जाने वाले प्रश्न">FAQ</a>
+      <a href="portfolio/index.html#top" data-en="Security Portfolio" data-ar="الملف الأمني" data-fr="Portfolio Cyber" data-bn="সিকিউরিটি পোর্টফোলিও" data-hi="सुरक्षा पोर्टफोलियो">Security Portfolio</a>
+      <a href="dashboard.html" data-en="Skills Dashboard" data-ar="لوحة المهارات" data-fr="Tableau des compétences" data-bn="দক্ষতা ড্যাশবোর্ড" data-hi="कौशल डैशबोर्ड">Skills Dashboard</a>
+      <a href="brand.html" data-en="Brand Kit" data-ar="الهوية البصرية" data-fr="Kit de Marque" data-bn="ব্র্যান্ড কিট" data-hi="ब्रांड किट">Brand Kit</a>
       <a href="blog.html" data-en="Blog" data-ar="المدونة" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
       <a href="#contact" data-en="Contact" data-ar="تواصل معنا" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
       <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA" data-en="WhatsApp Us" data-ar="واتساب" data-fr="WhatsApp" data-bn="হোয়াটসঅ্যাপ করুন" data-hi="व्हाट्सएप करें">WhatsApp Us</a>
