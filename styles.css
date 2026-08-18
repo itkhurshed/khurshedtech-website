@@ -1739,7 +1739,10 @@ footer {
 [data-theme="dark"] .tier-brand-name strong,
 [data-theme="dark"] .tier-trust-item strong,
 [data-theme="dark"] .tier-consult-text strong,
-[data-theme="dark"] .trust-badge span { color: var(--text-main); }
+[data-theme="dark"] .trust-badge span,
+[data-theme="dark"] .kt-timeline-node h4 { color: var(--text-main); }
+[data-theme="dark"] .kt-timeline-node p { color: var(--grey); }
+[data-theme="dark"] .kt-timeline-chip { color: var(--teal); background: rgba(0,194,255,0.12); border-color: rgba(0,194,255,0.32); }
 [data-theme="dark"] .industry-tag { background: var(--light-grey); border-color: var(--border); color: var(--text-main); }
 [data-theme="dark"] .industry-tag:hover { background: var(--accent); color: #fff; }
 [data-theme="dark"] .why-item:hover { background: var(--light-grey); }
