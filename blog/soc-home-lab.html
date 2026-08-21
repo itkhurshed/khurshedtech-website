@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a SOC Home Lab on a Budget | Khurshed Alam</title>
+<meta name="description" content="A practical, step-by-step guide to building a SOC home lab with Wazuh and Suricata for real detection and incident-response practice — no enterprise budget required.">
+<meta name="keywords" content="SOC home lab, Wazuh, Suricata, SIEM lab, blue team practice, cybersecurity home lab">
+<meta name="author" content="Khurshed Alam">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/blog/soc-home-lab.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building a SOC Home Lab on a Budget">
+<meta property="og:description" content="Stand up Wazuh + Suricata for real detection practice, without enterprise budget.">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshedtech-website/assets/og-image-blog.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "Article",
+  "headline": "Building a SOC Home Lab on a Budget",
+  "author": {"@type":"Person","name":"Khurshed Alam"},
+  "description": "A practical guide to building a SOC home lab with Wazuh and Suricata."
+}
+</script>
+</head>
+<body>
+<div class="top-nav"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="brand-mark">KA</span>Khurshed Alam</a>
+  <a class="back-link" href="../index.html#blog">← Back to Research</a>
+</div></div>
+
+<article class="wrap">
+  <div class="eyebrow">SOC / Detection Engineering</div>
+  <h1 class="title">Building a SOC Home Lab on a Budget</h1>
+  <p class="meta">By Khurshed Alam · Cybersecurity Engineering Notes</p>
+
+  <p>One of the fastest ways to move from "I know security concepts" to "I can actually detect and triage an attack" is building a small Security Operations Center (SOC) lab at home. You don't need enterprise licensing or a rack of servers — a single decent laptop or an old desktop with a few virtual machines is enough to practice real detection engineering end to end.</p>
+
+  <p>This is the exact structure I use for my own SOC Home Lab project: a target environment that generates activity, a sensor layer that watches it, and a SIEM that aggregates and alerts on what it sees.</p>
+
+  <h2>1. Plan the architecture first</h2>
+  <p>Before installing anything, sketch three layers:</p>
+  <ul>
+    <li><strong>Targets</strong> — one Windows 10/11 VM and one Linux VM, acting as the "endpoints" you're protecting.</li>
+    <li><strong>Sensors</strong> — a network intrusion detection engine watching traffic, plus host agents on each target reporting logs.</li>
+    <li><strong>Aggregation &amp; alerting</strong> — a central SIEM that ingests everything and lets you search, correlate, and build detection rules.</li>
+  </ul>
+
+  <h2>2. Core tooling (all free/open-source)</h2>
+  <ul>
+    <li><strong>Wazuh</strong> — open-source SIEM and host-based intrusion detection (agents on each endpoint, a central manager and dashboard).</li>
+    <li><strong>Suricata</strong> — network intrusion detection engine that inspects traffic against signature rule sets and can feed alerts into Wazuh.</li>
+    <li><strong>VirtualBox or Proxmox</strong> — free virtualization to host everything on one machine.</li>
+    <li><strong>Kali Linux</strong> — a controlled "attacker" VM used only inside your isolated lab network to generate realistic malicious traffic.</li>
+  </ul>
+
+  <div class="callout"><b>Isolate the lab network.</b> Put every VM on an internal/host-only virtual network with no route to your real home network. You're intentionally generating malicious-looking traffic — it should never reach the internet or your other devices.</div>
+
+  <h2>3. Build order</h2>
+  <ol>
+    <li>Stand up the Wazuh manager and dashboard VM first — this is your "SIEM."</li>
+    <li>Install Wazuh agents on the Windows and Linux target VMs so host logs (auth events, process creation, file integrity) start flowing in.</li>
+    <li>Deploy Suricata on a VM positioned to see inter-VM traffic (or on the target hosts themselves) and configure it to forward alerts to Wazuh.</li>
+    <li>Confirm end-to-end flow: an event on a target should appear as a searchable, alertable entry in the Wazuh dashboard within seconds.</li>
+  </ol>
+
+  <h2>4. Generate real detections, not just green checkmarks</h2>
+  <p>A lab is only useful if you actually break things. From the Kali VM, run a handful of well-known, low-risk simulated attacks against your targets — a port scan, a brute-force login attempt, an EICAR test file — and then go find the alert in Wazuh. Ask yourself the questions a SOC analyst actually asks:</p>
+  <ul>
+    <li>What alert fired, and how long after the activity started?</li>
+    <li>What data do I have to confirm this is real and not noise (source IP, process tree, user account)?</li>
+    <li>What would my containment step be, and what log would confirm containment worked?</li>
+  </ul>
+
+  <h2>5. Turn it into a portfolio project</h2>
+  <p>Document each detection you build: the scenario, the rule or query that catches it, and a short write-up of your triage decision. That documentation — not just the running lab — is what turns this into evidence of real analyst skill for interviews and portfolio reviews.</p>
+
+  <div class="callout"><b>Where this fits my profile:</b> this lab is one of the case studies in my <a href="../index.html#projects">Projects section</a>, framed as Problem → Solution → Tools → Security Impact.</div>
+
+  <div class="author-box">
+    <div class="author-avatar">KA</div>
+    <div><h4>Khurshed Alam</h4><p>Cybersecurity Engineer &amp; System Administrator, focused on SOC operations and cloud security.</p></div>
+  </div>
+
+  <div class="cta-strip">
+    <span>Want to talk about SOC tooling or detection engineering?</span>
+    <a href="mailto:itkhurshed@gmail.com">Get in touch →</a>
+  </div>
+</article>
+
+<footer>© <span id="y"></span> Khurshed Alam — Cybersecurity Research</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

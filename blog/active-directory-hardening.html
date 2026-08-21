@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Directory Hardening Checklist | Khurshed Alam</title>
+<meta name="description" content="The highest-impact Active Directory hardening steps to close common privilege-escalation and lateral-movement paths, based on hands-on lab auditing with BloodHound.">
+<meta name="keywords" content="Active Directory hardening, AD security, BloodHound, privilege escalation, domain security checklist">
+<meta name="author" content="Khurshed Alam">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/blog/active-directory-hardening.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Active Directory Hardening Checklist">
+<meta property="og:description" content="The highest-impact AD hardening steps to close common privilege-escalation paths.">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshedtech-website/assets/og-image-blog.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "Article",
+  "headline": "Active Directory Hardening Checklist",
+  "author": {"@type":"Person","name":"Khurshed Alam"},
+  "description": "The highest-impact AD hardening steps to close common privilege-escalation paths."
+}
+</script>
+</head>
+<body>
+<div class="top-nav"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="brand-mark">KA</span>Khurshed Alam</a>
+  <a class="back-link" href="../index.html#blog">← Back to Research</a>
+</div></div>
+
+<article class="wrap">
+  <div class="eyebrow">Identity Security</div>
+  <h1 class="title">Active Directory Hardening Checklist</h1>
+  <p class="meta">By Khurshed Alam · Cybersecurity Engineering Notes</p>
+
+  <p>Active Directory is still the backbone of identity for most enterprise networks — and it's also the single most attractive target once an attacker gets a foothold. Almost every ransomware incident I've read a post-mortem on shares one pattern: initial access on a low-privilege machine, followed by AD misconfiguration abuse to reach Domain Admin. Hardening AD isn't about buying a product — it's about closing paths that are usually already there by default.</p>
+
+  <p>This is the checklist I use when auditing a lab (or real) AD environment, roughly in order of impact.</p>
+
+  <h2>1. Audit privilege paths, don't just count admins</h2>
+  <p>Counting Domain Admins is not enough — nested group memberships, ACL misconfigurations, and delegated permissions create hidden paths to the same privilege. Tools like <code>BloodHound</code> map these paths visually and consistently surface issues like:</p>
+  <ul>
+    <li>Service accounts with <code>GenericAll</code> or <code>WriteDACL</code> rights on high-value objects</li>
+    <li>Users with unconstrained delegation enabled on their machines</li>
+    <li>Stale group nesting that grants privilege no one remembers approving</li>
+  </ul>
+
+  <h2>2. Kill Kerberoasting exposure</h2>
+  <p>Any service account with a Service Principal Name (SPN) is Kerberoastable — an attacker can request a ticket and crack the password offline. Mitigate by:</p>
+  <ul>
+    <li>Using long, randomly generated passwords (25+ characters) for service accounts, ideally via Group Managed Service Accounts (gMSA)</li>
+    <li>Auditing and removing unnecessary SPNs</li>
+    <li>Monitoring for abnormal TGS-REQ volume, a common Kerberoasting signal</li>
+  </ul>
+
+  <h2>3. Disable NTLM where you can, monitor it where you can't</h2>
+  <p>NTLM relay attacks remain effective because NTLM is still enabled by default in most environments. Practical steps:</p>
+  <ul>
+    <li>Enable SMB signing domain-wide</li>
+    <li>Enforce LDAP signing and channel binding</li>
+    <li>Where NTLM can't be fully removed, monitor authentication logs for relay-pattern anomalies</li>
+  </ul>
+
+  <h2>4. Tier your admin model</h2>
+  <p>The single biggest structural fix: stop using Domain Admin accounts to log into workstations or Tier-1 servers. A tiered administration model (Tier 0 = domain controllers and identity systems, Tier 1 = servers, Tier 2 = workstations) with dedicated admin accounts per tier breaks the most common lateral-movement chain outright.</p>
+
+  <h2>5. Harden default settings</h2>
+  <ul>
+    <li>Set a strong, enforced password and lockout policy — and consider a fine-grained policy for service/admin accounts</li>
+    <li>Disable the default <code>Print Spooler</code> service on domain controllers (closes a known abuse path)</li>
+    <li>Regularly review and clean stale computer and user objects — they're unmonitored attack surface</li>
+    <li>Enable Advanced Audit Policy logging so the events above are actually visible in your SIEM</li>
+  </ul>
+
+  <div class="callout"><b>Lab it before you trust it.</b> I run this checklist against a self-built lab AD forest, use BloodHound to confirm each fix actually removes the attack path (not just the symptom), and document before/after — this is the basis of the Active Directory Security Lab case study in my <a href="../index.html#projects">Projects section</a>.</div>
+
+  <h2>Priority order if you only have time for three</h2>
+  <ol>
+    <li>Audit privilege paths with BloodHound and fix what it finds — this catches issues no checklist alone will.</li>
+    <li>Move to a tiered admin model — this breaks the most common attack chain structurally.</li>
+    <li>Enforce SMB/LDAP signing and reduce NTLM exposure — this closes the most common initial relay vector.</li>
+  </ol>
+
+  <div class="author-box">
+    <div class="author-avatar">KA</div>
+    <div><h4>Khurshed Alam</h4><p>Cybersecurity Engineer &amp; System Administrator, focused on identity security and cloud.</p></div>
+  </div>
+
+  <div class="cta-strip">
+    <span>Working on an AD security review? Let's compare notes.</span>
+    <a href="mailto:itkhurshed@gmail.com">Get in touch →</a>
+  </div>
+</article>
+
+<footer>© <span id="y"></span> Khurshed Alam — Cybersecurity Research</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

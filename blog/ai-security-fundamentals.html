@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Security Fundamentals for IT Professionals | Khurshed Alam</title>
+<meta name="description" content="What system administrators and security engineers actually need to know about securing AI and LLM-integrated systems — prompt injection, data handling, and safe integration patterns.">
+<meta name="keywords" content="AI security, LLM security, prompt injection, AI risk, cybersecurity AI">
+<meta name="author" content="Khurshed Alam">
+<link rel="canonical" href="https://itkhurshed.github.io/khurshedtech-website/blog/ai-security-fundamentals.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Security Fundamentals for IT Professionals">
+<meta property="og:description" content="What sysadmins and security engineers need to know about securing AI-integrated systems.">
+<meta property="og:image" content="https://itkhurshed.github.io/khurshedtech-website/assets/og-image-blog.png">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "Article",
+  "headline": "AI Security Fundamentals for IT Professionals",
+  "author": {"@type":"Person","name":"Khurshed Alam"},
+  "description": "What sysadmins and security engineers need to know about securing AI-integrated systems."
+}
+</script>
+</head>
+<body>
+<div class="top-nav"><div class="wrap">
+  <a class="brand" href="../index.html"><span class="brand-mark">KA</span>Khurshed Alam</a>
+  <a class="back-link" href="../index.html#blog">← Back to Research</a>
+</div></div>
+
+<article class="wrap">
+  <div class="eyebrow">AI Security</div>
+  <h1 class="title">AI Security Fundamentals for IT Professionals</h1>
+  <p class="meta">By Khurshed Alam · Cybersecurity Engineering Notes</p>
+
+  <p>AI tools are showing up inside IT environments faster than most security teams can formally review them — copilots in productivity suites, chatbots wired into internal knowledge bases, automation scripts calling out to language models. You don't need to become a machine learning researcher to secure these systems responsibly. You need to recognize the new risk surface and apply security fundamentals you already know to it.</p>
+
+  <h2>1. Prompt injection is the new input validation problem</h2>
+  <p>If a language model reads untrusted content — an email, a web page, a document a user uploads — that content can contain instructions designed to hijack the model's behavior. This is conceptually identical to SQL injection or XSS: untrusted input is being interpreted as instructions instead of data. The fix pattern is familiar too:</p>
+  <ul>
+    <li>Never let a model take irreversible action (send an email, delete data, make a purchase) directly from untrusted content without a human or a strict allow-list gate</li>
+    <li>Separate "trusted instructions" (system prompts, your own configuration) from "untrusted data" (documents, web content, user messages) as clearly as your architecture allows</li>
+    <li>Log what the model was shown and what it decided to do — you can't investigate an incident you didn't log</li>
+  </ul>
+
+  <h2>2. Treat AI integrations like any other third-party data flow</h2>
+  <p>Before connecting an AI tool to internal systems, ask the same questions you'd ask about any new SaaS integration:</p>
+  <ul>
+    <li>What data does it see, and where does that data go (does the vendor train on it, store it, send it to a subprocessor)?</li>
+    <li>What can it <em>do</em>, not just what can it <em>read</em> — does it have write access, and is that access scoped to least privilege?</li>
+    <li>Is there an audit trail of its actions that lands in your existing SIEM?</li>
+  </ul>
+
+  <h2>3. Watch for data leakage through the model itself</h2>
+  <p>Sensitive data pasted into a public AI tool can leave your control instantly. This is a policy and awareness problem as much as a technical one — the same category as USB drive controls or personal email use, just with a newer interface. Practical mitigations:</p>
+  <ul>
+    <li>Use enterprise-tier AI tools with contractual data-handling guarantees for anything touching sensitive data</li>
+    <li>Apply DLP (data loss prevention) rules to AI tool traffic where your stack supports it</li>
+    <li>Write a short, clear acceptable-use policy — most data leakage is accidental, not malicious, and a one-page policy prevents most of it</li>
+  </ul>
+
+  <h2>4. Automation scripts calling AI APIs need the same hygiene as any script</h2>
+  <p>If you're writing Python automation that calls an AI API as part of a security or IT workflow — which I do for parts of my own automation work — apply the basics you'd apply to any credentialed script:</p>
+  <ul>
+    <li>Store API keys in a secrets manager or environment variable, never hard-coded</li>
+    <li>Scope the key's permissions to only what the script needs</li>
+    <li>Rate-limit and monitor usage so an anomaly (leaked key, runaway loop) is visible fast</li>
+  </ul>
+
+  <div class="callout"><b>The takeaway:</b> AI security is mostly existing security discipline — input validation, least privilege, logging, vendor risk assessment — applied to a new kind of input and a new kind of integration. The fundamentals you already have as a sysadmin or security engineer carry over further than the hype suggests.</div>
+
+  <div class="author-box">
+    <div class="author-avatar">KA</div>
+    <div><h4>Khurshed Alam</h4><p>Cybersecurity Engineer applying automation and AI concepts to practical security workflows.</p></div>
+  </div>
+
+  <div class="cta-strip">
+    <span>Exploring AI security or automation in your environment?</span>
+    <a href="mailto:itkhurshed@gmail.com">Get in touch →</a>
+  </div>
+</article>
+
+<footer>© <span id="y"></span> Khurshed Alam — Cybersecurity Research</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
