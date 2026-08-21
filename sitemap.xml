@@ -2,102 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://itkhurshed.github.io/khurshedtech-website/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#services</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#portfolio</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog/soc-home-lab.html</loc>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#pricing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#quote-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#case-studies</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog/active-directory-hardening.html</loc>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#faq</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://itkhurshed.github.io/khurshedtech-website/blog/ai-security-fundamentals.html</loc>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#roadmap</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/#contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/website-design-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/video-editing-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/blog.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-windows11-tips.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-m365-migration-checklist.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/blog-cybersecurity-basics-smb.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/privacy-policy.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/terms.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/brand.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/portfolio/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://itkhurshed.github.io/khurshedtech-website/dashboard.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
 </urlset>

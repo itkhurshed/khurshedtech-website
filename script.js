@@ -1,439 +1,402 @@
-// Mobile nav toggle
-const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-}
+/*!
+ * Khurshed Alam — Cybersecurity Portfolio
+ * Vanilla JS only — no third-party runtime dependencies (reduces supply-chain risk).
+ * All effects respect prefers-reduced-motion.
+ */
+(() => {
+  'use strict';
 
-// Hero mouse parallax - subtle background drift following the cursor, disabled for reduced-motion users
-const heroSection = document.querySelector('.hero');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (heroSection && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
-  heroSection.addEventListener('mousemove', (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    const relX = (e.clientX - rect.left) / rect.width - 0.5;
-    const relY = (e.clientY - rect.top) / rect.height - 0.5;
-    heroSection.style.setProperty('--parallax-x', (relX * 20) + 'px');
-    heroSection.style.setProperty('--parallax-y', (relY * 20) + 'px');
-  });
-  heroSection.addEventListener('mouseleave', () => {
-    heroSection.style.setProperty('--parallax-x', '0px');
-    heroSection.style.setProperty('--parallax-y', '0px');
-  });
-}
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 
-// Portfolio filter buttons
-const portfolioFilterBtns = document.querySelectorAll('.portfolio-filter-btn');
-const portfolioCards = document.querySelectorAll('#portfolio-grid .portfolio-card');
-if (portfolioFilterBtns.length && portfolioCards.length) {
-  portfolioFilterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      portfolioFilterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-      portfolioCards.forEach((card) => {
-        const show = filter === 'all' || card.getAttribute('data-category') === filter;
-        card.classList.toggle('is-hidden', !show);
-      });
-    });
-  });
-}
+  /* ----------------------------------------------------------
+     Footer year
+  ---------------------------------------------------------- */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// AOS (Animate On Scroll) init — powers all data-aos="..." attributes across the page
-if (typeof AOS !== 'undefined') {
-  AOS.init({
-    duration: 700,
-    easing: 'ease-out-cubic',
-    once: true,
-    offset: 60,
-  });
-}
-
-// ---------- Dark / Light mode toggle ----------
-const themeToggle = document.getElementById('theme-toggle');
-const applyTheme = (theme) => {
-  if (theme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (themeToggle) themeToggle.textContent = '☀️';
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-    if (themeToggle) themeToggle.textContent = '🌙';
+  /* ----------------------------------------------------------
+     Mobile nav drawer
+  ---------------------------------------------------------- */
+  const navToggle = document.getElementById('navToggle');
+  const drawer = document.getElementById('mobileDrawer');
+  const drawerClose = document.getElementById('drawerClose');
+  function openDrawer() {
+    drawer.classList.add('show');
+    navToggle.setAttribute('aria-expanded', 'true');
   }
-};
-(function initTheme() {
-  let saved = null;
-  try { saved = localStorage.getItem('kt-theme'); } catch (e) {}
-  applyTheme(saved === 'dark' ? 'dark' : 'light');
-})();
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    applyTheme(next);
-    try { localStorage.setItem('kt-theme', next); } catch (e) {}
-  });
-}
-
-// ---------- Multi-language switcher (English / Arabic / French / Bangla / Hindi) ----------
-// Translates nav, hero, footer and the promo-banner section. Other sections remain
-// English-only for now — full-site translation across every section is a larger future phase.
-const SUPPORTED_LANGS = ['en', 'ar', 'fr', 'bn', 'hi'];
-const langSelect = document.getElementById('lang-select');
-const applyLang = (lang) => {
-  if (!SUPPORTED_LANGS.includes(lang)) lang = 'en';
-
-  document.querySelectorAll('[data-en]').forEach((el) => {
-    const text = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
-    if (text) el.textContent = text;
-  });
-
-  document.querySelectorAll('.promo-banner-card').forEach((el) => {
-    el.hidden = el.getAttribute('data-banner-lang') !== lang;
-  });
-
-  if (lang === 'ar') {
-    document.documentElement.setAttribute('dir', 'rtl');
-  } else {
-    document.documentElement.setAttribute('dir', 'ltr');
+  function closeDrawer() {
+    drawer.classList.remove('show');
+    navToggle.setAttribute('aria-expanded', 'false');
   }
-  document.documentElement.setAttribute('lang', lang);
-  if (langSelect) langSelect.value = lang;
-};
-(function initLang() {
-  let saved = null;
-  try { saved = localStorage.getItem('kt-lang'); } catch (e) {}
-  applyLang(SUPPORTED_LANGS.includes(saved) ? saved : 'en');
-})();
-if (langSelect) {
-  langSelect.addEventListener('change', () => {
-    const next = langSelect.value;
-    applyLang(next);
-    try { localStorage.setItem('kt-lang', next); } catch (e) {}
-  });
-}
+  navToggle && navToggle.addEventListener('click', openDrawer);
+  drawerClose && drawerClose.addEventListener('click', closeDrawer);
+  drawer && drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
 
-// Contact form -> opens WhatsApp with prefilled message (no backend required)
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const val = (id) => {
-      const el = document.getElementById(id);
-      return el ? el.value.trim() : '';
-    };
-    const name = val('cf-name');
-    const company = val('cf-company');
-    const email = val('cf-email');
-    const phone = val('cf-phone');
-    const employees = val('cf-employees');
-    const service = val('cf-service');
-    const supportType = val('cf-support-type');
-    const time = val('cf-time');
-    const message = val('cf-message');
-    const budget = val('cf-budget');
-
-    const lines = [
-      `Hello KhurshedTech, my name is ${name}.`,
-      company && `Company: ${company}`,
-      email && `Email: ${email}`,
-      phone && `Phone: ${phone}`,
-      employees && `Employees: ${employees}`,
-      service && `Interested in: ${service}`,
-      supportType && `Support type: ${supportType}`,
-      time && `Preferred contact time: ${time}`,
-      budget && `Estimated budget: ${budget}`,
-      message && `Message: ${message}`,
-    ].filter(Boolean);
-
-    const text = encodeURIComponent(lines.join('\n'));
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'engagement',
-        event_label: 'Contact Form Submit',
-      });
+  /* ----------------------------------------------------------
+     Skill bar percentage labels — single source of truth is the
+     --pct custom property on .bar-fill; fill the adjacent label.
+  ---------------------------------------------------------- */
+  document.querySelectorAll('.skill-row').forEach(row => {
+    const fill = row.querySelector('.bar-fill');
+    const label = row.querySelector('.lbl b');
+    if (fill && label) {
+      const pct = fill.style.getPropertyValue('--pct').trim();
+      if (pct) label.textContent = pct;
     }
-
-    window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
-
-    const confirmationEl = document.getElementById('cf-confirmation');
-    if (confirmationEl) confirmationEl.hidden = false;
   });
-}
 
-// Footer year
-const yearEl = document.getElementById('year');
-if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-// Sticky header shadow on scroll
-const siteHeader = document.querySelector('header');
-if (siteHeader) {
-  const onScroll = () => {
-    siteHeader.classList.toggle('scrolled', window.scrollY > 8);
-  };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-}
-
-// Scroll-reveal animations (fallback for sections not using AOS; harmless alongside AOS)
-const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .reveal-left, .reveal-right, .reveal-zoom');
-if (revealTargets.length && 'IntersectionObserver' in window) {
-  const revealObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
+  /* ----------------------------------------------------------
+     Scroll reveal (IntersectionObserver)
+  ---------------------------------------------------------- */
+  const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger, .soc-panel, .timeline, .tl-item');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
+          entry.target.classList.add('in', 'in-view');
+          io.unobserve(entry.target);
         }
       });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-  );
-  revealTargets.forEach((el) => revealObserver.observe(el));
-} else {
-  revealTargets.forEach((el) => el.classList.add('visible'));
-}
-
-// Animated stat counters (run once, when the stats scroll into view)
-const counters = document.querySelectorAll('.counter');
-if (counters.length) {
-  const animateCounter = (el) => {
-    const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-    const suffix = el.getAttribute('data-suffix') || '';
-    const duration = 1200;
-    const start = performance.now();
-    const step = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  if ('IntersectionObserver' in window) {
-    const counterObserver = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    counters.forEach((el) => counterObserver.observe(el));
+    }, { threshold: 0.18, rootMargin: '0px 0px -60px 0px' });
+    revealTargets.forEach(el => io.observe(el));
   } else {
-    counters.forEach(animateCounter);
+    revealTargets.forEach(el => el.classList.add('in', 'in-view'));
   }
-}
 
-// Analytics event tracking on WhatsApp / CTA / phone / email links.
-// Safe no-op until a real GA4 Measurement ID is added in index.html <head> —
-// gtag() is only called if Google Analytics has actually loaded.
-document.querySelectorAll('.track-cta').forEach((el) => {
-  el.addEventListener('click', () => {
-    const plan = el.getAttribute('data-plan') || 'Unknown CTA';
-    if (typeof gtag === 'function') {
-      gtag('event', 'whatsapp_click', {
-        event_category: 'engagement',
-        event_label: plan,
+  /* ----------------------------------------------------------
+     Active nav link highlight on scroll
+  ---------------------------------------------------------- */
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  if ('IntersectionObserver' in window && sections.length) {
+    const navIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
       });
-    }
+    }, { threshold: 0.4 });
+    sections.forEach(s => navIO.observe(s));
+  }
+
+  /* ----------------------------------------------------------
+     Back to top button
+  ---------------------------------------------------------- */
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  }, { passive: true });
+  toTop && toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+  /* ----------------------------------------------------------
+     Ripple + magnetic buttons
+  ---------------------------------------------------------- */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const rect = this.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 650);
+    });
   });
-});
 
-// ---------- Quote calculator ----------
-// Pure client-side estimate. Clearly labeled as an estimate, not a final quotation.
-const calcSubmit = document.getElementById('calc-submit');
-if (calcSubmit) {
-  calcSubmit.addEventListener('click', () => {
-    const users = parseInt(document.getElementById('calc-users').value, 10) || 1;
-    const locations = parseInt(document.getElementById('calc-locations').value, 10) || 1;
-    const onsiteVisits = parseInt(document.getElementById('calc-onsite').value, 10) || 0;
-    const remote = document.getElementById('calc-remote').checked;
-    const m365 = document.getElementById('calc-m365').checked;
-    const server = document.getElementById('calc-server').checked;
-    const network = document.getElementById('calc-network').checked;
-    const security = document.getElementById('calc-security').checked;
-
-    const resultBox = document.getElementById('calc-result');
-    const rangeEl = document.getElementById('calc-range');
-
-    // Enterprise: 40+ users routes straight to a custom quote, matching the
-    // Starter (up to 20) / Business (up to 40) / Enterprise (custom) plan structure.
-    if (users > 40) {
-      if (rangeEl) rangeEl.textContent = 'Custom Enterprise pricing — contact us for a quote';
-      if (resultBox) {
-        resultBox.hidden = false;
-        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-      if (typeof gtag === 'function') {
-        gtag('event', 'quote_calculated', { event_category: 'engagement', event_label: 'Enterprise (custom)' });
-      }
-      return;
-    }
-
-    // Base per-user cost (remote helpdesk baseline), aligned to Starter/Business tiers
-    let low = users <= 5 ? 60 : users <= 20 ? 99 : 149;
-    let high = low + 50;
-
-    // Adjustments
-    if (locations >= 2) { low += 20; high += 30; }
-    if (locations >= 3) { low += 20; high += 30; }
-    if (onsiteVisits >= 1) { low += 25; high += 40; }
-    if (onsiteVisits >= 4) { low += 30; high += 50; }
-    if (m365) { low += 15; high += 25; }
-    if (server) { low += 30; high += 50; }
-    if (network) { low += 15; high += 25; }
-    if (security) { low += 25; high += 45; }
-    if (!remote && onsiteVisits === 0) { low += 10; high += 10; }
-
-    if (rangeEl) rangeEl.textContent = `${low}–${high} KWD / month (estimate)`;
-    if (resultBox) {
-      resultBox.hidden = false;
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'quote_calculated', {
-        event_category: 'engagement',
-        event_label: `${low}-${high} KWD`,
+  if (isFinePointer && !reduceMotion) {
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.3}px)`;
       });
-    }
-  });
-}
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  }
 
-const calcLeadForm = document.getElementById('calc-lead-form');
-if (calcLeadForm) {
-  calcLeadForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('calc-name').value.trim();
-    const company = document.getElementById('calc-company').value.trim();
-    const email = document.getElementById('calc-email').value.trim();
-    const whatsapp = document.getElementById('calc-whatsapp').value.trim();
-    const range = document.getElementById('calc-range') ? document.getElementById('calc-range').textContent : '';
+  /* ----------------------------------------------------------
+     3D tilt for cards
+  ---------------------------------------------------------- */
+  if (isFinePointer && !reduceMotion) {
+    document.querySelectorAll('.tilt, .tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rotY = (px - 0.5) * 10;
+        const rotX = (0.5 - py) * 10;
+        card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+        card.style.setProperty('--x', (px * 100) + '%');
+        card.style.setProperty('--y', (py * 100) + '%');
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
 
+  /* ----------------------------------------------------------
+     Terminal typing effect (hero)
+  ---------------------------------------------------------- */
+  const terminalBody = document.getElementById('terminalBody');
+  if (terminalBody) {
     const lines = [
-      `Hello KhurshedTech, my name is ${name}.`,
-      company && `Company: ${company}`,
-      email && `Email: ${email}`,
-      whatsapp && `WhatsApp: ${whatsapp}`,
-      `I used the online calculator and got an estimate of: ${range}.`,
-      `Please send me a confirmed quotation.`,
-    ].filter(Boolean);
+      { p: '$ ', t: 'whoami' },
+      { p: '> ', t: 'khurshed_alam — cybersecurity_engineer' },
+      { p: '$ ', t: 'status --check' },
+      { p: '> ', t: 'availability: OPEN_TO_OPPORTUNITIES' },
+      { p: '$ ', t: 'focus --list' },
+      { p: '> ', t: 'security_ops, cloud, ai_automation' },
+    ];
+    let li = 0, ci = 0;
+    const speed = reduceMotion ? 0 : 32;
 
-    const text = encodeURIComponent(lines.join('\n'));
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'engagement',
-        event_label: 'Quote Calculator Lead',
-      });
-    }
-
-    window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
-  });
-}
-
-// ---------- Website cost calculator (website-design-services.html) ----------
-// Pure client-side estimate, anchored to the real package prices shown on the page.
-const wcalcSubmit = document.getElementById('wcalc-submit');
-if (wcalcSubmit) {
-  wcalcSubmit.addEventListener('click', () => {
-    const type = document.getElementById('wcalc-type').value;
-    const pages = parseInt(document.getElementById('wcalc-pages').value, 10) || 1;
-    const multilang = document.getElementById('wcalc-multilang').checked;
-    const booking = document.getElementById('wcalc-booking').checked;
-    const seo = document.getElementById('wcalc-seo').checked;
-    const content = document.getElementById('wcalc-content').checked;
-    const logo = document.getElementById('wcalc-logo').checked;
-
-    const resultBox = document.getElementById('wcalc-result');
-    const rangeEl = document.getElementById('wcalc-range');
-
-    if (type === 'enterprise') {
-      if (rangeEl) rangeEl.textContent = 'Custom Enterprise pricing — contact us for a quote';
-      if (resultBox) {
-        resultBox.hidden = false;
-        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    function typeLine() {
+      if (li >= lines.length) {
+        setTimeout(() => { terminalBody.innerHTML = ''; li = 0; ci = 0; typeLine(); }, 2600);
+        return;
       }
-      if (typeof gtag === 'function') {
-        gtag('event', 'quote_calculated', { event_category: 'engagement', event_label: 'Website Enterprise (custom)' });
+      const row = document.createElement('div');
+      const promptSpan = document.createElement('span');
+      promptSpan.className = 'prompt';
+      promptSpan.textContent = lines[li].p;
+      row.appendChild(promptSpan);
+      const textSpan = document.createElement('span');
+      row.appendChild(textSpan);
+      const caret = document.createElement('span');
+      caret.className = 'caret';
+      row.appendChild(caret);
+      terminalBody.appendChild(row);
+
+      if (reduceMotion) {
+        textSpan.textContent = lines[li].t;
+        caret.remove();
+        li++;
+        setTimeout(typeLine, 260);
+        return;
       }
-      return;
+
+      const full = lines[li].t;
+      ci = 0;
+      const iv = setInterval(() => {
+        textSpan.textContent = full.slice(0, ci + 1);
+        ci++;
+        if (ci >= full.length) {
+          clearInterval(iv);
+          caret.remove();
+          li++;
+          setTimeout(typeLine, 420);
+        }
+      }, speed);
     }
+    typeLine();
+  }
 
-    // Base price + baseline page count, aligned to the real Starter/Basic Business/Professional Business/E-Commerce/Premium Business packages
-    const plans = {
-      landing:  { base: 49,  basePages: 1,  high: 79 },
-      business: { base: 99,  basePages: 5,  high: 149 },
-      standard: { base: 199, basePages: 10, high: 279 },
-      ecommerce:{ base: 349, basePages: 20, high: 449 },
-      bookingpro:{ base: 599, basePages: 20, high: 699 },
-    };
-    const plan = plans[type] || plans.business;
-    let low = plan.base;
-    let high = plan.high;
+  /* ----------------------------------------------------------
+     Particle / cyber-grid canvas background
+  ---------------------------------------------------------- */
+  const particlesCanvas = document.getElementById('particles');
+  if (particlesCanvas && !reduceMotion) {
+    const ctx = particlesCanvas.getContext('2d');
+    let w, h, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let nodes = [];
+    const NODE_COUNT = window.innerWidth < 768 ? 34 : 70;
+    const LINK_DIST = 130;
 
-    const extraPages = Math.max(0, pages - plan.basePages);
-    low += extraPages * 8;
-    high += extraPages * 12;
-
-    if (multilang) { low += 40; high += 70; }
-    if (booking) { low += 60; high += 100; }
-    if (seo) { low += 30; high += 50; }
-    if (content) { low += 15 * Math.min(pages, 20); high += 20 * Math.min(pages, 20); }
-    if (logo) { low += 25; high += 40; }
-
-    if (rangeEl) rangeEl.textContent = `${low}–${high} KWD (estimate)`;
-    if (resultBox) {
-      resultBox.hidden = false;
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      particlesCanvas.style.width = w + 'px';
+      particlesCanvas.style.height = h + 'px';
+      particlesCanvas.width = w * dpr;
+      particlesCanvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
+    function initNodes() {
+      nodes = Array.from({ length: NODE_COUNT }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+      }));
+    }
+    resize();
+    initNodes();
+    window.addEventListener('resize', () => { resize(); initNodes(); });
 
-    if (typeof gtag === 'function') {
-      gtag('event', 'quote_calculated', {
-        event_category: 'engagement',
-        event_label: `Website ${low}-${high} KWD`,
+    let mouse = { x: -9999, y: -9999 };
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+
+    function tick() {
+      ctx.clearRect(0, 0, w, h);
+      for (let n of nodes) {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
+      }
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < LINK_DIST) {
+            ctx.strokeStyle = `rgba(45,216,239,${0.12 * (1 - dist / LINK_DIST)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+        const dmx = nodes[i].x - mouse.x, dmy = nodes[i].y - mouse.y;
+        const dm = Math.sqrt(dmx * dmx + dmy * dmy);
+        if (dm < 160) {
+          ctx.strokeStyle = `rgba(155,123,255,${0.25 * (1 - dm / 160)})`;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+        ctx.fillStyle = 'rgba(45,216,239,0.55)';
+        ctx.beginPath();
+        ctx.arc(nodes[i].x, nodes[i].y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ----------------------------------------------------------
+     Neural network visual (AI section)
+  ---------------------------------------------------------- */
+  const neuroCanvas = document.getElementById('neuroCanvas');
+  if (neuroCanvas) {
+    const ctx = neuroCanvas.getContext('2d');
+    let w, h, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const layers = [3, 5, 5, 3];
+    let layerNodes = [];
+
+    function layout() {
+      const parent = neuroCanvas.parentElement;
+      w = neuroCanvas.width = parent.clientWidth * dpr;
+      h = neuroCanvas.height = parent.clientHeight * dpr;
+      neuroCanvas.style.width = parent.clientWidth + 'px';
+      neuroCanvas.style.height = parent.clientHeight + 'px';
+      const W = parent.clientWidth, H = parent.clientHeight;
+      layerNodes = layers.map((count, li) => {
+        const x = (W / (layers.length + 1)) * (li + 1);
+        return Array.from({ length: count }, (_, ni) => ({
+          x, y: (H / (count + 1)) * (ni + 1),
+          phase: Math.random() * Math.PI * 2,
+        }));
       });
     }
-  });
-}
+    layout();
+    window.addEventListener('resize', layout);
 
-const wcalcLeadForm = document.getElementById('wcalc-lead-form');
-if (wcalcLeadForm) {
-  wcalcLeadForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('wcalc-name').value.trim();
-    const company = document.getElementById('wcalc-company').value.trim();
-    const email = document.getElementById('wcalc-email').value.trim();
-    const whatsapp = document.getElementById('wcalc-whatsapp').value.trim();
-    const range = document.getElementById('wcalc-range') ? document.getElementById('wcalc-range').textContent : '';
-
-    const lines = [
-      `Hello KhurshedTech, my name is ${name}.`,
-      company && `Company: ${company}`,
-      email && `Email: ${email}`,
-      whatsapp && `WhatsApp: ${whatsapp}`,
-      `I used the website cost calculator and got an estimate of: ${range}.`,
-      `Please send me a confirmed quotation.`,
-    ].filter(Boolean);
-
-    const text = encodeURIComponent(lines.join('\n'));
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'engagement',
-        event_label: 'Website Calculator Lead',
+    function draw(t) {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      // connections
+      for (let li = 0; li < layerNodes.length - 1; li++) {
+        for (let a of layerNodes[li]) {
+          for (let b of layerNodes[li + 1]) {
+            const pulse = reduceMotion ? 0.5 : (Math.sin(t / 900 + a.phase) + 1) / 2;
+            ctx.strokeStyle = `rgba(155,123,255,${0.08 + pulse * 0.18})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // nodes
+      layerNodes.flat().forEach(n => {
+        const pulse = reduceMotion ? 0.5 : (Math.sin(t / 700 + n.phase) + 1) / 2;
+        const r = 3 + pulse * 2.2;
+        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
+        grad.addColorStop(0, `rgba(155,123,255,${0.5 + pulse * 0.4})`);
+        grad.addColorStop(1, 'rgba(155,123,255,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#c3b2ff';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
       });
+      if (!reduceMotion) requestAnimationFrame(draw);
     }
+    requestAnimationFrame(draw);
+  }
 
-    window.open(`https://wa.me/96566648706?text=${text}`, '_blank');
+  /* ----------------------------------------------------------
+     Ambient sound toggle — synthesized in-browser (Web Audio API).
+     No external audio file required, no autoplay (user-gesture gated).
+  ---------------------------------------------------------- */
+  const ambienceBtn = document.getElementById('ambienceBtn');
+  const ambiencePanel = document.getElementById('ambiencePanel');
+  let audioCtx = null, masterGain = null, voices = [], playing = false;
+
+  function buildAmbience() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0;
+    masterGain.connect(audioCtx.destination);
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 900;
+    filter.connect(masterGain);
+
+    // Soft pad: a few detuned sine/triangle oscillators with slow LFOs = calm ambient tone
+    const freqs = [110, 165, 220, 277.18];
+    freqs.forEach((f, i) => {
+      const osc = audioCtx.createOscillator();
+      osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.value = f;
+      const gain = audioCtx.createGain();
+      gain.gain.value = 0.06;
+      const lfo = audioCtx.createOscillator();
+      lfo.frequency.value = 0.05 + i * 0.02;
+      const lfoGain = audioCtx.createGain();
+      lfoGain.gain.value = 3;
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+      osc.connect(gain);
+      gain.connect(filter);
+      osc.start();
+      lfo.start();
+      voices.push(osc, lfo);
+    });
+  }
+
+  function fadeTo(target, duration = 1.2) {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    masterGain.gain.cancelScheduledValues(now);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+    masterGain.gain.linearRampToValueAtTime(target, now + duration);
+  }
+
+  ambienceBtn && ambienceBtn.addEventListener('click', () => {
+    if (!audioCtx) buildAmbience();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    playing = !playing;
+    ambienceBtn.classList.toggle('active', playing);
+    ambienceBtn.setAttribute('aria-pressed', String(playing));
+    ambiencePanel.classList.toggle('show', playing);
+    ambiencePanel.classList.toggle('playing', playing);
+    fadeTo(playing ? 0.09 : 0, playing ? 2 : 1);
   });
-}
+
+})();

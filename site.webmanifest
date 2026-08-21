@@ -1,0 +1,13 @@
+{
+  "name": "Khurshed Alam — Cybersecurity Engineer",
+  "short_name": "Khurshed Alam",
+  "description": "Cybersecurity Engineer, System Administrator, and Cloud & AI Security Specialist.",
+  "start_url": "/khurshedtech-website/",
+  "display": "standalone",
+  "background_color": "#05070d",
+  "theme_color": "#05070d",
+  "icons": [
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
