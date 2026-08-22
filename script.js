@@ -88,11 +88,13 @@
      Back to top button
   ---------------------------------------------------------- */
   const toTop = document.getElementById('toTop');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 600) toTop.classList.add('show');
-    else toTop.classList.remove('show');
-  }, { passive: true });
-  toTop && toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+  if (toTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    }, { passive: true });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+  }
 
   /* ----------------------------------------------------------
      Ripple + magnetic buttons
@@ -398,5 +400,145 @@
     ambiencePanel.classList.toggle('playing', playing);
     fadeTo(playing ? 0.09 : 0, playing ? 2 : 1);
   });
+
+  /* ----------------------------------------------------------
+     AOS (Animate On Scroll) init — library is loaded just
+     before this file, so the global is ready here.
+  ---------------------------------------------------------- */
+  if (window.AOS) {
+    window.AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+      disable: reduceMotion,
+    });
+  }
+
+  /* ----------------------------------------------------------
+     Animated stat counters — count up from 0 to data-target
+     once the element scrolls into view.
+  ---------------------------------------------------------- */
+  const counters = document.querySelectorAll('.counter[data-target]');
+  if (counters.length) {
+    const animateCounter = (el) => {
+      const target = parseFloat(el.getAttribute('data-target')) || 0;
+      const suffix = el.getAttribute('data-suffix') || '';
+      if (reduceMotion) {
+        el.textContent = target + suffix;
+        return;
+      }
+      const duration = 1600;
+      const start = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const value = Math.round(target * eased);
+        el.textContent = value + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target + suffix;
+      };
+      requestAnimationFrame(step);
+    };
+    if ('IntersectionObserver' in window) {
+      const counterIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(el => counterIO.observe(el));
+    } else {
+      counters.forEach(animateCounter);
+    }
+  }
+
+  /* ----------------------------------------------------------
+     Floating live-chat widget — toggle popup, auto-reply menu,
+     WhatsApp quick replies. Closes on outside click / Escape.
+  ---------------------------------------------------------- */
+  const chatToggle = document.getElementById('ktChatToggle');
+  const chatPopup = document.getElementById('ktChatPopup');
+  const chatClose = document.getElementById('ktChatClose');
+  if (chatToggle && chatPopup) {
+    let chatOpen = false;
+    let chatOpenedOnce = false;
+
+    function setChatOpen(open) {
+      chatOpen = open;
+      chatToggle.classList.toggle('chat-open', open);
+      chatToggle.setAttribute('aria-expanded', String(open));
+      chatPopup.classList.toggle('show', open);
+      chatPopup.setAttribute('aria-hidden', String(!open));
+      if (open) {
+        chatOpenedOnce = true;
+        chatToggle.classList.add('chat-seen');
+      }
+    }
+
+    chatToggle.addEventListener('click', () => setChatOpen(!chatOpen));
+    chatClose && chatClose.addEventListener('click', () => setChatOpen(false));
+
+    document.addEventListener('click', (e) => {
+      if (!chatOpen) return;
+      if (chatPopup.contains(e.target) || chatToggle.contains(e.target)) return;
+      setChatOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && chatOpen) setChatOpen(false);
+    });
+
+    // Gently invite the visitor to open the chat once, after they've
+    // been on the page a while, if they haven't already interacted with it.
+    setTimeout(() => {
+      if (!chatOpenedOnce && !chatOpen) {
+        chatToggle.classList.add('chat-hint');
+        setTimeout(() => chatToggle.classList.remove('chat-hint'), 2600);
+      }
+    }, 12000);
+  }
+
+  /* ----------------------------------------------------------
+     Animated testimonial slider — auto-advances, dot + arrow
+     navigation, pauses on hover/focus, respects reduced motion.
+  ---------------------------------------------------------- */
+  const tSlider = document.getElementById('testimonialSlider');
+  const tTrack = document.getElementById('testimonialTrack');
+  if (tSlider && tTrack) {
+    const slides = tTrack.children;
+    const dots = document.querySelectorAll('#testimonialDots .t-dot');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    let idx = 0;
+    let timer = null;
+
+    function goTo(i) {
+      idx = (i + slides.length) % slides.length;
+      tTrack.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+    }
+    function next() { goTo(idx + 1); }
+    function prev() { goTo(idx - 1); }
+    function startAuto() {
+      if (reduceMotion) return;
+      stopAuto();
+      timer = setInterval(next, 5500);
+    }
+    function stopAuto() { if (timer) clearInterval(timer); timer = null; }
+
+    dots.forEach((d, di) => d.addEventListener('click', () => { goTo(di); startAuto(); }));
+    nextBtn && nextBtn.addEventListener('click', () => { next(); startAuto(); });
+    prevBtn && prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+    tSlider.addEventListener('mouseenter', stopAuto);
+    tSlider.addEventListener('mouseleave', startAuto);
+    tSlider.addEventListener('focusin', stopAuto);
+    tSlider.addEventListener('focusout', startAuto);
+
+    goTo(0);
+    startAuto();
+  }
 
 })();
