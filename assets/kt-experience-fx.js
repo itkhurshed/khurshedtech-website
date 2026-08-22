@@ -275,10 +275,13 @@
   /* ------------------------------------------------ Credential flip cards */
   function initFlipBadges(){
     var descriptions = {
-      '20+ Years Experience': 'Two decades of hands-on IT support — from small offices to enterprise environments.',
-      'Cisco CCNA': 'Routing, switching, and foundational networking, validated by Cisco’s associate-level exam.',
-      'Cisco CCNP Enterprise': 'Advanced enterprise networking, WAN technologies, and infrastructure design.',
-      'Microsoft Azure Administrator': 'Cloud infrastructure, identity, and workload management on Microsoft Azure.',
+      '15+ Years Experience': '15+ years of hands-on IT support — from small offices to enterprise environments.',
+      '15+ Years\' Experience': '15+ years of hands-on IT support — from small offices to enterprise environments.',
+      'Cisco CCNA': 'Routing, switching, and foundational networking — in progress, targeting Cisco’s associate-level exam in 2026.',
+      'Cisco CCNP Enterprise': 'Advanced enterprise networking, WAN technologies, and infrastructure design — in progress, targeting 2026.',
+      'CCNA (2026 Target)': 'Routing, switching, and foundational networking — in progress, targeting Cisco’s associate-level exam in 2026.',
+      'CCNP (2026 Target)': 'Advanced enterprise networking, WAN technologies, and infrastructure design — in progress, targeting 2026.',
+      'Microsoft Azure Administrator': 'Cloud infrastructure, identity, and workload management on Microsoft Azure — certification in progress, targeting 2026 (AZ-140).',
       'Microsoft 365 Specialist': 'Exchange Online, Teams, SharePoint, and tenant administration.',
       'Kuwait Based': 'On-site support across Kuwait City, with flexible scheduling for local clients.',
       'Remote Worldwide Support': 'Secure remote access and support tooling for clients anywhere in the world.'
@@ -311,12 +314,12 @@
     if (!card || !card.parentNode) return;
 
     var skills = [
-      { label: 'Cisco CCNP Enterprise', pct: 95 },
-      { label: 'Cisco CCNA', pct: 98 },
-      { label: 'Microsoft Azure Administrator', pct: 92 },
-      { label: 'Microsoft 365 & Cloud', pct: 94 },
-      { label: 'Windows Server & VMware', pct: 93 },
-      { label: 'Network Security & Infra.', pct: 96 }
+      { label: 'Networking & Infrastructure', pct: 90 },
+      { label: 'Microsoft 365 & Cloud', pct: 88 },
+      { label: 'Windows Server & VMware', pct: 88 },
+      { label: 'Network Security', pct: 85 },
+      { label: 'CCNA / CCNP (in progress)', pct: 60 },
+      { label: 'Azure Administrator (in progress)', pct: 55 }
     ];
 
     var panel = document.createElement('div');
@@ -342,7 +345,7 @@
     });
 
     var terminal = panel.querySelector('#kt-dash-terminal');
-    var line = '> 20+ years hands-on IT, networking & security experience_';
+    var line = '> 15+ years hands-on IT, networking & security experience_';
 
     function typeLine(){
       if (reduceMotion){ terminal.textContent = line.replace(/_$/, ''); return; }
@@ -383,9 +386,9 @@
   /* -------------------------------------------------- Quick-answers bot */
   function initAssistant(){
     var FAQ = [
-      { key: 'certif', q: 'What are your certifications?', a: 'Cisco CCNP Enterprise, Cisco CCNA, Microsoft Certified Azure Administrator, and Microsoft 365 Specialist — plus 20+ years of hands-on experience.' },
+      { key: 'certif', q: 'What are your certifications?', a: 'CCNA, CCNP, Microsoft Azure Administrator (AZ-140), and CompTIA CySA+ are all in progress, targeting 2026 — backed by 15+ years of hands-on IT experience.' },
       { key: 'service', q: 'What services do you offer?', a: 'Managed IT support, Microsoft 365 & cloud administration, networking & infrastructure, cybersecurity, website design, and video editing.' },
-      { key: 'experi', q: 'How much experience do you have?', a: 'Over 20 years of hands-on IT experience, supporting 150+ users and 50+ business solutions across Kuwait and remotely worldwide.' },
+      { key: 'experi', q: 'How much experience do you have?', a: '15+ years of hands-on IT experience, supporting 150+ users and 50+ business solutions across Kuwait and remotely worldwide.' },
       { key: 'contact', q: 'How can I contact you?', a: 'WhatsApp +965 6664 8706, email info@khurshedtech.com, or use the contact form at the bottom of this page — same-business-day response for active clients.' },
       { key: 'locat', q: 'Where are you based?', a: 'Based in Kuwait City, Kuwait — on-site support locally, remote support worldwide.' }
     ];

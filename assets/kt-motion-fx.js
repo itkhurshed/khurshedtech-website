@@ -162,10 +162,10 @@
     if (!grid || !grid.parentNode) return;
 
     var stages = [
-      { icon: '🖧', title: 'Networking & Support', text: 'Foundational IT support and networking, validated by Cisco’s associate-level exam.', chip: 'Cisco CCNA' },
-      { icon: '☁️', title: 'Systems & Cloud', text: 'Windows Server, VMware virtualization, and Microsoft 365 & Azure administration.', chip: 'Azure Administrator · M365' },
-      { icon: '🛡️', title: 'Enterprise Security', text: 'Advanced enterprise networking, WAN technologies, and infrastructure design.', chip: 'Cisco CCNP Enterprise' },
-      { icon: '🤖', title: 'Automation & Modern IT', text: 'Workflow automation and modern tooling that cuts busywork out of day-to-day IT.', chip: '20+ Years Applied' }
+      { icon: '🖧', title: 'Networking & Support', text: 'Foundational IT support and networking — CCNA in progress, targeting 2026.', chip: 'CCNA (2026 Target)' },
+      { icon: '☁️', title: 'Systems & Cloud', text: 'Windows Server, VMware virtualization, and Microsoft 365 & Azure administration.', chip: 'Azure Administrator (2026 Target) · M365' },
+      { icon: '🛡️', title: 'Enterprise Security', text: 'Advanced enterprise networking, WAN technologies, and infrastructure design — CCNP in progress, targeting 2026.', chip: 'CCNP (2026 Target)' },
+      { icon: '🤖', title: 'Automation & Modern IT', text: 'Workflow automation and modern tooling that cuts busywork out of day-to-day IT.', chip: '15+ Years Applied' }
     ];
 
     var wrap = document.createElement('div');
