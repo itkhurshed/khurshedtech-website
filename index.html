@@ -40,7 +40,7 @@
   })();
 </script>
 
-<link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="styles.css?v=22">
 
 <!-- AOS.js — lightweight scroll-reveal animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -1154,12 +1154,78 @@
       </div>
     </div>
 
-    <div class="plan-banner-wrap" data-aos="zoom-in">
-      <picture>
-        <source srcset="service-plan-banner.webp" type="image/webp">
-        <img src="service-plan-banner.jpg" alt="KhurshedTech Professional IT Service Offer — Small Company Plan 99 KWD/month, Big Company Plan 149 KWD/month" class="plan-banner-img" width="1000" height="1415" loading="lazy" decoding="async">
-      </picture>
-      <p class="plan-banner-caption">Promotional overview — see the full, current plan details and pricing below.</p>
+    <div class="promo-slideshow" id="promoSlideshow" data-aos="zoom-in">
+      <div class="promo-track" id="promoTrack">
+
+        <div class="promo-slide promo-slide-1">
+          <div class="promo-slide-particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="promo-slide-inner">
+            <div class="promo-photo-ring">
+              <img src="fiverr-avatar.jpg" alt="Mohammad Khurshed Alam, Founder of Khurshed Tech IT Solutions" loading="lazy" decoding="async">
+            </div>
+            <span class="promo-eyebrow">Khurshed Tech IT Solutions</span>
+            <h3>Focus On Your Business.<br>We Handle Your IT.</h3>
+            <p>Reliable support, fixed pricing, no surprises — for homes, offices, and growing businesses.</p>
+          </div>
+        </div>
+
+        <div class="promo-slide promo-slide-2">
+          <div class="promo-slide-particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="promo-slide-inner">
+            <div class="promo-icon-badge">💳</div>
+            <span class="promo-eyebrow">Simple, Honest Pricing</span>
+            <h3>Fixed Monthly Price.<br>No Hidden Fees.</h3>
+            <ul class="promo-slide-list">
+              <li><span class="check">✓</span> Unlimited remote support</li>
+              <li><span class="check">✓</span> Proactive system monitoring</li>
+              <li><span class="check">✓</span> Scheduled on-site visits</li>
+              <li><span class="check">✓</span> Priority help desk</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="promo-slide promo-slide-3">
+          <div class="promo-slide-particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="promo-slide-inner">
+            <div class="promo-icon-badge">🎓</div>
+            <span class="promo-eyebrow">Hands-On &amp; Growing</span>
+            <h3>15+ Years Experience.<br>2026 Certification Track.</h3>
+            <p>CCNA, CCNP, Microsoft Azure Administrator and CompTIA CySA+ — all in progress, targeting 2026.</p>
+          </div>
+        </div>
+
+        <div class="promo-slide promo-slide-4">
+          <div class="promo-slide-particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="promo-slide-inner">
+            <div class="promo-icon-badge">🚀</div>
+            <span class="promo-eyebrow">Ready When You Are</span>
+            <h3>Let's Fix Your IT Today.</h3>
+            <div class="promo-slide-actions">
+              <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20request%20a%20consultation%20about%20your%20IT%20support%20plans." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Promo Slideshow WhatsApp">WhatsApp Now</a>
+              <a href="#quote-calculator" class="btn btn-outline">Book IT Service</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="promo-nav">
+        <button type="button" class="p-arrow" id="promoPrev" aria-label="Previous slide">‹</button>
+        <div class="promo-dots" id="promoDots">
+          <button type="button" class="p-dot active" aria-label="Show slide 1"></button>
+          <button type="button" class="p-dot" aria-label="Show slide 2"></button>
+          <button type="button" class="p-dot" aria-label="Show slide 3"></button>
+          <button type="button" class="p-dot" aria-label="Show slide 4"></button>
+        </div>
+        <button type="button" class="p-arrow" id="promoNext" aria-label="Next slide">›</button>
+      </div>
     </div>
 
     <div class="pricing-grid pricing-grid-4">
@@ -1885,6 +1951,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=14"></script>
+<script src="script.js?v=15"></script>
 </body>
 </html>

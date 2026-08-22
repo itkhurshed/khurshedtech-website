@@ -541,4 +541,45 @@
     startAuto();
   }
 
+  /* ----------------------------------------------------------
+     Pricing promo slideshow — animated, auto-advancing banner
+     replacing the old static promo image. Same interaction
+     pattern as the testimonial slider above.
+  ---------------------------------------------------------- */
+  const pSlider = document.getElementById('promoSlideshow');
+  const pTrack = document.getElementById('promoTrack');
+  if (pSlider && pTrack) {
+    const pSlides = pTrack.children;
+    const pDots = document.querySelectorAll('#promoDots .p-dot');
+    const pPrevBtn = document.getElementById('promoPrev');
+    const pNextBtn = document.getElementById('promoNext');
+    let pIdx = 0;
+    let pTimer = null;
+
+    function pGoTo(i) {
+      pIdx = (i + pSlides.length) % pSlides.length;
+      pTrack.style.transform = `translateX(-${pIdx * 100}%)`;
+      pDots.forEach((d, di) => d.classList.toggle('active', di === pIdx));
+    }
+    function pNext() { pGoTo(pIdx + 1); }
+    function pPrev() { pGoTo(pIdx - 1); }
+    function pStartAuto() {
+      if (reduceMotion) return;
+      pStopAuto();
+      pTimer = setInterval(pNext, 4800);
+    }
+    function pStopAuto() { if (pTimer) clearInterval(pTimer); pTimer = null; }
+
+    pDots.forEach((d, di) => d.addEventListener('click', () => { pGoTo(di); pStartAuto(); }));
+    pNextBtn && pNextBtn.addEventListener('click', () => { pNext(); pStartAuto(); });
+    pPrevBtn && pPrevBtn.addEventListener('click', () => { pPrev(); pStartAuto(); });
+    pSlider.addEventListener('mouseenter', pStopAuto);
+    pSlider.addEventListener('mouseleave', pStartAuto);
+    pSlider.addEventListener('focusin', pStopAuto);
+    pSlider.addEventListener('focusout', pStartAuto);
+
+    pGoTo(0);
+    pStartAuto();
+  }
+
 })();
