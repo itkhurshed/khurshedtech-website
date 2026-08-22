@@ -28,19 +28,26 @@
 <!-- Premium type system: Plus Jakarta Sans for headings, Inter for body copy -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- Inline theme-preload: sets dark/light mode before paint to avoid a flash of the wrong theme -->
+<!-- Inline theme + language preload: sets dark/light mode and lang/dir before paint to avoid a flash of the wrong theme or text direction -->
 <script>
   (function () {
     try {
       var saved = localStorage.getItem('kt-theme');
       if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     } catch (e) {}
+    try {
+      var lang = localStorage.getItem('kt-lang');
+      if (lang && lang !== 'en') {
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      }
+    } catch (e) {}
   })();
 </script>
 
-<link rel="stylesheet" href="styles.css?v=25">
+<link rel="stylesheet" href="styles.css?v=26">
 
 <!-- AOS.js — lightweight scroll-reveal animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -230,23 +237,24 @@
       <span>KhurshedTech</span>
     </a>
     <nav class="nav-links">
-      <a href="#about" data-en="About" data-ar="من نحن" data-fr="À propos" data-bn="আমাদের সম্পর্কে" data-hi="हमारे बारे में">About</a>
-      <a href="#services" data-en="Services" data-ar="خدماتنا" data-fr="Services" data-bn="সেবাসমূহ" data-hi="सेवाएं">Services</a>
-      <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا" data-fr="Portfolio" data-bn="পোর্টফোলিও" data-hi="पोर्टफोलियो">Portfolio</a>
-      <a href="#pricing" data-en="Pricing" data-ar="الأسعار" data-fr="Tarifs" data-bn="মূল্য তালিকা" data-hi="मूल्य निर्धारण">Pricing</a>
-      <a href="#case-studies" data-en="Case Studies" data-ar="دراسات الحالة" data-fr="Études de cas" data-bn="কেস স্টাডি" data-hi="केस स्टडीज़">Case Studies</a>
-      <a href="#testimonials" data-en="Testimonials" data-ar="آراء العملاء" data-fr="Témoignages" data-bn="প্রশংসাপত্র" data-hi="प्रशंसापत्र">Testimonials</a>
-      <a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة" data-fr="FAQ" data-bn="সাধারণ জিজ্ঞাসা" data-hi="अक्सर पूछे जाने वाले प्रश्न">FAQ</a>
-      <a href="portfolio/index.html#top" data-en="Security Portfolio" data-ar="الملف الأمني" data-fr="Portfolio Cyber" data-bn="সিকিউরিটি পোর্টফোলিও" data-hi="सुरक्षा पोर्टफोलियो">Security Portfolio</a>
-      <a href="dashboard.html" data-en="Skills Dashboard" data-ar="لوحة المهارات" data-fr="Tableau des compétences" data-bn="দক্ষতা ড্যাশবোর্ড" data-hi="कौशल डैशबोर्ड">Skills Dashboard</a>
-      <a href="brand.html" data-en="Brand Kit" data-ar="الهوية البصرية" data-fr="Kit de Marque" data-bn="ব্র্যান্ড কিট" data-hi="ब्रांड किट">Brand Kit</a>
-      <a href="blog.html" data-en="Blog" data-ar="المدونة" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
-      <a href="#contact" data-en="Contact" data-ar="تواصل معنا" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
-      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA" data-en="WhatsApp Us" data-ar="واتساب" data-fr="WhatsApp" data-bn="হোয়াটসঅ্যাপ করুন" data-hi="व्हाट्सएप करें">WhatsApp Us</a>
+      <a href="#about" data-en="About" data-ar="من نحن" data-es="Acerca de" data-fr="À propos" data-bn="আমাদের সম্পর্কে" data-hi="हमारे बारे में">About</a>
+      <a href="#services" data-en="Services" data-ar="خدماتنا" data-es="Servicios" data-fr="Services" data-bn="সেবাসমূহ" data-hi="सेवाएं">Services</a>
+      <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا" data-es="Portafolio" data-fr="Portfolio" data-bn="পোর্টফোলিও" data-hi="पोर्टफोलियो">Portfolio</a>
+      <a href="#pricing" data-en="Pricing" data-ar="الأسعار" data-es="Precios" data-fr="Tarifs" data-bn="মূল্য তালিকা" data-hi="मूल्य निर्धारण">Pricing</a>
+      <a href="#case-studies" data-en="Case Studies" data-ar="دراسات الحالة" data-es="Casos de Éxito" data-fr="Études de cas" data-bn="কেস স্টাডি" data-hi="केस स्टडीज़">Case Studies</a>
+      <a href="#testimonials" data-en="Testimonials" data-ar="آراء العملاء" data-es="Testimonios" data-fr="Témoignages" data-bn="প্রশংসাপত্র" data-hi="प्रशंसापत्र">Testimonials</a>
+      <a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة" data-es="Preguntas Frecuentes" data-fr="FAQ" data-bn="সাধারণ জিজ্ঞাসা" data-hi="अक्सर पूछे जाने वाले प्रश्न">FAQ</a>
+      <a href="portfolio/index.html#top" data-en="Security Portfolio" data-ar="الملف الأمني" data-es="Portafolio de Seguridad" data-fr="Portfolio Cyber" data-bn="সিকিউরিটি পোর্টফোলিও" data-hi="सुरक्षा पोर्टफोलियो">Security Portfolio</a>
+      <a href="dashboard.html" data-en="Skills Dashboard" data-ar="لوحة المهارات" data-es="Panel de Habilidades" data-fr="Tableau des compétences" data-bn="দক্ষতা ড্যাশবোর্ড" data-hi="कौशल डैशबोर्ड">Skills Dashboard</a>
+      <a href="brand.html" data-en="Brand Kit" data-ar="الهوية البصرية" data-es="Kit de Marca" data-fr="Kit de Marque" data-bn="ব্র্যান্ড কিট" data-hi="ब्रांड किट">Brand Kit</a>
+      <a href="blog.html" data-en="Blog" data-ar="المدونة" data-es="Blog" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
+      <a href="#contact" data-en="Contact" data-ar="تواصل معنا" data-es="Contacto" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Nav CTA" data-en="WhatsApp Us" data-ar="واتساب" data-es="WhatsApp" data-fr="WhatsApp" data-bn="হোয়াটসঅ্যাপ করুন" data-hi="व्हाट्सएप करें">WhatsApp Us</a>
       <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
       <select id="lang-select" class="icon-toggle lang-toggle" aria-label="Switch language" title="Choose language">
         <option value="en">EN</option>
         <option value="ar">AR</option>
+        <option value="es">ES</option>
         <option value="fr">FR</option>
         <option value="bn">BN</option>
         <option value="hi">HI</option>
@@ -316,13 +324,13 @@
 
   <div class="hero-inner">
     <div>
-      <span class="hero-eyebrow" data-en="Managed IT Services · Kuwait &amp; Remote Worldwide" data-ar="خدمات تقنية معلومات مُدارة · الكويت وعن بُعد حول العالم" data-fr="Services informatiques gérés · Koweït et à distance dans le monde entier" data-bn="ব্যবস্থাপিত আইটি সেবা · কুয়েত এবং বিশ্বব্যাপী দূরবর্তী সহায়তা" data-hi="प्रबंधित आईटी सेवाएं · कुवैत और दुनिया भर में रिमोट सहायता">Managed IT Services · Kuwait &amp; Remote Worldwide</span>
-      <h1 data-en="Professional IT Solutions For Home &amp; Business" data-ar="حلول تقنية معلومات احترافية للمنزل والأعمال" data-fr="Solutions informatiques professionnelles pour la maison et l'entreprise" data-bn="বাড়ি ও ব্যবসার জন্য পেশাদার আইটি সমাধান" data-hi="घर और व्यवसाय के लिए पेशेवर आईटी समाधान">Professional IT Solutions For Home &amp; Business</h1>
-      <p class="lead hero-subtitle-pipes" data-en="Computer Repair | Server Management | Network Solutions | Website Development" data-ar="إصلاح الحاسوب | إدارة الخوادم | حلول الشبكات | تطوير المواقع" data-fr="Réparation d'ordinateurs | Gestion de serveurs | Solutions réseau | Développement de sites web" data-bn="কম্পিউটার মেরামত | সার্ভার ম্যানেজমেন্ট | নেটওয়ার্ক সমাধান | ওয়েবসাইট ডেভেলপমেন্ট" data-hi="कंप्यूटर मरम्मत | सर्वर प्रबंधन | नेटवर्क समाधान | वेबसाइट डेवलपमेंट">Computer Repair | Server Management | Network Solutions | Website Development</p>
+      <span class="hero-eyebrow" data-en="Managed IT Services · Kuwait &amp; Remote Worldwide" data-ar="خدمات تقنية معلومات مُدارة · الكويت وعن بُعد حول العالم" data-es="Servicios de TI Gestionados · Kuwait y a Distancia en Todo el Mundo" data-fr="Services informatiques gérés · Koweït et à distance dans le monde entier" data-bn="ব্যবস্থাপিত আইটি সেবা · কুয়েত এবং বিশ্বব্যাপী দূরবর্তী সহায়তা" data-hi="प्रबंधित आईटी सेवाएं · कुवैत और दुनिया भर में रिमोट सहायता">Managed IT Services · Kuwait &amp; Remote Worldwide</span>
+      <h1 data-en="Professional IT Solutions For Home &amp; Business" data-ar="حلول تقنية معلومات احترافية للمنزل والأعمال" data-es="Soluciones de TI Profesionales para el Hogar y la Empresa" data-fr="Solutions informatiques professionnelles pour la maison et l'entreprise" data-bn="বাড়ি ও ব্যবসার জন্য পেশাদার আইটি সমাধান" data-hi="घर और व्यवसाय के लिए पेशेवर आईटी समाधान">Professional IT Solutions For Home &amp; Business</h1>
+      <p class="lead hero-subtitle-pipes" data-en="Computer Repair | Server Management | Network Solutions | Website Development" data-ar="إصلاح الحاسوب | إدارة الخوادم | حلول الشبكات | تطوير المواقع" data-es="Reparación de Computadoras | Gestión de Servidores | Soluciones de Red | Desarrollo Web" data-fr="Réparation d'ordinateurs | Gestion de serveurs | Solutions réseau | Développement de sites web" data-bn="কম্পিউটার মেরামত | সার্ভার ম্যানেজমেন্ট | নেটওয়ার্ক সমাধান | ওয়েবসাইট ডেভেলপমেন্ট" data-hi="कंप्यूटर मरम्मत | सर्वर प्रबंधन | नेटवर्क समाधान | वेबसाइट डेवलपमेंट">Computer Repair | Server Management | Network Solutions | Website Development</p>
       <div class="hero-actions">
-        <a href="#quote-calculator" class="btn btn-primary" data-en="Book IT Service" data-ar="احجز خدمة تقنية" data-fr="Réserver un service" data-bn="আইটি সার্ভিস বুক করুন" data-hi="आईटी सेवा बुक करें">Book IT Service</a>
-        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Hero WhatsApp Now" data-en="WhatsApp Now" data-ar="واتساب الآن" data-fr="WhatsApp maintenant" data-bn="এখনই হোয়াটসঅ্যাপ করুন" data-hi="अभी व्हाट्सएप करें">WhatsApp Now</a>
-        <a href="#portfolio" class="btn btn-ghost" data-en="View Portfolio" data-ar="عرض أعمالنا" data-fr="Voir le portfolio" data-bn="পোর্টফোলিও দেখুন" data-hi="पोर्टफोलियो देखें">View Portfolio</a>
+        <a href="#quote-calculator" class="btn btn-primary" data-en="Book IT Service" data-ar="احجز خدمة تقنية" data-es="Reservar Servicio de TI" data-fr="Réserver un service" data-bn="আইটি সার্ভিস বুক করুন" data-hi="आईटी सेवा बुक करें">Book IT Service</a>
+        <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Hero WhatsApp Now" data-en="WhatsApp Now" data-ar="واتساب الآن" data-es="WhatsApp Ahora" data-fr="WhatsApp maintenant" data-bn="এখনই হোয়াটসঅ্যাপ করুন" data-hi="अभी व्हाट्सएप करें">WhatsApp Now</a>
+        <a href="#portfolio" class="btn btn-ghost" data-en="View Portfolio" data-ar="عرض أعمالنا" data-es="Ver Portafolio" data-fr="Voir le portfolio" data-bn="পোর্টফোলিও দেখুন" data-hi="पोर्टफोलियो देखें">View Portfolio</a>
       </div>
       <div class="hero-badge-row" data-aos="fade-up">
         <div class="hero-badge-item"><span class="hero-badge-icon">⚡</span>Fast Response</div>
@@ -393,7 +401,7 @@
   <div class="container hba-inner">
     <div class="hba-text">
       <img src="logo-icon.png" alt="KhurshedTech logo" class="hba-logo">
-      <h2 class="hba-title">Smart Solutions.<br><span class="hba-title-accent">Stronger Business.</span></h2>
+      <h2 class="hba-title"><span data-en="Smart Solutions." data-ar="حلول ذكية." data-es="Soluciones Inteligentes." data-fr="Solutions Intelligentes." data-bn="স্মার্ট সমাধান।" data-hi="स्मार्ट समाधान।">Smart Solutions.</span><br><span class="hba-title-accent" data-en="Stronger Business." data-ar="أعمال أقوى." data-es="Negocio Más Fuerte." data-fr="Entreprise Plus Forte." data-bn="শক্তিশালী ব্যবসা।" data-hi="मजबूत व्यवसाय।">Stronger Business.</span></h2>
       <p class="hba-sub">Reliable IT services and support to keep your business running smoothly and securely.</p>
     </div>
     <div class="hba-photo-ring">
@@ -538,8 +546,8 @@
     </div>
 
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Pricing at a Glance</span>
-      <h2>Smart IT Support Solutions</h2>
+      <span class="section-eyebrow" data-en="Pricing at a Glance" data-ar="نظرة سريعة على الأسعار" data-es="Precios de un Vistazo" data-fr="Tarifs en un Coup d'Œil" data-bn="এক নজরে মূল্য তালিকা" data-hi="एक नज़र में मूल्य निर्धारण">Pricing at a Glance</span>
+      <h2 data-en="Smart IT Support Solutions" data-ar="حلول دعم تقنية معلومات ذكية" data-es="Soluciones Inteligentes de Soporte de TI" data-fr="Solutions Intelligentes de Support Informatique" data-bn="স্মার্ট আইটি সাপোর্ট সমাধান" data-hi="स्मार्ट आईटी सपोर्ट समाधान">Smart IT Support Solutions</h2>
       <p>7 Flexible Plans &middot; One Trusted Partner &middot; Unlimited Possibilities</p>
       <p class="tier-manage-note">We manage your IT, so you can focus on <strong>growing your business.</strong></p>
     </div>
@@ -675,7 +683,7 @@
       <div class="tier-consult-cta">
         <span class="tier-consult-icon">🎁</span>
         <div class="tier-consult-text"><strong>FREE INITIAL CONSULTATION</strong><span>Let's find the perfect plan for your business.</span></div>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20consultation%20to%20find%20the%20right%20IT%20support%20plan%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Smart Plans Free Consultation">Get Free Consultation</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20consultation%20to%20find%20the%20right%20IT%20support%20plan%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Smart Plans Free Consultation" data-en="Get Free Consultation" data-ar="احصل على استشارة مجانية" data-es="Obtener Consulta Gratuita" data-fr="Obtenir une Consultation Gratuite" data-bn="বিনামূল্যে পরামর্শ নিন" data-hi="मुफ्त परामर्श प्राप्त करें">Get Free Consultation</a>
       </div>
     </div>
   </div>
@@ -685,8 +693,8 @@
 <section id="outcomes" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Why It Matters</span>
-      <h2>We Sell Outcomes, Not Just Technology</h2>
+      <span class="section-eyebrow" data-en="Why It Matters" data-ar="لماذا يهم هذا الأمر" data-es="Por Qué Importa" data-fr="Pourquoi C'est Important" data-bn="কেন এটি গুরুত্বপূর্ণ" data-hi="यह क्यों महत्वपूर्ण है">Why It Matters</span>
+      <h2 data-en="We Sell Outcomes, Not Just Technology" data-ar="نحن نقدم نتائج، لا مجرد تقنية" data-es="Vendemos Resultados, No Solo Tecnología" data-fr="Nous Vendons des Résultats, Pas Seulement de la Technologie" data-bn="আমরা প্রযুক্তি নয়, ফলাফল বিক্রি করি" data-hi="हम केवल तकनीक नहीं, परिणाम प्रदान करते हैं">We Sell Outcomes, Not Just Technology</h2>
       <p>Behind every service is a business result. Here's what working with KhurshedTech actually gets you.</p>
     </div>
     <div class="outcomes-grid">
@@ -725,8 +733,8 @@
 <section id="about">
   <div class="container about-grid">
     <div data-aos="fade-right">
-      <span class="section-eyebrow">About KhurshedTech</span>
-      <h2>Your Trusted IT Partner for Business Success</h2>
+      <span class="section-eyebrow" data-en="About KhurshedTech" data-ar="عن خورشيد تك" data-es="Sobre KhurshedTech" data-fr="À Propos de KhurshedTech" data-bn="খুরশিদটেক সম্পর্কে" data-hi="खुर्शीदटेक के बारे में">About KhurshedTech</span>
+      <h2 data-en="Your Trusted IT Partner for Business Success" data-ar="شريكك الموثوق في تقنية المعلومات لنجاح أعمالك" data-es="Su Socio de TI de Confianza para el Éxito Empresarial" data-fr="Votre Partenaire IT de Confiance pour la Réussite de Votre Entreprise" data-bn="আপনার ব্যবসায়িক সাফল্যের জন্য বিশ্বস্ত আইটি পার্টনার" data-hi="आपकी व्यावसायिक सफलता के लिए विश्वसनीय आईटी साझेदार">Your Trusted IT Partner for Business Success</h2>
       <p class="about-lead">At KhurshedTech IT Solutions, we provide reliable, secure, and cost-effective IT services that help businesses operate efficiently and grow with confidence. Our mission is to deliver enterprise-level technology solutions with exceptional customer service, proactive support, and rapid response times.</p>
       <p class="about-lead">Whether you're a small business, medium-sized company, or large enterprise, our experienced IT professionals ensure your technology works seamlessly — so you can focus on running your business. We've supported financial services, retail, healthcare, education, manufacturing, hospitality, construction and government clients across Kuwait.</p>
     </div>
@@ -741,8 +749,8 @@
 <section id="credibility" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Who's Behind KhurshedTech</span>
-      <h2>Meet Your IT Partner</h2>
+      <span class="section-eyebrow" data-en="Who's Behind KhurshedTech" data-ar="من وراء خورشيد تك" data-es="Quién Está Detrás de KhurshedTech" data-fr="Qui Se Cache Derrière KhurshedTech" data-bn="খুরশিদটেকের পেছনে কে আছেন" data-hi="खुर्शीदटेक के पीछे कौन है">Who's Behind KhurshedTech</span>
+      <h2 data-en="Meet Your IT Partner" data-ar="تعرف على شريكك في تقنية المعلومات" data-es="Conoce a tu Socio de TI" data-fr="Rencontrez Votre Partenaire IT" data-bn="আপনার আইটি পার্টনারের সাথে পরিচিত হন" data-hi="अपने आईटी पार्टनर से मिलें">Meet Your IT Partner</h2>
     </div>
     <div class="credibility-card" data-aos="fade-up">
       <picture>
@@ -802,8 +810,8 @@
 <section id="process">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">How It Works</span>
-      <h2>Our Work Process</h2>
+      <span class="section-eyebrow" data-en="How It Works" data-ar="كيف تعمل" data-es="Cómo Funciona" data-fr="Comment Ça Marche" data-bn="এটি কীভাবে কাজ করে" data-hi="यह कैसे काम करता है">How It Works</span>
+      <h2 data-en="Our Work Process" data-ar="آلية عملنا" data-es="Nuestro Proceso de Trabajo" data-fr="Notre Processus de Travail" data-bn="আমাদের কাজের প্রক্রিয়া" data-hi="हमारी कार्य प्रक्रिया">Our Work Process</h2>
       <p>A clear, no-surprises process from first message to complete fix.</p>
     </div>
     <div class="roadmap-flow" data-aos="fade-up">
@@ -821,8 +829,8 @@
 <section id="services">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">What We Do</span>
-      <h2>Complete IT Services &amp; Maintenance</h2>
+      <span class="section-eyebrow" data-en="What We Do" data-ar="ماذا نقدم" data-es="Qué Hacemos" data-fr="Ce Que Nous Faisons" data-bn="আমরা যা করি" data-hi="हम क्या करते हैं">What We Do</span>
+      <h2 data-en="Complete IT Services &amp; Maintenance" data-ar="خدمات وصيانة تقنية معلومات متكاملة" data-es="Servicios y Mantenimiento de TI Completos" data-fr="Services et Maintenance IT Complets" data-bn="সম্পূর্ণ আইটি সেবা ও রক্ষণাবেক্ষণ" data-hi="संपूर्ण आईटी सेवाएं और रखरखाव">Complete IT Services &amp; Maintenance</h2>
       <p>From a single laptop screen repair to a full office network build, KhurshedTech covers every layer of your technology — for home users, small businesses and corporate offices.</p>
     </div>
     <div class="services-grid services-grid-8">
@@ -938,8 +946,8 @@
 <section id="specialized-it" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Also Available</span>
-      <h2>Specialized IT Solutions</h2>
+      <span class="section-eyebrow" data-en="Also Available" data-ar="متوفر أيضًا" data-es="También Disponible" data-fr="Également Disponible" data-bn="এছাড়াও উপলব্ধ" data-hi="यह भी उपलब्ध है">Also Available</span>
+      <h2 data-en="Specialized IT Solutions" data-ar="حلول تقنية معلومات متخصصة" data-es="Soluciones de TI Especializadas" data-fr="Solutions IT Spécialisées" data-bn="বিশেষায়িত আইটি সমাধান" data-hi="विशेष आईटी समाधान">Specialized IT Solutions</h2>
       <p>Beyond day-to-day support, we handle the specialized projects that keep your infrastructure secure, compliant, and running.</p>
     </div>
     <div class="wds-addons-grid" data-aos="fade-up">
@@ -955,7 +963,7 @@
       <div class="wds-addon-item"><span class="wds-addon-icon">📹</span><div><strong>CCTV &amp; Access Control</strong><span>Camera systems, NVRs &amp; door-access setup</span></div></div>
     </div>
     <div class="pricing-cta-row" data-aos="fade-up" style="margin-top:24px;">
-      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20a%20specialized%20IT%20project." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Specialized IT Quote">Get a Quote</a>
+      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20a%20specialized%20IT%20project." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Specialized IT Quote" data-en="Get a Quote" data-ar="احصل على عرض سعر" data-es="Solicitar Presupuesto" data-fr="Demander un Devis" data-bn="কোটেশন নিন" data-hi="कोटेशन प्राप्त करें">Get a Quote</a>
       <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Specialized IT WhatsApp">💬 WhatsApp</a>
     </div>
   </div>
@@ -966,7 +974,7 @@
   <div class="container">
     <div class="web-promo-header" data-aos="fade-up">
       <span class="web-promo-eyebrow">Also From KhurshedTech</span>
-      <h2>We Create Professional Websites That Grow Your Business</h2>
+      <h2 data-en="We Create Professional Websites That Grow Your Business" data-ar="نصمم مواقع احترافية تنمّي أعمالك" data-es="Creamos Sitios Web Profesionales que Hacen Crecer tu Negocio" data-fr="Nous Créons des Sites Web Professionnels qui Font Croître Votre Entreprise" data-bn="আমরা পেশাদার ওয়েবসাইট তৈরি করি যা আপনার ব্যবসাকে বৃদ্ধি করে" data-hi="हम पेशेवर वेबसाइटें बनाते हैं जो आपके व्यवसाय को बढ़ाती हैं">We Create Professional Websites That Grow Your Business</h2>
       <p>Modern, responsive, SEO-friendly websites — designed and built by the same certified team behind your IT support.</p>
       <div class="web-promo-badges">
         <span>✅ Modern Design</span>
@@ -984,8 +992,8 @@
       <div class="web-promo-item"><span class="web-promo-icon wp-c6">🎧</span><div><strong>Dedicated Support</strong><span>Direct technical support</span></div></div>
     </div>
     <div class="web-promo-actions" data-aos="fade-up" data-aos-delay="120">
-      <a href="website-design-services.html#wds-pricing" class="btn btn-primary">View Packages &amp; Pricing</a>
-      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20consultation%20about%20a%20new%20website." target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Homepage Web Promo Consultation">Get Free Consultation</a>
+      <a href="website-design-services.html#wds-pricing" class="btn btn-primary" data-en="View Packages &amp; Pricing" data-ar="عرض الباقات والأسعار" data-es="Ver Paquetes y Precios" data-fr="Voir les Forfaits et Tarifs" data-bn="প্যাকেজ ও মূল্য দেখুন" data-hi="पैकेज और मूल्य देखें">View Packages &amp; Pricing</a>
+      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20free%20consultation%20about%20a%20new%20website." target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Homepage Web Promo Consultation" data-en="Get Free Consultation" data-ar="احصل على استشارة مجانية" data-es="Obtener Consulta Gratuita" data-fr="Obtenir une Consultation Gratuite" data-bn="বিনামূল্যে পরামর্শ নিন" data-hi="मुफ्त परामर्श प्राप्त करें">Get Free Consultation</a>
     </div>
   </div>
 </section>
@@ -994,8 +1002,8 @@
 <section id="portfolio" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Our Work</span>
-      <h2>Types of Projects We Deliver</h2>
+      <span class="section-eyebrow" data-en="Our Work" data-ar="أعمالنا" data-es="Nuestro Trabajo" data-fr="Notre Travail" data-bn="আমাদের কাজ" data-hi="हमारा कार्य">Our Work</span>
+      <h2 data-en="Types of Projects We Deliver" data-ar="أنواع المشاريع التي ننفذها" data-es="Tipos de Proyectos que Entregamos" data-fr="Types de Projets que Nous Réalisons" data-bn="আমরা যে ধরনের প্রকল্প সরবরাহ করি" data-hi="हम जिस प्रकार की परियोजनाएं प्रदान करते हैं">Types of Projects We Deliver</h2>
       <p>A look at the kind of work we do day to day. Full project details and screenshots are shared with prospective clients on request, respecting the confidentiality of every business we work with.</p>
     </div>
     <div class="portfolio-filters" data-aos="fade-up" role="tablist" aria-label="Filter portfolio by category">
@@ -1071,8 +1079,8 @@
 <section id="tech-stack" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Technologies We Support</span>
-      <h2>Our Technology Stack</h2>
+      <span class="section-eyebrow" data-en="Technologies We Support" data-ar="التقنيات التي ندعمها" data-es="Tecnologías que Soportamos" data-fr="Technologies que Nous Prenons en Charge" data-bn="আমরা যেসব প্রযুক্তি সমর্থন করি" data-hi="हम जिन तकनीकों का समर्थन करते हैं">Technologies We Support</span>
+      <h2 data-en="Our Technology Stack" data-ar="تقنياتنا المستخدمة" data-es="Nuestra Pila Tecnológica" data-fr="Notre Stack Technologique" data-bn="আমাদের প্রযুক্তি স্ট্যাক" data-hi="हमारा टेक्नोलॉजी स्टैक">Our Technology Stack</h2>
       <p>Hands-on experience with the platforms most growing businesses already rely on.</p>
     </div>
     <div class="tech-stack-grid" data-aos="fade-up">
@@ -1093,8 +1101,8 @@
 <section id="why-us">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Our Approach</span>
-      <h2>Why Choose KhurshedTech</h2>
+      <span class="section-eyebrow" data-en="Our Approach" data-ar="منهجنا" data-es="Nuestro Enfoque" data-fr="Notre Approche" data-bn="আমাদের পদ্ধতি" data-hi="हमारा दृष्टिकोण">Our Approach</span>
+      <h2 data-en="Why Choose KhurshedTech" data-ar="لماذا تختار خورشيد تك" data-es="Por Qué Elegir KhurshedTech" data-fr="Pourquoi Choisir KhurshedTech" data-bn="কেন খুরশিদটেক বেছে নেবেন" data-hi="खुर्शीदटेक क्यों चुनें">Why Choose KhurshedTech</h2>
       <p>We treat your business technology the way we'd want ours treated — proactively, honestly, and without surprise bills.</p>
     </div>
     <div class="why-grid">
@@ -1135,8 +1143,8 @@
 <section id="industries" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Who We Work With</span>
-      <h2>Industries We Support</h2>
+      <span class="section-eyebrow" data-en="Who We Work With" data-ar="مع من نعمل" data-es="Con Quién Trabajamos" data-fr="Avec Qui Nous Travaillons" data-bn="আমরা কাদের সাথে কাজ করি" data-hi="हम किसके साथ काम करते हैं">Who We Work With</span>
+      <h2 data-en="Industries We Support" data-ar="القطاعات التي ندعمها" data-es="Industrias que Apoyamos" data-fr="Secteurs que Nous Soutenons" data-bn="আমরা যেসব শিল্পখাতে সহায়তা করি" data-hi="हम जिन उद्योगों का समर्थन करते हैं">Industries We Support</h2>
       <p>Our IT support model adapts to the compliance, uptime, and workflow needs of a wide range of sectors.</p>
     </div>
     <div class="industries-grid" data-aos="fade-up">
@@ -1198,12 +1206,12 @@
   </div>
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Support Plans</span>
-      <h2>Prefer Ongoing Coverage? Monthly IT Support Plans</h2>
+      <span class="section-eyebrow" data-en="Support Plans" data-ar="خطط الدعم" data-es="Planes de Soporte" data-fr="Forfaits de Support" data-bn="সাপোর্ট প্ল্যান" data-hi="सपोर्ट प्लान">Support Plans</span>
+      <h2 data-en="Prefer Ongoing Coverage? Monthly IT Support Plans" data-ar="تفضل تغطية مستمرة؟ خطط دعم تقني شهرية" data-es="¿Prefieres Cobertura Continua? Planes Mensuales de Soporte de TI" data-fr="Vous Préférez une Couverture Continue ? Forfaits Mensuels de Support IT" data-bn="চলমান কভারেজ পছন্দ করেন? মাসিক আইটি সাপোর্ট প্ল্যান" data-hi="निरंतर कवरेज पसंद करते हैं? मासिक आईटी सपोर्ट प्लान">Prefer Ongoing Coverage? Monthly IT Support Plans</h2>
       <p>Want continuous monitoring and support instead of a one-time package? These three monthly retainer plans keep your business running with no surprises.</p>
       <div class="pricing-cta-row" data-aos="fade-up">
-        <a href="#plan-photo-banner" class="btn btn-outline">See Monthly Plan Details</a>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20request%20a%20consultation%20about%20your%20IT%20support%20plans." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Pricing Request Consultation">Request Consultation</a>
+        <a href="#plan-photo-banner" class="btn btn-outline" data-en="See Monthly Plan Details" data-ar="عرض تفاصيل الخطة الشهرية" data-es="Ver Detalles del Plan Mensual" data-fr="Voir les Détails du Forfait Mensuel" data-bn="মাসিক প্ল্যানের বিস্তারিত দেখুন" data-hi="मासिक प्लान विवरण देखें">See Monthly Plan Details</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20request%20a%20consultation%20about%20your%20IT%20support%20plans." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Pricing Request Consultation" data-en="Request Consultation" data-ar="طلب استشارة" data-es="Solicitar Consulta" data-fr="Demander une Consultation" data-bn="পরামর্শের অনুরোধ করুন" data-hi="परामर्श का अनुरोध करें">Request Consultation</a>
       </div>
     </div>
 
@@ -1298,7 +1306,7 @@
             <li><span class="check">✓</span> Basic monthly health check</li>
             <li><span class="check">✓</span> Business-hours response</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20Plan%20(from%2099%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Starter Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20Plan%20(from%2099%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Starter Plan" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Ideal for Small Teams</div>
       </div>
@@ -1321,7 +1329,7 @@
             <li><span class="check">✓</span> Network &amp; printer assistance</li>
             <li><span class="check">✓</span> Monthly IT report</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Plan%20(from%20149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Business%20Plan%20(from%20149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Business Plan" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best for Growing Teams</div>
       </div>
@@ -1343,7 +1351,7 @@
             <li><span class="check">✓</span> Backup &amp; disaster-recovery checks</li>
             <li><span class="check">✓</span> Quarterly IT strategy review</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Professional%20Plan%20(from%20229%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Professional Plan">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Professional%20Plan%20(from%20229%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Professional Plan" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best for Multi-Department Teams</div>
       </div>
@@ -1366,7 +1374,7 @@
             <li><span class="check">✓</span> Security recommendations</li>
             <li><span class="check">✓</span> Monthly management report</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20quote." target="_blank" rel="noopener" class="btn track-cta" data-plan="Enterprise Plan">Contact Us</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20quote." target="_blank" rel="noopener" class="btn track-cta" data-plan="Enterprise Plan" data-en="Contact Us" data-ar="تواصل معنا" data-es="Contáctanos" data-fr="Contactez-Nous" data-bn="যোগাযোগ করুন" data-hi="संपर्क करें">Contact Us</a>
         </div>
         <div class="price-tag-footer">Best for Established Businesses</div>
       </div>
@@ -1386,8 +1394,8 @@
 <section id="one-time-packages" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Fixed-Price Packages</span>
-      <h2>Service Packages</h2>
+      <span class="section-eyebrow" data-en="Fixed-Price Packages" data-ar="باقات بسعر ثابت" data-es="Paquetes de Precio Fijo" data-fr="Forfaits à Prix Fixe" data-bn="নির্দিষ্ট মূল্যের প্যাকেজ" data-hi="निश्चित मूल्य पैकेज">Fixed-Price Packages</span>
+      <h2 data-en="Service Packages" data-ar="باقات الخدمات" data-es="Paquetes de Servicio" data-fr="Forfaits de Services" data-bn="সার্ভিস প্যাকেজ" data-hi="सेवा पैकेज">Service Packages</h2>
       <p>Seven clear, fixed-price packages covering everything from a single computer fix to a full enterprise IT solution. Pick one, or WhatsApp us and we'll help you choose.</p>
     </div>
     <div class="onetime-grid onetime-grid-7">
@@ -1401,7 +1409,7 @@
           <li><span class="check">✓</span> Software installation</li>
           <li><span class="check">✓</span> Basic optimization</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Basic%20Computer%20Fix%20package%20(79%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Basic Computer Fix">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Basic%20Computer%20Fix%20package%20(79%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Basic Computer Fix" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
         <div class="onetime-badge">Package 2</div>
@@ -1413,7 +1421,7 @@
           <li><span class="check">✓</span> Driver installation</li>
           <li><span class="check">✓</span> Software setup</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Laptop%20Care%20Package%20(99%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Laptop Care">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Laptop%20Care%20Package%20(99%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Laptop Care" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card onetime-featured" data-aos="fade-up" data-aos-delay="80">
         <div class="onetime-badge onetime-badge-featured">Most Popular</div>
@@ -1424,7 +1432,7 @@
           <li><span class="check">✓</span> Network troubleshooting</li>
           <li><span class="check">✓</span> Monthly maintenance</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Business%20IT%20Support%20package%20(149%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Business IT Support">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Business%20IT%20Support%20package%20(149%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Business IT Support" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card" data-aos="fade-up" data-aos-delay="120">
         <div class="onetime-badge">Package 4</div>
@@ -1436,7 +1444,7 @@
           <li><span class="check">✓</span> Security updates</li>
           <li><span class="check">✓</span> Performance tuning</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Server%20Maintenance%20package%20(199%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Server Maintenance">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Server%20Maintenance%20package%20(199%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Server Maintenance" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
         <div class="onetime-badge">Package 5</div>
@@ -1448,7 +1456,7 @@
           <li><span class="check">✓</span> SEO setup</li>
           <li><span class="check">✓</span> Website support</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Professional%20Website%20Package%20(199%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Professional Website">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Professional%20Website%20Package%20(199%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Professional Website" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
         <div class="onetime-badge">Package 6</div>
@@ -1460,7 +1468,7 @@
           <li><span class="check">✓</span> Microsoft 365 support</li>
           <li><span class="check">✓</span> Security management</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Advanced%20IT%20Management%20package%20(249%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Advanced IT Management">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Advanced%20IT%20Management%20package%20(249%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Advanced IT Management" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card" data-aos="fade-up" data-aos-delay="80">
         <div class="onetime-badge">Package 7</div>
@@ -1472,7 +1480,7 @@
           <li><span class="check">✓</span> Priority support</li>
           <li><span class="check">✓</span> Business consultation</li>
         </ul>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Enterprise%20IT%20Solution%20package%20(299%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Enterprise IT Solution">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20the%20Enterprise%20IT%20Solution%20package%20(299%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Package: Enterprise IT Solution" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
     </div>
     <p class="price-note">Prices are starting estimates for typical setups — final pricing depends on business size and current environment. Need something that doesn't fit neatly into a package? WhatsApp us and we'll scope it together.</p>
@@ -1528,8 +1536,8 @@
         <span class="callsupport-phone-badge" aria-hidden="true">📞</span>
         <span class="callsupport-live-badge"><span class="dot"></span> 24/7 IT Help</span>
       </div>
-      <span class="section-eyebrow">IT Helpdesk</span>
-      <h2>IT Call Support &amp; Remote Assistance Packages</h2>
+      <span class="section-eyebrow" data-en="IT Helpdesk" data-ar="مكتب المساعدة التقنية" data-es="Mesa de Ayuda de TI" data-fr="Support Technique IT" data-bn="আইটি হেল্পডেস্ক" data-hi="आईटी हेल्पडेस्क">IT Helpdesk</span>
+      <h2 data-en="IT Call Support &amp; Remote Assistance Packages" data-ar="باقات الدعم الهاتفي والمساعدة عن بُعد" data-es="Paquetes de Soporte Telefónico y Asistencia Remota de TI" data-fr="Forfaits de Support Téléphonique IT et d'Assistance à Distance" data-bn="আইটি কল সাপোর্ট ও রিমোট সহায়তা প্যাকেজ" data-hi="आईटी कॉल सपोर्ट और रिमोट सहायता पैकेज">IT Call Support &amp; Remote Assistance Packages</h2>
       <p>Professional IT helpdesk service for home users, offices, and businesses — pick a monthly call-support plan, or book a one-time fix below when you just need help right now.</p>
     </div>
 
@@ -1552,7 +1560,7 @@
             <li><span class="check">✓</span> Basic internet troubleshooting</li>
             <li><span class="check">✓</span> Security advice</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Basic%20IT%20Call%20Support%20package%20(19%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Basic">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Basic%20IT%20Call%20Support%20package%20(19%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Basic" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Home Users</div>
       </div>
@@ -1575,7 +1583,7 @@
             <li><span class="check">✓</span> Software configuration</li>
             <li><span class="check">✓</span> Monthly system check</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Standard%20IT%20Support%20package%20(39%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Standard">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Standard%20IT%20Support%20package%20(39%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Standard" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Small Offices</div>
       </div>
@@ -1599,7 +1607,7 @@
             <li><span class="check">✓</span> Backup checking</li>
             <li><span class="check">✓</span> System health report</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Professional%20Business%20IT%20package%20(79%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Professional">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Professional%20Business%20IT%20package%20(79%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Professional" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Small Businesses</div>
       </div>
@@ -1622,7 +1630,7 @@
             <li><span class="check">✓</span> Backup management</li>
             <li><span class="check">✓</span> Security updates</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Advanced%20Server%20%26%20Network%20Support%20package%20(149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Advanced Server">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Advanced%20Server%20%26%20Network%20Support%20package%20(149%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Advanced Server" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Companies</div>
       </div>
@@ -1646,7 +1654,7 @@
             <li><span class="check">✓</span> Monthly IT report</li>
             <li><span class="check">✓</span> Emergency support</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Premium%20IT%20Management%20package%20(249%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Premium">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27m%20interested%20in%20the%20Premium%20IT%20Management%20package%20(249%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Premium" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Medium Businesses</div>
       </div>
@@ -1670,7 +1678,7 @@
             <li><span class="check">✓</span> Backup strategy</li>
             <li><span class="check">✓</span> IT consulting</li>
           </ul>
-          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20Support%20quote%20(399%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Enterprise">Get Started</a>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20custom%20Enterprise%20IT%20Support%20quote%20(399%20KWD%2Fmonth)." target="_blank" rel="noopener" class="btn track-cta" data-plan="Call Support: Enterprise" data-en="Get Started" data-ar="ابدأ الآن" data-es="Comenzar" data-fr="Commencer" data-bn="শুরু করুন" data-hi="शुरू करें">Get Started</a>
         </div>
         <div class="price-tag-footer">Best For: Corporate Companies</div>
       </div>
@@ -1679,7 +1687,7 @@
     <p class="price-note">Call-support plans are for remote &amp; phone-based assistance. Need a technician on site? See the <a href="#pricing" class="inline-link">Monthly IT Support Plans</a> or <a href="#one-time-packages" class="inline-link">Fixed-Price Packages</a> above.</p>
 
     <div class="section-header" style="margin-top:56px;" data-aos="fade-up">
-      <span class="section-eyebrow">Quick Remote Support</span>
+      <span class="section-eyebrow" data-en="Quick Remote Support" data-ar="دعم سريع عن بُعد" data-es="Soporte Remoto Rápido" data-fr="Support à Distance Rapide" data-bn="দ্রুত রিমোট সহায়তা" data-hi="त्वरित रिमोट सहायता">Quick Remote Support</span>
       <h2 style="font-size:1.5rem;">🚨 One-Time IT Call Service</h2>
       <p>Just need one quick fix? No monthly commitment — book a single remote support call.</p>
     </div>
@@ -1690,35 +1698,35 @@
         <h3>Computer Issue Fix</h3>
         <span class="onetime-from">Starting From</span>
         <p class="onetime-price">10 KWD</p>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Computer%20Issue%20Fix%20call%20(from%2010%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Computer Issue">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Computer%20Issue%20Fix%20call%20(from%2010%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Computer Issue" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card quickfix-card" data-aos="fade-up" data-aos-delay="40">
         <span class="quickfix-icon" aria-hidden="true">🖨️</span>
         <h3>Printer Problem Fix</h3>
         <span class="onetime-from">Starting From</span>
         <p class="onetime-price">15 KWD</p>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Printer%20Problem%20Fix%20call%20(from%2015%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Printer">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Printer%20Problem%20Fix%20call%20(from%2015%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Printer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card quickfix-card" data-aos="fade-up" data-aos-delay="80">
         <span class="quickfix-icon" aria-hidden="true">🌐</span>
         <h3>Network Problem Fix</h3>
         <span class="onetime-from">Starting From</span>
         <p class="onetime-price">20 KWD</p>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Network%20Problem%20Fix%20call%20(from%2020%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Network">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Network%20Problem%20Fix%20call%20(from%2020%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Network" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card quickfix-card" data-aos="fade-up" data-aos-delay="120">
         <span class="quickfix-icon" aria-hidden="true">🖥️</span>
         <h3>Server Troubleshooting</h3>
         <span class="onetime-from">Starting From</span>
         <p class="onetime-price">50 KWD</p>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Server%20Troubleshooting%20call%20(from%2050%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Server">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Server%20Troubleshooting%20call%20(from%2050%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Server" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
       <div class="onetime-card quickfix-card" data-aos="fade-up" data-aos-delay="160">
         <span class="quickfix-icon" aria-hidden="true">🌍</span>
         <h3>Website Technical Support</h3>
         <span class="onetime-from">Starting From</span>
         <p class="onetime-price">30 KWD</p>
-        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Website%20Technical%20Support%20call%20(from%2030%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Website">Book This Service</a>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20one-time%20Website%20Technical%20Support%20call%20(from%2030%20KWD)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Quick Fix: Website" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
       </div>
     </div>
 
@@ -1729,12 +1737,270 @@
   </div>
 </section>
 
+<!-- ================= IT ON-DEMAND HOURLY SERVICE ================= -->
+<section id="hourly-pricing" class="bg-light">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-eyebrow" data-en="On-Demand Hourly Service" data-ar="خدمة بالساعة عند الطلب" data-es="Servicio Por Hora Bajo Demanda" data-fr="Service Horaire à la Demande" data-bn="চাহিদা অনুযায়ী ঘণ্টাভিত্তিক সেবা" data-hi="मांग पर प्रति घंटा सेवा">On-Demand Hourly Service</span>
+      <h2 data-en="IT On-Demand Hourly Service — Pay Only For Required Hours" data-ar="خدمة تقنية المعلومات بالساعة عند الطلب — ادفع فقط مقابل الساعات المطلوبة" data-es="Servicio de TI Por Hora Bajo Demanda — Pague Solo Por las Horas Necesarias" data-fr="Service Informatique Horaire à la Demande — Payez Uniquement les Heures Nécessaires" data-bn="চাহিদা অনুযায়ী আইটি ঘণ্টাভিত্তিক সেবা — শুধুমাত্র প্রয়োজনীয় ঘণ্টার জন্য পরিশোধ করুন" data-hi="मांग पर आईटी प्रति घंटा सेवा — केवल आवश्यक घंटों का भुगतान करें">IT On-Demand Hourly Service — Pay Only For Required Hours</h2>
+      <p data-en="Need an expert IT engineer for a specific task? Book by the hour — no contracts, no monthly commitment. Choose the specialist you need and pay only for the time it takes." data-ar="هل تحتاج مهندس تقنية معلومات محترف لمهمة محددة؟ احجز بالساعة — بدون عقود وبدون التزام شهري. اختر المتخصص الذي تحتاجه وادفع فقط مقابل الوقت المستغرق." data-es="¿Necesita un ingeniero de TI experto para una tarea específica? Reserve por hora — sin contratos, sin compromiso mensual. Elija al especialista que necesita y pague solo por el tiempo utilizado." data-fr="Besoin d'un ingénieur IT expert pour une tâche spécifique ? Réservez à l'heure — sans contrat, sans engagement mensuel. Choisissez le spécialiste dont vous avez besoin et ne payez que le temps utilisé." data-bn="নির্দিষ্ট কাজের জন্য একজন দক্ষ আইটি ইঞ্জিনিয়ার দরকার? ঘণ্টাভিত্তিক বুক করুন — কোনো চুক্তি নেই, মাসিক প্রতিশ্রুতি নেই। আপনার প্রয়োজনীয় বিশেষজ্ঞ বেছে নিন এবং শুধুমাত্র ব্যয়িত সময়ের জন্য পরিশোধ করুন।" data-hi="किसी विशेष कार्य के लिए विशेषज्ञ आईटी इंजीनियर चाहिए? प्रति घंटा बुक करें — कोई अनुबंध नहीं, कोई मासिक प्रतिबद्धता नहीं। अपनी ज़रूरत का विशेषज्ञ चुनें और केवल लगे समय का भुगतान करें।">Need an expert IT engineer for a specific task? Book by the hour — no contracts, no monthly commitment. Choose the specialist you need and pay only for the time it takes.</p>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">💻</span> <span data-en="Computer &amp; Laptop Technical Support" data-ar="الدعم الفني لأجهزة الكمبيوتر واللابتوب" data-es="Soporte Técnico de Computadoras y Portátiles" data-fr="Support Technique pour Ordinateurs et Portables" data-bn="কম্পিউটার ও ল্যাপটপ প্রযুক্তিগত সহায়তা" data-hi="कंप्यूटर और लैपटॉप तकनीकी सहायता">Computer &amp; Laptop Technical Support</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Basic IT Technician</h3>
+          <p class="onetime-price">10 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Computer &amp; laptop troubleshooting</li>
+            <li><span class="check">✓</span> Software installation &amp; setup</li>
+            <li><span class="check">✓</span> Virus &amp; malware removal</li>
+            <li><span class="check">✓</span> Operating system fixes</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Basic%20IT%20Technician%20(10%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Basic IT Technician" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Advanced Desktop &amp; Laptop Engineer</h3>
+          <p class="onetime-price">20 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Hardware diagnostics &amp; repair</li>
+            <li><span class="check">✓</span> Performance optimization &amp; upgrades</li>
+            <li><span class="check">✓</span> Data recovery assistance</li>
+            <li><span class="check">✓</span> Multi-device support</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20an%20Advanced%20Desktop%20%26%20Laptop%20Engineer%20(20%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Advanced Desktop Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">🖥️</span> <span data-en="Server Administration" data-ar="إدارة الخوادم" data-es="Administración de Servidores" data-fr="Administration de Serveurs" data-bn="সার্ভার প্রশাসন" data-hi="सर्वर प्रशासन">Server Administration</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Windows Server Administrator</h3>
+          <p class="onetime-price">30 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Windows Server setup &amp; configuration</li>
+            <li><span class="check">✓</span> Active Directory management</li>
+            <li><span class="check">✓</span> User &amp; permissions administration</li>
+            <li><span class="check">✓</span> Routine server maintenance</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Windows%20Server%20Administrator%20(30%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Windows Server Admin" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Advanced Server Engineer</h3>
+          <p class="onetime-price">50 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Server architecture &amp; deployment</li>
+            <li><span class="check">✓</span> Virtualization (Hyper-V / VMware)</li>
+            <li><span class="check">✓</span> Backup &amp; disaster recovery planning</li>
+            <li><span class="check">✓</span> Performance tuning &amp; troubleshooting</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20an%20Advanced%20Server%20Engineer%20(50%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Advanced Server Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">🌐</span> <span data-en="Network Engineering" data-ar="هندسة الشبكات" data-es="Ingeniería de Redes" data-fr="Ingénierie Réseau" data-bn="নেটওয়ার্ক ইঞ্জিনিয়ারিং" data-hi="नेटवर्क इंजीनियरिंग">Network Engineering</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Network Support Engineer</h3>
+          <p class="onetime-price">25 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Router &amp; switch configuration</li>
+            <li><span class="check">✓</span> Wi-Fi setup &amp; troubleshooting</li>
+            <li><span class="check">✓</span> Network connectivity fixes</li>
+            <li><span class="check">✓</span> Basic firewall configuration</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Network%20Support%20Engineer%20(25%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Network Support Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Professional Network Engineer</h3>
+          <p class="onetime-price">50 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Enterprise network design</li>
+            <li><span class="check">✓</span> VPN &amp; site-to-site connectivity</li>
+            <li><span class="check">✓</span> Advanced firewall &amp; security policies</li>
+            <li><span class="check">✓</span> Network monitoring &amp; optimization</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Professional%20Network%20Engineer%20(50%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Professional Network Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">🖨️</span> <span data-en="Printer &amp; Office Equipment" data-ar="الطابعات ومعدات المكتب" data-es="Impresoras y Equipos de Oficina" data-fr="Imprimantes et Équipements de Bureau" data-bn="প্রিন্টার ও অফিস সরঞ্জাম" data-hi="प्रिंटर और कार्यालय उपकरण">Printer &amp; Office Equipment</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Printer Technician</h3>
+          <p class="onetime-price">15 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Printer setup &amp; driver installation</li>
+            <li><span class="check">✓</span> Print quality troubleshooting</li>
+            <li><span class="check">✓</span> Network printer configuration</li>
+            <li><span class="check">✓</span> Toner &amp; hardware diagnostics</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Printer%20Technician%20(15%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Printer Technician" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Office Printing Solution</h3>
+          <p class="onetime-price">30 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Multi-device print server setup</li>
+            <li><span class="check">✓</span> Shared printing across offices</li>
+            <li><span class="check">✓</span> Scan-to-email configuration</li>
+            <li><span class="check">✓</span> Fleet maintenance planning</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20an%20Office%20Printing%20Solution%20(30%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Office Printing Solution" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">🌍</span> <span data-en="Website Development &amp; Maintenance" data-ar="تطوير وصيانة المواقع" data-es="Desarrollo y Mantenimiento Web" data-fr="Développement et Maintenance de Sites Web" data-bn="ওয়েবসাইট ডেভেলপমেন্ট ও রক্ষণাবেক্ষণ" data-hi="वेबसाइट विकास और रखरखाव">Website Development &amp; Maintenance</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Web Developer Support</h3>
+          <p class="onetime-price">25 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Website updates &amp; content changes</li>
+            <li><span class="check">✓</span> Bug fixes &amp; minor design tweaks</li>
+            <li><span class="check">✓</span> Plugin &amp; CMS maintenance</li>
+            <li><span class="check">✓</span> Basic SEO adjustments</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20Web%20Developer%20Support%20(25%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Web Developer Support" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Professional Web Developer</h3>
+          <p class="onetime-price">50 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Custom feature development</li>
+            <li><span class="check">✓</span> Website redesign &amp; optimization</li>
+            <li><span class="check">✓</span> E-commerce &amp; integrations</li>
+            <li><span class="check">✓</span> Performance &amp; security hardening</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Professional%20Web%20Developer%20(50%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Professional Web Developer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">☁️</span> <span data-en="Cloud &amp; Microsoft Services" data-ar="الخدمات السحابية وخدمات مايكروسوفت" data-es="Servicios en la Nube y Microsoft" data-fr="Services Cloud et Microsoft" data-bn="ক্লাউড ও মাইক্রোসফট সেবা" data-hi="क्लाउड और माइक्रोसॉफ्ट सेवाएं">Cloud &amp; Microsoft Services</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Microsoft 365 Administrator</h3>
+          <p class="onetime-price">40 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Microsoft 365 setup &amp; migration</li>
+            <li><span class="check">✓</span> Mailbox &amp; user management</li>
+            <li><span class="check">✓</span> SharePoint &amp; Teams configuration</li>
+            <li><span class="check">✓</span> Licensing &amp; security policies</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Microsoft%20365%20Administrator%20(40%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: M365 Administrator" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Azure Cloud Engineer</h3>
+          <p class="onetime-price">60 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Azure infrastructure deployment</li>
+            <li><span class="check">✓</span> Cloud migration planning</li>
+            <li><span class="check">✓</span> Identity &amp; access management</li>
+            <li><span class="check">✓</span> Cost optimization &amp; monitoring</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20an%20Azure%20Cloud%20Engineer%20(60%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Azure Cloud Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">🛡️</span> <span data-en="Cyber Security" data-ar="الأمن السيبراني" data-es="Ciberseguridad" data-fr="Cybersécurité" data-bn="সাইবার নিরাপত্তা" data-hi="साइबर सुरक्षा">Cyber Security</span></h3>
+      <div class="onetime-grid hourly-tier-grid">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Security Technician</h3>
+          <p class="onetime-price">40 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Security assessment &amp; audits</li>
+            <li><span class="check">✓</span> Antivirus &amp; endpoint protection setup</li>
+            <li><span class="check">✓</span> Security patch management</li>
+            <li><span class="check">✓</span> Basic incident response</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Security%20Technician%20(40%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Security Technician" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="40">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Cyber Security Engineer</h3>
+          <p class="onetime-price">75 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> Penetration testing &amp; vulnerability scans</li>
+            <li><span class="check">✓</span> Advanced threat detection setup</li>
+            <li><span class="check">✓</span> Security architecture consulting</li>
+            <li><span class="check">✓</span> Compliance &amp; incident response planning</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Cyber%20Security%20Engineer%20(75%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Cyber Security Engineer" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-category" data-aos="fade-up">
+      <h3 class="hourly-category-title"><span class="hourly-category-icon" aria-hidden="true">👑</span> <span data-en="Complete Managed IT Engineer" data-ar="مهندس إدارة تقنية معلومات متكاملة" data-es="Ingeniero de TI Totalmente Gestionado" data-fr="Ingénieur IT Entièrement Géré" data-bn="সম্পূর্ণ ম্যানেজড আইটি ইঞ্জিনিয়ার" data-hi="पूर्ण प्रबंधित आईटी इंजीनियर">Complete Managed IT Engineer</span></h3>
+      <div class="onetime-grid hourly-tier-grid hourly-tier-grid-single">
+        <div class="onetime-card" data-aos="fade-up" data-aos-delay="0">
+          <span class="hourly-rate-tag">Per Hour</span>
+          <h3>Senior IT Infrastructure Consultant</h3>
+          <p class="onetime-price">100 KWD <span style="font-size:0.65em; font-weight:600; color:var(--grey);">/ hr</span></p>
+          <ul class="onetime-list">
+            <li><span class="check">✓</span> End-to-end IT infrastructure strategy</li>
+            <li><span class="check">✓</span> Multi-system integration</li>
+            <li><span class="check">✓</span> Executive-level IT consulting</li>
+            <li><span class="check">✓</span> Complex project leadership</li>
+          </ul>
+          <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Senior%20IT%20Infrastructure%20Consultant%20(100%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Senior IT Infrastructure Consultant" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hourly-emergency-card" data-aos="fade-up">
+      <div class="hourly-emergency-text">
+        <h3>⭐ Emergency IT Support</h3>
+        <p>🚨 Emergency Same-Day Support — same-day emergency response, critical system recovery, after-hours availability, and priority dispatch for urgent issues.</p>
+      </div>
+      <div class="hourly-emergency-price-wrap">
+        <div class="hourly-emergency-price">75 KWD <span>Starting / hr</span></div>
+        <a href="https://wa.me/96566648706?text=Hi%2C%20I%20have%20an%20IT%20emergency%20and%20need%20Same-Day%20Support%20(starting%2075%20KWD%2Fhr)." target="_blank" rel="noopener" class="btn-small track-cta" data-plan="Hourly: Emergency Same-Day Support" data-en="Book This Service" data-ar="احجز هذه الخدمة" data-es="Reservar Este Servicio" data-fr="Réserver ce Service" data-bn="এই সেবা বুক করুন" data-hi="यह सेवा बुक करें">Book This Service</a>
+      </div>
+    </div>
+
+    <p class="price-note">Hourly rates are for remote or on-site engineer time as required by the task. A minimum booking of 1 hour applies; larger or ongoing needs may be better served by our <a href="#pricing" class="inline-link">Monthly IT Support Plans</a>.</p>
+
+    <div class="pricing-cta-row" data-aos="fade-up">
+      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20to%20book%201%20hour%20of%20IT%20engineer%20support." target="_blank" rel="noopener" class="btn btn-primary track-cta" data-plan="Hourly CTA: Book 1 Hour" data-en="Book 1 Hour Service" data-ar="احجز خدمة ساعة واحدة" data-es="Reservar 1 Hora de Servicio" data-fr="Réserver 1 Heure de Service" data-bn="১ ঘণ্টার সেবা বুক করুন" data-hi="1 घंटे की सेवा बुक करें">📅 Book 1 Hour Service</a>
+      <a href="tel:+96566648706" class="btn btn-outline track-cta" data-plan="Hourly CTA: Call Engineer" data-en="Call Engineer Now" data-ar="اتصل بالمهندس الآن" data-es="Llamar al Ingeniero Ahora" data-fr="Appeler l'Ingénieur Maintenant" data-bn="এখনই ইঞ্জিনিয়ারকে কল করুন" data-hi="अभी इंजीनियर को कॉल करें">📲 Call Engineer Now</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="btn btn-outline track-cta" data-plan="Hourly CTA: WhatsApp Support" data-en="WhatsApp Support" data-ar="دعم واتساب" data-es="Soporte por WhatsApp" data-fr="Support WhatsApp" data-bn="হোয়াটসঅ্যাপ সহায়তা" data-hi="व्हाट्सएप सहायता">💬 WhatsApp Support</a>
+    </div>
+  </div>
+</section>
+
 <!-- ================= QUOTE CALCULATOR ================= -->
 <section id="quote-calculator">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Not Sure Which Plan?</span>
-      <h2>Get an Instant Estimate</h2>
+      <span class="section-eyebrow" data-en="Not Sure Which Plan?" data-ar="لست متأكدًا من الخطة المناسبة؟" data-es="¿No Estás Seguro de Qué Plan Elegir?" data-fr="Vous Ne Savez Pas Quel Forfait Choisir ?" data-bn="কোন প্ল্যান নির্বাচন করবেন নিশ্চিত নন?" data-hi="निश्चित नहीं कि कौन सा प्लान चुनें?">Not Sure Which Plan?</span>
+      <h2 data-en="Get an Instant Estimate" data-ar="احصل على تقدير فوري" data-es="Obtén un Presupuesto Instantáneo" data-fr="Obtenez une Estimation Instantanée" data-bn="তাৎক্ষণিক মূল্য নির্ধারণ পান" data-hi="तुरंत अनुमान प्राप्त करें">Get an Instant Estimate</h2>
       <p>Answer a few quick questions and get an estimated monthly package range in seconds. This is an estimate, not a final quotation.</p>
     </div>
     <div class="calculator-card" data-aos="fade-up">
@@ -1790,8 +2056,8 @@
 <section id="case-studies" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Proof, Not Just Promises</span>
-      <h2>Recent Case Studies</h2>
+      <span class="section-eyebrow" data-en="Proof, Not Just Promises" data-ar="إثبات، لا مجرد وعود" data-es="Pruebas, No Solo Promesas" data-fr="Des Preuves, Pas Seulement des Promesses" data-bn="প্রমাণ, শুধু প্রতিশ্রুতি নয়" data-hi="वादे नहीं, प्रमाण">Proof, Not Just Promises</span>
+      <h2 data-en="Recent Case Studies" data-ar="أحدث دراسات الحالة" data-es="Casos de Éxito Recientes" data-fr="Études de Cas Récentes" data-bn="সাম্প্রতিক কেস স্টাডি" data-hi="हाल के केस स्टडीज़">Recent Case Studies</h2>
     </div>
     <div class="case-grid case-grid-3">
       <div class="case-card" data-aos="fade-up" data-aos-delay="0">
@@ -1817,8 +2083,8 @@
 <section id="testimonials">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Client Feedback</span>
-      <h2>What Clients Say</h2>
+      <span class="section-eyebrow" data-en="Client Feedback" data-ar="آراء العملاء" data-es="Comentarios de Clientes" data-fr="Avis des Clients" data-bn="ক্লায়েন্ট মতামত" data-hi="ग्राहक प्रतिक्रिया">Client Feedback</span>
+      <h2 data-en="What Clients Say" data-ar="ماذا يقول عملاؤنا" data-es="Lo Que Dicen Nuestros Clientes" data-fr="Ce Que Disent Nos Clients" data-bn="ক্লায়েন্টরা যা বলেন" data-hi="ग्राहक क्या कहते हैं">What Clients Say</h2>
       <p>Illustrative sample quotes shown below while we collect published reviews — ask us to add your real testimonial here.</p>
     </div>
     <div class="testimonial-slider" id="testimonialSlider" data-aos="fade-up">
@@ -1862,8 +2128,8 @@
 <section id="faq" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Questions</span>
-      <h2>Frequently Asked Questions</h2>
+      <span class="section-eyebrow" data-en="Questions" data-ar="أسئلة" data-es="Preguntas" data-fr="Questions" data-bn="প্রশ্নসমূহ" data-hi="प्रश्न">Questions</span>
+      <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة" data-es="Preguntas Frecuentes" data-fr="Questions Fréquemment Posées" data-bn="সাধারণ জিজ্ঞাসা" data-hi="अक्सर पूछे जाने वाले प्रश्न">Frequently Asked Questions</h2>
     </div>
     <div class="faq-list" data-aos="fade-up">
       <details class="faq-item">
@@ -1918,8 +2184,8 @@
 <section id="roadmap" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">What's Next</span>
-      <h2>Building Toward a Complete Managed IT Platform</h2>
+      <span class="section-eyebrow" data-en="What's Next" data-ar="ما التالي" data-es="Qué Sigue" data-fr="Et Ensuite ?" data-bn="এরপর কী" data-hi="आगे क्या">What's Next</span>
+      <h2 data-en="Building Toward a Complete Managed IT Platform" data-ar="نحو منصة متكاملة لإدارة تقنية المعلومات" data-es="Construyendo una Plataforma Completa de TI Gestionada" data-fr="Vers une Plateforme IT Gérée Complète" data-bn="একটি সম্পূর্ণ ব্যবস্থাপিত আইটি প্ল্যাটফর্মের দিকে" data-hi="एक संपूर्ण प्रबंधित आईटी प्लेटफॉर्म की दिशा में">Building Toward a Complete Managed IT Platform</h2>
       <p>This website is phase one. The plan is to grow it into a full self-service platform — choose a plan, pay securely, and manage your subscription without back-and-forth emails. Here's the roadmap.</p>
     </div>
 
@@ -1993,8 +2259,8 @@
 <section id="book-consultation" class="bg-light">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Book a Consultation</span>
-      <h2>Choose the Type of Session You Need</h2>
+      <span class="section-eyebrow" data-en="Book a Consultation" data-ar="احجز استشارة" data-es="Reserva una Consulta" data-fr="Réserver une Consultation" data-bn="পরামর্শ বুক করুন" data-hi="परामर्श बुक करें">Book a Consultation</span>
+      <h2 data-en="Choose the Type of Session You Need" data-ar="اختر نوع الجلسة التي تحتاجها" data-es="Elige el Tipo de Sesión que Necesitas" data-fr="Choisissez le Type de Séance dont Vous Avez Besoin" data-bn="আপনার প্রয়োজনীয় সেশনের ধরন বেছে নিন" data-hi="अपनी आवश्यक सत्र का प्रकार चुनें">Choose the Type of Session You Need</h2>
       <p>Pick a topic below and we'll open WhatsApp with your session request pre-filled — no forms, no waiting.</p>
     </div>
     <div class="booking-grid" data-aos="fade-up">
@@ -2026,8 +2292,8 @@
 <section id="blog-preview">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">From the Blog</span>
-      <h2>IT &amp; Website Tips</h2>
+      <span class="section-eyebrow" data-en="From the Blog" data-ar="من المدونة" data-es="Desde el Blog" data-fr="Depuis le Blog" data-bn="ব্লগ থেকে" data-hi="ब्लॉग से">From the Blog</span>
+      <h2 data-en="IT &amp; Website Tips" data-ar="نصائح تقنية معلومات ومواقع" data-es="Consejos de TI y Sitios Web" data-fr="Conseils IT et Sites Web" data-bn="আইটি ও ওয়েবসাইট টিপস" data-hi="आईटी और वेबसाइट टिप्स">IT &amp; Website Tips</h2>
       <p>Practical guides from our team — no fluff, just what actually helps your business.</p>
     </div>
     <div class="portfolio-grid" data-aos="fade-up">
@@ -2057,7 +2323,7 @@
       </a>
     </div>
     <div class="wds-banner-wrap" data-aos="fade-up" style="margin-top: 32px; text-align: center;">
-      <a href="blog.html" class="btn btn-outline">View All Articles</a>
+      <a href="blog.html" class="btn btn-outline" data-en="View All Articles" data-ar="عرض جميع المقالات" data-es="Ver Todos los Artículos" data-fr="Voir Tous les Articles" data-bn="সব নিবন্ধ দেখুন" data-hi="सभी लेख देखें">View All Articles</a>
     </div>
   </div>
 </section>
@@ -2065,8 +2331,8 @@
 <section id="contact">
   <div class="container">
     <div class="section-header" data-aos="fade-up">
-      <span class="section-eyebrow">Get In Touch</span>
-      <h2>Let's Talk About Your IT</h2>
+      <span class="section-eyebrow" data-en="Get In Touch" data-ar="تواصل معنا" data-es="Ponte en Contacto" data-fr="Contactez-Nous" data-bn="যোগাযোগ করুন" data-hi="संपर्क करें">Get In Touch</span>
+      <h2 data-en="Let's Talk About Your IT" data-ar="لنتحدث عن تقنية معلوماتك" data-es="Hablemos de tu TI" data-fr="Parlons de Votre IT" data-bn="চলুন আপনার আইটি নিয়ে কথা বলি" data-hi="चलिए आपकी आईटी के बारे में बात करें">Let's Talk About Your IT</h2>
       <p>Message us on WhatsApp for the fastest response, or send a detailed note using the form.</p>
     </div>
     <div class="contact-grid" data-aos="fade-up">
@@ -2207,8 +2473,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-en="Smart Technology. Reliable Support. Business Growth." data-ar="تقنية ذكية. دعم موثوق. نمو الأعمال." data-fr="Technologie intelligente. Support fiable. Croissance de l'entreprise." data-bn="স্মার্ট প্রযুক্তি। নির্ভরযোগ্য সহায়তা। ব্যবসায়িক প্রবৃদ্ধি।" data-hi="स्मार्ट तकनीक। विश्वसनीय सहायता। व्यापार वृद्धि।">Smart Technology. Reliable Support. Business Growth.</span><br>
-      &copy; <span id="year"></span> <span data-en="KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait." data-ar="خورشيد تك – خدمات تقنية معلومات مُدارة وتطوير مواقع. مدينة الكويت، الكويت." data-fr="KhurshedTech – Services informatiques gérés et développement de sites web. Koweït City, Koweït." data-bn="খুরশিদটেক – ব্যবস্থাপিত আইটি সেবা ও ওয়েবসাইট ডেভেলপমেন্ট। কুয়েত সিটি, কুয়েত।" data-hi="खुर्शीदटेक – प्रबंधित आईटी सेवाएं और वेबसाइट डेवलपमेंट। कुवैत सिटी, कुवैत।">KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait.</span>
+      <span data-en="Smart Technology. Reliable Support. Business Growth." data-ar="تقنية ذكية. دعم موثوق. نمو الأعمال." data-es="Tecnología Inteligente. Soporte Confiable. Crecimiento Empresarial." data-fr="Technologie intelligente. Support fiable. Croissance de l'entreprise." data-bn="স্মার্ট প্রযুক্তি। নির্ভরযোগ্য সহায়তা। ব্যবসায়িক প্রবৃদ্ধি।" data-hi="स्मार्ट तकनीक। विश्वसनीय सहायता। व्यापार वृद्धि।">Smart Technology. Reliable Support. Business Growth.</span><br>
+      &copy; <span id="year"></span> <span data-en="KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait." data-ar="خورشيد تك – خدمات تقنية معلومات مُدارة وتطوير مواقع. مدينة الكويت، الكويت." data-es="KhurshedTech – Servicios de TI Gestionados y Desarrollo Web. Ciudad de Kuwait, Kuwait." data-fr="KhurshedTech – Services informatiques gérés et développement de sites web. Koweït City, Koweït." data-bn="খুরশিদটেক – ব্যবস্থাপিত আইটি সেবা ও ওয়েবসাইট ডেভেলপমেন্ট। কুয়েত সিটি, কুয়েত।" data-hi="खुर्शीदटेक – प्रबंधित आईटी सेवाएं और वेबसाइट डेवलपमेंट। कुवैत सिटी, कुवैत।">KhurshedTech – Managed IT Services &amp; Website Development. Kuwait City, Kuwait.</span>
     </div>
   </div>
 </footer>
@@ -2254,6 +2520,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=15"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>

@@ -10,6 +10,69 @@
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 
   /* ----------------------------------------------------------
+     Dark mode toggle + language switcher (EN / AR / ES / FR / BN / HI)
+     - Theme + language choice persist via localStorage (kt-theme / kt-lang).
+     - Translation works by swapping textContent from data-{lang}
+       attributes; elements without a translation for the chosen
+       language simply keep their English text (graceful fallback),
+       so partial translation coverage never breaks the page.
+  ---------------------------------------------------------- */
+  (function () {
+    var LANGS = ['en', 'ar', 'es', 'fr', 'bn', 'hi'];
+    var RTL_LANGS = ['ar'];
+    var html = document.documentElement;
+    var themeBtn = document.getElementById('theme-toggle');
+    var langSel = document.getElementById('lang-select');
+
+    function setThemeIcon() {
+      if (!themeBtn) return;
+      var isDark = html.getAttribute('data-theme') === 'dark';
+      themeBtn.textContent = isDark ? '☀️' : '🌙';
+      themeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+    function applyTheme(theme) {
+      if (theme === 'dark') html.setAttribute('data-theme', 'dark');
+      else html.removeAttribute('data-theme');
+      setThemeIcon();
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function () {
+        var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try { localStorage.setItem('kt-theme', next); } catch (e) {}
+      });
+    }
+    setThemeIcon();
+
+    function applyLang(lang) {
+      if (LANGS.indexOf(lang) === -1) lang = 'en';
+      html.setAttribute('lang', lang);
+      html.setAttribute('dir', RTL_LANGS.indexOf(lang) > -1 ? 'rtl' : 'ltr');
+      document.querySelectorAll('[data-en]').forEach(function (el) {
+        var text = el.dataset[lang];
+        if (text == null) text = el.dataset.en;
+        if (text != null) el.textContent = text;
+      });
+      document.querySelectorAll('[data-en-html]').forEach(function (el) {
+        var html2 = el.dataset[lang + 'Html'];
+        if (html2 == null) html2 = el.dataset.enHtml;
+        if (html2 != null) el.innerHTML = html2;
+      });
+      if (langSel) langSel.value = lang;
+    }
+    var savedLang = 'en';
+    try { savedLang = localStorage.getItem('kt-lang') || 'en'; } catch (e) {}
+    applyLang(savedLang);
+    if (langSel) {
+      langSel.addEventListener('change', function () {
+        var lang = langSel.value;
+        applyLang(lang);
+        try { localStorage.setItem('kt-lang', lang); } catch (e) {}
+      });
+    }
+  })();
+
+  /* ----------------------------------------------------------
      Footer year
   ---------------------------------------------------------- */
   const yearEl = document.getElementById('year');

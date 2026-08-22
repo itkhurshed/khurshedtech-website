@@ -613,6 +613,7 @@ header.scrolled { box-shadow: 0 6px 24px rgba(7, 26, 43, 0.1); }
 .promo-track {
   display: flex;
   transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  direction: ltr; /* JS translateX() math assumes LTR flex order; lock it so RTL page mode can't reverse slide order/overflow the layout */
 }
 @media (prefers-reduced-motion: reduce) { .promo-track { transition: none; } }
 .promo-slide {
@@ -1540,6 +1541,58 @@ section { padding: 84px 0; }
 .callsupport-cta-row .btn-outline { border-color: var(--teal); color: var(--teal); }
 .callsupport-cta-row .btn-outline:hover { background: var(--teal); color: var(--navy-dark); }
 
+/* ---------- On-Demand Hourly Service Pricing ---------- */
+.hourly-category { margin-bottom: 40px; }
+.hourly-category:last-of-type { margin-bottom: 0; }
+.hourly-category-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.hourly-category-icon { font-size: 1.3rem; line-height: 1; }
+.hourly-tier-grid { grid-template-columns: repeat(2, 1fr); }
+.hourly-tier-grid-single { grid-template-columns: 1fr; max-width: 420px; margin: 0; }
+@media (max-width: 620px) { .hourly-tier-grid { grid-template-columns: 1fr; } }
+.hourly-rate-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--teal-dark);
+  background: rgba(0, 194, 255, 0.1);
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+}
+
+.hourly-emergency-card {
+  margin-top: 8px;
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #DC2626, #991B1B);
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 20px 45px rgba(220, 38, 38, 0.3);
+}
+.hourly-emergency-text h3 { color: #fff; font-size: 1.25rem; margin-bottom: 6px; }
+.hourly-emergency-text p { color: rgba(255,255,255,0.85); font-size: 0.9rem; max-width: 460px; margin: 0; }
+.hourly-emergency-price-wrap { text-align: right; flex-shrink: 0; }
+.hourly-emergency-price { font-size: 1.7rem; font-weight: 800; font-family: 'Poppins', sans-serif; white-space: nowrap; }
+.hourly-emergency-price span { display: block; font-size: 0.78rem; font-weight: 400; opacity: 0.85; }
+.hourly-emergency-card .btn-small { background: #fff; color: #991B1B; font-weight: 800; margin-top: 10px; }
+.hourly-emergency-card .btn-small:hover { background: rgba(255,255,255,0.85); }
+@media (max-width: 700px) { .hourly-emergency-card { justify-content: center; text-align: center; } .hourly-emergency-price-wrap { text-align: center; } }
+[data-theme="dark"] .hourly-category-title { color: var(--text-main); }
+
 /* ==========================================================
    Cosmic Ambiance System — animated tech background layers
    shared by .hero, #pricing, #call-support and the footer.
@@ -1813,7 +1866,9 @@ footer::before {
 .testimonial-track {
   display: flex;
   transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+  direction: ltr; /* JS translateX() math assumes LTR flex order; lock it so RTL page mode can't reverse slide order/overflow the layout */
 }
+.testimonial-slider { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .testimonial-track { transition: none; } }
 .testimonial-slider .testimonial-card {
   flex: 0 0 100%;
@@ -2669,15 +2724,22 @@ footer {
 /* mission-card always keeps its own explicit navy-gradient background + white text, so it stays legible in both themes without extra overrides */
 
 /* ---------- RTL support (Arabic toggle) ---------- */
-html[dir="rtl"] body { font-family: 'Noto Kufi Arabic', 'Inter', sans-serif; }
-html[dir="rtl"] .nav-links { direction: rtl; }
-html[dir="rtl"] .hero-actions,
-html[dir="rtl"] .trust-bar,
-html[dir="rtl"] .hero-stats,
-html[dir="rtl"] .social-row { direction: rtl; }
-html[dir="rtl"] .hero-inner { direction: rtl; }
-html[dir="rtl"] .hero-badge-row { direction: rtl; }
-html[dir="rtl"] .hero-photo-card { direction: rtl; }
+html[dir="rtl"] body { direction: rtl; font-family: 'Noto Kufi Arabic', 'Inter', sans-serif; }
+/* A handful of components read better staying LTR even in Arabic mode:
+   phone numbers/prices (digits), the logo lockup, and code/demo snippets. */
+html[dir="rtl"] .logo,
+html[dir="rtl"] .price,
+html[dir="rtl"] .onetime-price,
+html[dir="rtl"] .footer-contact-lines,
+html[dir="rtl"] .price-head .price,
+html[dir="rtl"] .demo-frame,
+html[dir="rtl"] code,
+html[dir="rtl"] pre { direction: ltr; }
+html[dir="rtl"] ul, html[dir="rtl"] ol { padding-right: 0; }
+
+/* ---------- Script-specific type (Bengali / Hindi) ---------- */
+html[lang="bn"] body { font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
+html[lang="hi"] body { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
@@ -2725,7 +2787,12 @@ html[dir="rtl"] .hero-photo-card { direction: rtl; }
   .tier-consult-cta { flex-direction: column; text-align: center; }
   .tier-consult-text { text-align: center; }
 }
-@media (max-width: 1100px) {
+@media (max-width: 1700px) {
+  /* Raised from 1100px: with the language switcher live, translated nav labels (especially
+     Spanish/French) and the full EN nav no longer reliably fit inline even at common
+     laptop/desktop widths (1280-1600px), which was causing the header to overflow
+     horizontally. Collapsing to the mobile drawer earlier avoids that regardless of
+     the selected language. */
   .nav-links {
     position: absolute;
     top: 100%;

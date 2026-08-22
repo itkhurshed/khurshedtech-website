@@ -10,7 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 
 <script>
   (function () {
@@ -20,8 +20,9 @@
     } catch (e) {}
   })();
 </script>
+<script>(function(){try{var l=localStorage.getItem('kt-lang');if(l){document.documentElement.setAttribute('lang',l);if(l==='ar')document.documentElement.setAttribute('dir','rtl');}}catch(e){}})();</script>
 
-<link rel="stylesheet" href="styles.css?v=25">
+<link rel="stylesheet" href="styles.css?v=26">
 
 <style>
   :root{
@@ -194,15 +195,23 @@
       <span>KhurshedTech</span>
     </a>
     <nav class="nav-links">
-      <a href="index.html#about">About</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#portfolio">Portfolio</a>
-      <a href="portfolio/index.html#top">Security Portfolio</a>
-      <a href="dashboard.html" style="opacity:0.6;">Skills Dashboard</a>
-      <a href="brand.html">Brand Kit</a>
-      <a href="blog.html">Blog</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta">WhatsApp Us</a>
+      <a href="index.html#about" data-en="About" data-ar="من نحن" data-es="Acerca de" data-fr="À propos" data-bn="আমাদের সম্পর্কে" data-hi="हमारे बारे में">About</a>
+      <a href="index.html#services" data-en="Services" data-ar="خدماتنا" data-es="Servicios" data-fr="Services" data-bn="সেবাসমূহ" data-hi="सेवाएं">Services</a>
+      <a href="index.html#portfolio" data-en="Portfolio" data-ar="أعمالنا" data-es="Portafolio" data-fr="Portfolio" data-bn="পোর্টফোলিও" data-hi="पोर्टफोलियो">Portfolio</a>
+      <a href="portfolio/index.html#top" data-en="Security Portfolio" data-ar="أعمال الأمن السيبراني" data-es="Portafolio de Seguridad" data-fr="Portfolio de Sécurité" data-bn="নিরাপত্তা পোর্টফোলিও" data-hi="सुरक्षा पोर्टफोलियो">Security Portfolio</a>
+      <a href="dashboard.html" style="opacity:0.6;" data-en="Skills Dashboard" data-ar="لوحة المهارات" data-es="Panel de Habilidades" data-fr="Tableau des Compétences" data-bn="দক্ষতা ড্যাশবোর্ড" data-hi="कौशल डैशबोर्ड">Skills Dashboard</a>
+      <a href="brand.html" data-en="Brand Kit" data-ar="هوية العلامة التجارية" data-es="Kit de Marca" data-fr="Kit de Marque" data-bn="ব্র্যান্ড কিট" data-hi="ब्रांड किट">Brand Kit</a>
+      <a href="blog.html" data-en="Blog" data-ar="المدونة" data-es="Blog" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
+      <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا" data-es="Contacto" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
+      <a href="https://wa.me/96566648706" target="_blank" rel="noopener" class="nav-cta" data-en="WhatsApp Us" data-ar="راسلنا واتساب" data-es="WhatsApp" data-fr="Contactez-nous sur WhatsApp" data-bn="হোয়াটসঅ্যাপে যোগাযোগ করুন" data-hi="व्हाट्सएप पर संपर्क करें">WhatsApp Us</a>
+      <select id="lang-select" aria-label="Select language">
+        <option value="en">EN</option>
+        <option value="ar">AR</option>
+        <option value="es">ES</option>
+        <option value="fr">FR</option>
+        <option value="bn">BN</option>
+        <option value="hi">HI</option>
+      </select>
       <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu">
@@ -214,9 +223,9 @@
 <section class="dash-hero">
   <canvas id="hero-particles" aria-hidden="true"></canvas>
   <div class="container">
-    <span class="section-eyebrow">Interactive Dashboard</span>
-    <h1>Skills, Certifications &amp; Projects</h1>
-    <p>Cybersecurity, systems administration and AI — the same skill set behind every KhurshedTech engagement, shown here in one live view.</p>
+    <span class="section-eyebrow" data-en="Interactive Dashboard" data-ar="لوحة تفاعلية" data-es="Panel Interactivo" data-fr="Tableau de Bord Interactif" data-bn="ইন্টারেক্টিভ ড্যাশবোর্ড" data-hi="इंटरैक्टिव डैशबोर्ड">Interactive Dashboard</span>
+    <h1 data-en="Skills, Certifications &amp; Projects" data-ar="المهارات والشهادات والمشاريع" data-es="Habilidades, Certificaciones y Proyectos" data-fr="Compétences, Certifications et Projets" data-bn="দক্ষতা, সার্টিফিকেশন ও প্রকল্প" data-hi="कौशल, प्रमाणन और परियोजनाएं">Skills, Certifications &amp; Projects</h1>
+    <p data-en="Cybersecurity, systems administration and AI — the same skill set behind every KhurshedTech engagement, shown here in one live view." data-ar="الأمن السيبراني وإدارة الأنظمة والذكاء الاصطناعي — نفس مجموعة المهارات وراء كل مشروع لدى KhurshedTech، معروضة هنا في عرض حي واحد." data-es="Ciberseguridad, administración de sistemas e IA — el mismo conjunto de habilidades detrás de cada proyecto de KhurshedTech, mostrado aquí en una sola vista en vivo." data-fr="Cybersécurité, administration système et IA — le même ensemble de compétences derrière chaque mission KhurshedTech, présenté ici en une seule vue en direct." data-bn="সাইবার সিকিউরিটি, সিস্টেম প্রশাসন ও এআই — প্রতিটি KhurshedTech প্রকল্পের পেছনের একই দক্ষতা, এখানে একটি লাইভ ভিউতে দেখানো হয়েছে।" data-hi="साइबर सुरक्षा, सिस्टम प्रशासन और एआई — हर KhurshedTech प्रोजेक्ट के पीछे का वही कौशल सेट, यहाँ एक लाइव व्यू में दिखाया गया है।">Cybersecurity, systems administration and AI — the same skill set behind every KhurshedTech engagement, shown here in one live view.</p>
   </div>
 </section>
 
@@ -408,7 +417,7 @@
   </div>
 </footer>
 
-<script src="script.js" defer></script>
+<script src="script.js?v=16" defer></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script>
 (function(){
@@ -481,20 +490,6 @@
   }
   initParticles(document.getElementById('hero-particles'));
   initParticles(document.getElementById('footer-particles'));
-})();
-</script>
-<script>
-(function(){
-  var t = document.getElementById('theme-toggle');
-  if(!t) return;
-  var root = document.documentElement;
-  function apply(){ try{ if(localStorage.getItem('kt-theme')==='dark') root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); }catch(e){} }
-  apply();
-  t.addEventListener('click', function(){
-    var isDark = root.getAttribute('data-theme') === 'dark';
-    if(isDark){ root.removeAttribute('data-theme'); try{localStorage.setItem('kt-theme','light');}catch(e){} }
-    else{ root.setAttribute('data-theme','dark'); try{localStorage.setItem('kt-theme','dark');}catch(e){} }
-  });
 })();
 </script>
 </body>

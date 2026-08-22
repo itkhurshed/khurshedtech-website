@@ -21,9 +21,10 @@
 <link rel="icon" type="image/png" href="logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Kufi+Arabic:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <script>(function(){try{var s=localStorage.getItem('kt-theme');if(s==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-<link rel="stylesheet" href="styles.css?v=25">
+<script>(function(){try{var l=localStorage.getItem('kt-lang');if(l){document.documentElement.setAttribute('lang',l);if(l==='ar')document.documentElement.setAttribute('dir','rtl');}}catch(e){}})();</script>
+<link rel="stylesheet" href="styles.css?v=26">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
 <script type="application/ld+json">
@@ -55,13 +56,21 @@
       <span>KhurshedTech</span>
     </a>
     <nav class="nav-links">
-      <a href="index.html#about">About</a>
-      <a href="index.html#services">Services</a>
-      <a href="website-design-services.html">Website Design</a>
-      <a href="blog.html">Blog</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20cybersecurity%20assessment." target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Blog Article Nav CTA">WhatsApp Us</a>
+      <a href="index.html#about" data-en="About" data-ar="من نحن" data-es="Acerca de" data-fr="À propos" data-bn="আমাদের সম্পর্কে" data-hi="हमारे बारे में">About</a>
+      <a href="index.html#services" data-en="Services" data-ar="خدماتنا" data-es="Servicios" data-fr="Services" data-bn="সেবাসমূহ" data-hi="सेवाएं">Services</a>
+      <a href="website-design-services.html" data-en="Website Design" data-ar="تصميم المواقع" data-es="Diseño Web" data-fr="Conception de Sites Web" data-bn="ওয়েবসাইট ডিজাইন" data-hi="वेबसाइट डिज़ाइन">Website Design</a>
+      <a href="blog.html" data-en="Blog" data-ar="المدونة" data-es="Blog" data-fr="Blog" data-bn="ব্লগ" data-hi="ब्लॉग">Blog</a>
+      <a href="index.html#faq" data-en="FAQ" data-ar="الأسئلة الشائعة" data-es="Preguntas Frecuentes" data-fr="FAQ" data-bn="সচরাচর জিজ্ঞাস্য" data-hi="सामान्य प्रश्न">FAQ</a>
+      <a href="index.html#contact" data-en="Contact" data-ar="تواصل معنا" data-es="Contacto" data-fr="Contact" data-bn="যোগাযোগ" data-hi="संपर्क करें">Contact</a>
+      <a href="https://wa.me/96566648706?text=Hi%2C%20I%27d%20like%20a%20cybersecurity%20assessment." target="_blank" rel="noopener" class="nav-cta track-cta" data-plan="Blog Article Nav CTA" data-en="WhatsApp Us" data-ar="راسلنا واتساب" data-es="WhatsApp" data-fr="Contactez-nous sur WhatsApp" data-bn="হোয়াটসঅ্যাপে যোগাযোগ করুন" data-hi="व्हाट्सएप पर संपर्क करें">WhatsApp Us</a>
+      <select id="lang-select" aria-label="Select language">
+        <option value="en">EN</option>
+        <option value="ar">AR</option>
+        <option value="es">ES</option>
+        <option value="fr">FR</option>
+        <option value="bn">BN</option>
+        <option value="hi">HI</option>
+      </select>
       <button id="theme-toggle" class="icon-toggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button>
     </nav>
     <button class="nav-toggle" aria-label="Toggle menu">
@@ -72,8 +81,8 @@
 
 <section class="wds-hero">
   <div class="container">
-    <span class="wds-eyebrow" data-aos="fade-up">Cybersecurity</span>
-    <h1 data-aos="fade-up">Cybersecurity Basics Every Small Business Needs</h1>
+    <span class="wds-eyebrow" data-aos="fade-up" data-en="Cybersecurity" data-ar="الأمن السيبراني" data-es="Ciberseguridad" data-fr="Cybersécurité" data-bn="সাইবার নিরাপত্তা" data-hi="साइबर सुरक्षा">Cybersecurity</span>
+    <h1 data-aos="fade-up" data-en="Cybersecurity Basics Every Small Business Needs" data-ar="أساسيات الأمن السيبراني التي تحتاجها كل شركة صغيرة" data-es="Fundamentos de Ciberseguridad que Toda Pequeña Empresa Necesita" data-fr="Les Bases de la Cybersécurité pour Chaque Petite Entreprise" data-bn="প্রতিটি ছোট ব্যবসার জন্য প্রয়োজনীয় সাইবার নিরাপত্তার মূল বিষয়" data-hi="हर छोटे व्यवसाय के लिए आवश्यक साइबर सुरक्षा की मूल बातें">Cybersecurity Basics Every Small Business Needs</h1>
     <div class="article-meta" data-aos="fade-up" data-aos-delay="60">
       <span>By Mohammad Khurshed Alam</span><span>·</span><span>KhurshedTech IT Solutions</span><span>·</span><span>5 min read</span>
     </div>
@@ -190,7 +199,6 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=15"></script>
-<script>document.documentElement.setAttribute('dir', 'ltr'); document.documentElement.setAttribute('lang', 'en');</script>
+<script src="script.js?v=16" defer></script>
 </body>
 </html>
