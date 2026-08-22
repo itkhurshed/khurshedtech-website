@@ -40,7 +40,7 @@
   })();
 </script>
 
-<link rel="stylesheet" href="styles.css?v=22">
+<link rel="stylesheet" href="styles.css?v=23">
 
 <!-- AOS.js — lightweight scroll-reveal animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -384,14 +384,24 @@
   </div>
 </section>
 
-<div class="hero-banner-wrap">
-  <div class="hero-banner-frame" data-aos="zoom-in">
-    <picture>
-      <source srcset="hero-banner.webp" type="image/webp">
-      <img src="hero-banner.jpg" alt="KhurshedTech — Smart Solutions. Stronger Business. Reliable IT services and support to keep your business running smoothly and securely." class="hero-banner-img" width="1536" height="528" loading="eager" fetchpriority="high" decoding="async">
-    </picture>
+<section class="hero-banner-animated" data-aos="zoom-in">
+  <div class="hba-particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
-</div>
+  <div class="container hba-inner">
+    <div class="hba-text">
+      <img src="logo-icon.png" alt="KhurshedTech logo" class="hba-logo">
+      <h2 class="hba-title">Smart Solutions.<br><span class="hba-title-accent">Stronger Business.</span></h2>
+      <p class="hba-sub">Reliable IT services and support to keep your business running smoothly and securely.</p>
+    </div>
+    <div class="hba-photo-ring">
+      <picture>
+        <source srcset="fiverr-avatar.webp" type="image/webp">
+        <img src="fiverr-avatar.jpg" alt="Mohammad Khurshed Alam, Founder of KhurshedTech" loading="lazy" decoding="async">
+      </picture>
+    </div>
+  </div>
+</section>
 
 <!-- ================= COMPANY PROMO MOTION (live animated, not a static flyer video) ================= -->
 <section id="innovation-intro" class="innovation-intro-section" data-aos="fade-up">

@@ -531,27 +531,74 @@ header.scrolled { box-shadow: 0 6px 24px rgba(7, 26, 43, 0.1); }
 .hero-card ul li:last-child { border-bottom: none; }
 .check { color: #1E9E5A; font-weight: 700; }
 
-/* ---------- Hero promo banner ---------- */
-.hero-banner-wrap {
-  background: var(--white);
-  padding: 44px 0;
+/* ---------- Hero promo banner (animated, replaces static hero-banner.jpg image) ---------- */
+.hero-banner-animated {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--navy) 0%, var(--purple-dark) 55%, var(--navy-dark) 100%);
+  padding: 48px 24px;
 }
-.hero-banner-frame {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 24px;
+.hba-particles { position: absolute; inset: 0; pointer-events: none; }
+.hba-particles span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 0 8px 2px rgba(0,194,255,0.45);
+  animation: promoFloat 8s ease-in-out infinite;
 }
-.hero-banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+.hba-particles span:nth-child(1) { top: 12%; left: 6%;  animation-delay: 0s; }
+.hba-particles span:nth-child(2) { top: 75%; left: 12%; animation-delay: 1.3s; }
+.hba-particles span:nth-child(3) { top: 20%; left: 92%; animation-delay: 2.6s; }
+.hba-particles span:nth-child(4) { top: 82%; left: 88%; animation-delay: 3.9s; }
+.hba-particles span:nth-child(5) { top: 50%; left: 50%; animation-delay: 5.2s; }
+.hba-particles span:nth-child(6) { top: 8%;  left: 60%; animation-delay: 6.5s; }
+@media (prefers-reduced-motion: reduce) { .hba-particles span { animation: none; } }
+
+.hba-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  max-width: 980px;
 }
-.hero-banner-img:hover {
-  transform: translateY(-4px) scale(1.008);
-  box-shadow: 0 26px 55px rgba(4, 15, 28, 0.28);
+.hba-text { max-width: 460px; }
+.hba-logo { height: 40px; margin-bottom: 16px; }
+.hba-title { font-size: 2rem; font-weight: 800; line-height: 1.22; color: #fff; margin-bottom: 12px; }
+.hba-title-accent {
+  background: linear-gradient(90deg, var(--teal), var(--purple), var(--teal));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hbaShine 5s linear infinite;
+}
+@keyframes hbaShine { to { background-position: 200% center; } }
+@media (prefers-reduced-motion: reduce) { .hba-title-accent { animation: none; } }
+.hba-sub { color: #D6E0F5; font-size: 1rem; line-height: 1.6; }
+
+.hba-photo-ring {
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, var(--teal), var(--purple));
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.06), 0 20px 40px rgba(0,0,0,0.35);
+  animation: hbaFloat 6s ease-in-out infinite;
+}
+.hba-photo-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--navy-dark); display: block; }
+@keyframes hbaFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@media (prefers-reduced-motion: reduce) { .hba-photo-ring { animation: none; } }
+
+@media (max-width: 720px) {
+  .hba-inner { flex-direction: column; text-align: center; }
+  .hba-title { font-size: 1.6rem; }
+  .hba-photo-ring { width: 130px; height: 130px; }
 }
 
 /* ---------- Pricing promo slideshow (animated, replaces static banner image) ---------- */
